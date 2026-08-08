@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: var(--font-jetbrains-mono), monospace;
+    --font-mono: var(--font-jetbrains-mono), monospace;
+    --font-serif: var(--font-eb-garamond), serif;
+  }
+}
+
+html.dark body {
+  background-color: #090a0f;
+  color: #d4d4d8;
+}
+
+html.light body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Light mode theme color overrides */
+html.light .bg-\[\#090a0f\] { background-color: #ffffff; }
+html.light .bg-\[\#0d0e14\] { background-color: #f1f5f9; }
+html.light .bg-\[\#111218\] { background-color: #e2e8f0; }
+html.light .bg-\[\#18181b\] { background-color: #cbd5e1; }
+
+html.light .border-\[\#27272a\] { border-color: #cbd5e1; }
+html.light .border-\[\#18181b\] { border-color: #e2e8f0; }
+
+html.light .text-\[\#f4f4f5\] { color: #0f172a; }
+html.light .text-\[\#d4d4d8\] { color: #334155; }
+html.light .text-\[\#a1a1aa\] { color: #475569; }
+html.light .text-\[\#71717a\] { color: #64748b; }
+
+.font-garamond {
+  font-family: var(--font-eb-garamond), Georgia, serif;
+}
+
+.font-mono-tech {
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+/* Custom Scrollbar for dense financial tables */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #71717a;
+}
