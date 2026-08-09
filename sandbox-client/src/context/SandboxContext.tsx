@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from "react";
+import { toast } from "sonner";
 import {
   RoundNumber,
   MarketStatus,
@@ -14,7 +15,6 @@ import {
 } from "@/types/sandbox";
 import {
   RealtimeEventPayload,
-  TradeRequestDto,
   TradeResponseDto,
 } from "@/types/realtime";
 import {
@@ -27,10 +27,6 @@ import { useAuthoritativeTimer } from "@/hooks/useAuthoritativeTimer";
 import { useRealtimeSubscription } from "@/hooks/useRealtimeSubscription";
 
 interface SandboxContextType {
-  // Console view state
-  activeTab: "participant" | "admin";
-  setActiveTab: (tab: "participant" | "admin") => void;
-
   // Competition State
   currentRound: RoundNumber;
   marketStatus: MarketStatus;
@@ -54,10 +50,11 @@ interface SandboxContextType {
   activeVideo: VideoItem | null;
   isVideoPlaying: boolean;
 
-  // Toasts
-  toasts: ToastMessage[];
+  // Notifications (rendered via Sonner)
   addToast: (type: ToastMessage["type"], title: string, message: string) => void;
-  removeToast: (id: string) => void;
+
+  // Initial authoritative-state sync (drives dashboard loading skeletons)
+  isInitializing: boolean;
 
   // Admin Actions (Ready for API integration)
   startRound: (round: RoundNumber) => Promise<void>;
@@ -83,8 +80,6 @@ interface SandboxContextType {
 const SandboxContext = createContext<SandboxContextType | undefined>(undefined);
 
 export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [activeTab, setActiveTab] = useState<"participant" | "admin">("participant");
-
   // Core Competition State
   const [currentRound, setCurrentRound] = useState<RoundNumber>(1);
   const [marketStatus, setMarketStatusState] = useState<MarketStatus>("MARKET_OPEN");
@@ -149,25 +144,23 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
   ]);
 
   const [pendingPriceChanges, setPendingPriceChanges] = useState<PendingPriceChange[]>([]);
+  const [leaderboardOverride, setLeaderboardOverride] = useState<LeaderboardEntry[] | null>(null);
   const [videos] = useState<VideoItem[]>(PRESET_VIDEOS);
   const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
-  const [toasts, setToasts] = useState<ToastMessage[]>([]);
-
-  const removeToast = useCallback((id: string) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
+  const addToast = useCallback((type: ToastMessage["type"], title: string, message: string) => {
+    if (type === "success") toast.success(title, { description: message });
+    else if (type === "warning") toast.warning(title, { description: message });
+    else if (type === "error") toast.error(title, { description: message });
+    else toast.info(title, { description: message });
   }, []);
 
-  const addToast = useCallback((type: ToastMessage["type"], title: string, message: string) => {
-    const id = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`;
-    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    setToasts((prev) => [...prev.slice(-4), { id, type, title, message, timestamp }]);
-
-    // Auto-dismiss notification after 5 seconds (5000ms)
-    setTimeout(() => {
-      removeToast(id);
-    }, 5000);
-  }, [removeToast]);
+  // Simulates the initial authoritative-state sync so dashboard skeletons render once.
+  const [isInitializing, setIsInitializing] = useState(true);
+  useEffect(() => {
+    const t = window.setTimeout(() => setIsInitializing(false), 500);
+    return () => window.clearTimeout(t);
+  }, []);
 
   // Sync state from backend realtime payloads cleanly
   const syncStateFromBackend = useCallback((payload: Partial<RealtimeEventPayload>) => {
@@ -180,21 +173,34 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     if (payload.transaction) {
       setTransactions((prev) => [payload.transaction!, ...prev]);
     }
+    if (payload.leaderboard) {
+      setLeaderboardOverride(payload.leaderboard);
+    }
     if (payload.videoId) {
       const v = videos.find((item) => item.id === payload.videoId);
       if (v) setActiveVideo(v);
     }
+    if (payload.type === "VIDEO_PLAY") {
+      setIsVideoPlaying(true);
+    } else if (payload.type === "VIDEO_STOP") {
+      setIsVideoPlaying(false);
+    }
   }, [videos]);
 
-  // Connect realtime adapter hook
-  useRealtimeSubscription((event) => {
-    syncStateFromBackend(event);
-    if (event.type === "PRICE_CHANGES_APPLIED") {
-      addToast("success", "Price Changes Applied", "New market prices broadcast by admin.");
-    } else if (event.type === "TRADING_PAUSED") {
-      addToast("warning", "Trading Paused", "The admin paused trading activity.");
-    }
-  });
+  // Connect realtime adapter hook (stable callback so the subscription is not re-created every render)
+  const handleRealtimeEvent = useCallback(
+    (event: RealtimeEventPayload) => {
+      syncStateFromBackend(event);
+      if (event.type === "PRICE_CHANGES_APPLIED") {
+        addToast("success", "Price Changes Applied", "New market prices broadcast by admin.");
+      } else if (event.type === "TRADING_PAUSED") {
+        addToast("warning", "Trading Paused", "The admin paused trading activity.");
+      }
+    },
+    [syncStateFromBackend, addToast]
+  );
+
+  useRealtimeSubscription(handleRealtimeEvent);
 
   // Derived Calculations
   const holdingsValue = useMemo(() => {
@@ -226,6 +232,8 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }, [holdings, stocks]);
 
   const leaderboard = useMemo(() => {
+    // Backend-broadcast leaderboard is authoritative when provided; otherwise derive locally.
+    if (leaderboardOverride) return leaderboardOverride;
     const list = INITIAL_LEADERBOARD.map((item) => {
       if (item.isCurrentTeam) {
         return {
@@ -239,7 +247,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     });
     const sorted = [...list].sort((a, b) => b.portfolioValue - a.portfolioValue);
     return sorted.map((entry, idx) => ({ ...entry, rank: idx + 1 }));
-  }, [totalPortfolioValue, totalProfitLoss, totalProfitLossPercent]);
+  }, [leaderboardOverride, totalPortfolioValue, totalProfitLoss, totalProfitLossPercent]);
 
   // Actions Interface (Async Ready for API Fetch Calls)
   const startRound = useCallback(async (round: RoundNumber) => {
@@ -313,6 +321,8 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const payDividends = useCallback(async (stockId: string, amountPerShare: number) => {
     const stock = stocks.find((s) => s.id === stockId);
     if (!stock) return;
+    // Guard against non-positive or non-finite payout amounts (e.g. empty admin input).
+    if (!Number.isFinite(amountPerShare) || amountPerShare <= 0) return;
     const holding = holdings.find((h) => h.stockId === stockId);
     const qty = holding ? holding.quantity : 0;
     if (qty > 0) {
@@ -367,6 +377,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setMarketStatusState("MARKET_OPEN");
     setServerEndTimestamp(new Date(Date.now() + 15 * 60 * 1000).toISOString());
     setPendingPriceChanges([]);
+    setLeaderboardOverride(null);
     setActiveVideo(null);
     setIsVideoPlaying(false);
     addToast("warning", "Competition Reset", "Restored initial market state.");
@@ -376,9 +387,12 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     if (marketStatus !== "MARKET_OPEN") {
       return { success: false, message: "Trading is currently closed or paused." };
     }
+    if (!Number.isInteger(quantity) || quantity <= 0) {
+      return { success: false, message: "Quantity must be a positive whole number." };
+    }
     const stock = stocks.find((s) => s.id === stockId);
     if (!stock) return { success: false, message: "Stock not found." };
-    const totalCost = stock.currentPrice * quantity;
+    const totalCost = Math.round(stock.currentPrice * quantity);
     if (cash < totalCost) {
       return { success: false, message: `Insufficient cash balance. Needs ₹${totalCost.toLocaleString()}` };
     }
@@ -427,13 +441,16 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     if (marketStatus !== "MARKET_OPEN") {
       return { success: false, message: "Trading is currently closed or paused." };
     }
+    if (!Number.isInteger(quantity) || quantity <= 0) {
+      return { success: false, message: "Quantity must be a positive whole number." };
+    }
     const stock = stocks.find((s) => s.id === stockId);
     if (!stock) return { success: false, message: "Stock not found." };
     const holding = holdings.find((h) => h.stockId === stockId);
     if (!holding || holding.quantity < quantity) {
       return { success: false, message: "Cannot sell more than owned." };
     }
-    const totalRevenue = stock.currentPrice * quantity;
+    const totalRevenue = Math.round(stock.currentPrice * quantity);
     setCash((c) => c + totalRevenue);
     setHoldings((prev) =>
       prev
@@ -460,8 +477,6 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
   return (
     <SandboxContext.Provider
       value={{
-        activeTab,
-        setActiveTab,
         currentRound,
         marketStatus,
         serverEndTimestamp,
@@ -479,9 +494,8 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
         videos,
         activeVideo,
         isVideoPlaying,
-        toasts,
         addToast,
-        removeToast,
+        isInitializing,
         startRound,
         endRound,
         setMarketStatus,

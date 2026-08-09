@@ -1,60 +1,222 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 @layer base {
   :root {
-    --font-sans: var(--font-jetbrains-mono), monospace;
-    --font-mono: var(--font-jetbrains-mono), monospace;
-    --font-serif: var(--font-eb-garamond), serif;
+    --font-sans: var(--font-google-sans), ui-sans-serif, system-ui, sans-serif;
+    /* No intentional monospace family — mono aliases the primary sans stack. */
+    --font-mono: var(--font-google-sans), ui-sans-serif, system-ui, sans-serif;
+    --font-serif: var(--font-eb-garamond), Georgia, serif;
+  }
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  html {
+    @apply font-sans;
+  }
+  /* Form controls inherit the application typeface */
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+
+  /* Kiosk presentation mode: prevent text selection across the UI,
+     except inside text-entry fields (search, inputs, selects). */
+  * {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  input,
+  textarea,
+  select,
+  [contenteditable] {
+    -webkit-user-select: text;
+    user-select: text;
   }
 }
 
-html.dark body {
-  background-color: #090a0f;
-  color: #d4d4d8;
+/* ---- Subtle motion ---- */
+@keyframes sandbox-flash-up {
+  0% {
+    background-color: color-mix(in srgb, var(--up) 14%, transparent);
+    color: var(--up);
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
-html.light body {
-  background-color: #f8fafc;
-  color: #0f172a;
+@keyframes sandbox-flash-down {
+  0% {
+    background-color: color-mix(in srgb, var(--down) 14%, transparent);
+    color: var(--down);
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
-/* Light mode theme color overrides */
-html.light .bg-\[\#090a0f\] { background-color: #ffffff; }
-html.light .bg-\[\#0d0e14\] { background-color: #f1f5f9; }
-html.light .bg-\[\#111218\] { background-color: #e2e8f0; }
-html.light .bg-\[\#18181b\] { background-color: #cbd5e1; }
-
-html.light .border-\[\#27272a\] { border-color: #cbd5e1; }
-html.light .border-\[\#18181b\] { border-color: #e2e8f0; }
-
-html.light .text-\[\#f4f4f5\] { color: #0f172a; }
-html.light .text-\[\#d4d4d8\] { color: #334155; }
-html.light .text-\[\#a1a1aa\] { color: #475569; }
-html.light .text-\[\#71717a\] { color: #64748b; }
-
-.font-garamond {
-  font-family: var(--font-eb-garamond), Georgia, serif;
+@keyframes sandbox-rank-move {
+  0% {
+    background-color: color-mix(in srgb, var(--foreground) 8%, transparent);
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
-.font-mono-tech {
-  font-family: var(--font-jetbrains-mono), monospace;
+@layer utilities {
+  .price-flash-up {
+    animation: sandbox-flash-up 0.7s ease-out;
+  }
+  .price-flash-down {
+    animation: sandbox-flash-down 0.7s ease-out;
+  }
+  .rank-move {
+    animation: sandbox-rank-move 0.9s ease-out;
+  }
 }
 
-/* Custom Scrollbar for dense financial tables */
+/* ---- Scrollbar ----
+   The page itself has no visible scrollbar (kiosk presentation mode).
+   Overflow containers (tables, select dropdowns, scrollable lists) keep
+   the thin styled scrollbar, which only appears when content overflows. */
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
-  border-radius: 0px;
+  background: var(--ring);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #71717a;
+::selection {
+  background: var(--border);
+  color: var(--foreground);
+}
+
+/* EB Garamond editorial utility (brand, homepage hero, major statements only) */
+@utility font-garamond {
+  font-family: var(--font-eb-garamond), Georgia, serif;
+}
+
+/* ---- SANDBOX theme tokens ---- */
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-sans);
+  --font-serif: var(--font-serif);
+
+  --color-up: var(--up);
+  --color-down: var(--down);
+  --color-warn: var(--warn);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-input-bg: var(--input-bg);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+  --radius-4xl: 24px;
+}
+
+:root,
+.dark {
+  --background: #000000;
+  --foreground: #fafafa;
+  --card: #050506;
+  --card-foreground: #fafafa;
+  --popover: #0a0a0b;
+  --popover-foreground: #fafafa;
+  --primary: #fafafa;
+  --primary-foreground: #000000;
+  --secondary: #0a0a0b;
+  --secondary-foreground: #e4e4e7;
+  --muted: #0a0a0b;
+  --muted-foreground: #a1a1aa;
+  --accent: #0a0a0b;
+  --accent-foreground: #fafafa;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #1c1c1f;
+  --input: #1c1c1f;
+  --input-bg: #020203;
+  --ring: #3f3f46;
+  --chart-1: #a1a1aa;
+  --chart-2: #71717a;
+  --chart-3: #52525b;
+  --chart-4: #3f3f46;
+  --chart-5: #e4e4e7;
+  --radius: 8px;
+  --sidebar: #050506;
+  --sidebar-foreground: #e4e4e7;
+  --sidebar-primary: #fafafa;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #0a0a0b;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #1c1c1f;
+  --sidebar-ring: #3f3f46;
+
+  /* Restrained state colors (brightened for pure-black background) */
+  --up: #4ade80;
+  --down: #f87171;
+  --warn: #fbbf24;
 }

@@ -1,10 +1,25 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, EB_Garamond } from "next/font/google";
+import { EB_Garamond } from "next/font/google";
+import localFont from "next/font/local";
+import { SandboxProvider } from "@/context/SandboxContext";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+/**
+ * Google Sans is a restricted-license family served by the Google Fonts API
+ * but not exposed through next/font/google. We self-host the Latin-subset
+ * woff2 files (400/500/600/700) via next/font/local — the proper Google Sans
+ * setup — so the app never falls back to a substituted family.
+ */
+const googleSans = localFont({
+  src: [
+    { path: "./fonts/google-sans-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/google-sans-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/google-sans-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/google-sans-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-google-sans",
   display: "swap",
 });
 
@@ -15,8 +30,8 @@ const ebGaramond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "SANDBOX --- Live Stock Market Trading Terminal",
-  description: "Real-time stock market simulation web application for competitive trading rounds.",
+  title: "SANDBOX --- Live Stock Market Simulation",
+  description: "A live market simulation where teams trade, react, and compete.",
 };
 
 export default function RootLayout({
@@ -25,9 +40,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${jetbrainsMono.variable} ${ebGaramond.variable}`}>
-      <body className="antialiased bg-[#090a0f] text-[#d4d4d8] font-mono selection:bg-[#27272a] selection:text-[#f4f4f5] min-h-screen">
-        {children}
+    <html
+      lang="en"
+      className={`dark ${googleSans.variable} ${ebGaramond.variable}`}
+    >
+      <body className="min-h-screen bg-background text-foreground antialiased">
+        <SandboxProvider>
+          <TooltipProvider>
+            {children}
+            <Toaster />
+          </TooltipProvider>
+        </SandboxProvider>
       </body>
     </html>
   );
