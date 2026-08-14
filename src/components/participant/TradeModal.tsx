@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { Stock } from "@/types/sandbox";
 import { useSandboxStore } from "@/context/SandboxContext";
-import { formatINR } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatPaise, formatINR, cn } from "@/lib/utils";
 import { ShieldAlert } from "lucide-react";
 import {
   Dialog,
@@ -37,8 +36,11 @@ export const TradeModal: React.FC<TradeModalProps> = ({ stock, mode, onClose }) 
 
   const holding = holdings.find((h) => h.stockId === stock.id);
   const ownedQty = holding ? holding.quantity : 0;
-  const estimatedTotal = liveStock.currentPrice * quantity;
-  const maxBuyQty = Math.floor(cash / liveStock.currentPrice);
+  // Use paise (integer) for exact arithmetic — no floating-point
+  const estimatedTotalPaise = liveStock.currentPricePaise * quantity;
+  const maxBuyQty = liveStock.currentPricePaise > 0
+    ? Math.floor((cash * 100) / liveStock.currentPricePaise)
+    : 0;
   const maxSellQty = ownedQty;
   const maxQty = mode === "BUY" ? maxBuyQty : maxSellQty;
 
@@ -90,21 +92,33 @@ export const TradeModal: React.FC<TradeModalProps> = ({ stock, mode, onClose }) 
           <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md border border-border bg-border">
             <div className="bg-muted/60 p-3">
               <span className="block text-xs text-muted-foreground">Current Price</span>
-              <span className="mt-0.5 block text-lg font-semibold tabular-nums text-foreground">
-                {formatINR(liveStock.currentPrice)}
-              </span>
+              {liveStock.quoteAvailable ? (
+                <span className="mt-0.5 block text-lg font-semibold tabular-nums text-foreground">
+                  {formatPaise(liveStock.currentPricePaise)}
+                </span>
+              ) : (
+                <span className="mt-0.5 block text-lg font-semibold tabular-nums text-muted-foreground italic">
+                  N/A
+                </span>
+              )}
             </div>
             <div className="bg-muted/60 p-3">
               <span className="block text-xs text-muted-foreground">24H Change</span>
-              <span
-                className={cn(
-                  "mt-0.5 block text-base font-semibold tabular-nums",
-                  liveStock.change >= 0 ? "text-up" : "text-down"
-                )}
-              >
-                {liveStock.change >= 0 ? "+" : ""}
-                {liveStock.change.toFixed(0)} ({liveStock.changePercent.toFixed(2)}%)
-              </span>
+              {liveStock.change != null && liveStock.changePercent != null ? (
+                <span
+                  className={cn(
+                    "mt-0.5 block text-base font-semibold tabular-nums",
+                    liveStock.change >= 0 ? "text-up" : "text-down"
+                  )}
+                >
+                  {liveStock.change >= 0 ? "+" : ""}
+                  {liveStock.change.toFixed(0)} ({liveStock.changePercent.toFixed(2)}%)
+                </span>
+              ) : (
+                <span className="mt-0.5 block text-base font-semibold tabular-nums text-muted-foreground italic">
+                  N/A
+                </span>
+              )}
             </div>
           </div>
 
@@ -181,7 +195,9 @@ export const TradeModal: React.FC<TradeModalProps> = ({ stock, mode, onClose }) 
           <div className="flex flex-col gap-1.5 rounded-md border border-border bg-muted/60 p-3 text-sm">
             <div className="flex justify-between text-muted-foreground">
               <span>Price per share</span>
-              <span className="tabular-nums">{formatINR(liveStock.currentPrice)}</span>
+              <span className="tabular-nums">
+                {liveStock.quoteAvailable ? formatPaise(liveStock.currentPricePaise) : "N/A"}
+              </span>
             </div>
             <div className="flex justify-between text-muted-foreground">
               <span>Brokerage / fee</span>
@@ -189,7 +205,9 @@ export const TradeModal: React.FC<TradeModalProps> = ({ stock, mode, onClose }) 
             </div>
             <div className="flex justify-between border-t border-border pt-2 font-semibold text-foreground">
               <span>Estimated total</span>
-              <span className="text-base tabular-nums">{formatINR(estimatedTotal)}</span>
+              <span className="text-base tabular-nums">
+                {liveStock.quoteAvailable ? formatPaise(estimatedTotalPaise) : "N/A"}
+              </span>
             </div>
           </div>
 

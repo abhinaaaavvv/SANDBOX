@@ -1,23 +1,17 @@
-import {
-  clearDemoRole,
-  demoRoleFromCredentials,
-  getDemoRoleFromDocument,
-  setDemoRole,
-  type DemoRole,
-} from "@/lib/demo-session";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 /**
- * Mock frontend-only authentication boundary.
+ * Real Supabase Auth boundary.
  *
- * This phase has no backend: sessions are simulated credentials stored in a
- * cookie (see lib/demo-session.ts). The public API mirrors what Supabase Auth
- * will provide later, so AuthGuard, LoginForm, and AppHeader keep working
- * unchanged when the real auth layer replaces this module.
+ * Maintains the same public API as the mock auth module so AuthGuard,
+ * LoginForm, and AppHeader continue working with minimal changes.
  *
- * This is NOT secure authentication — it is a frontend simulation only.
+ * Session state is managed via Supabase Auth's onAuthStateChange listener.
+ * Profile and team membership are resolved from the database after auth.
  */
 
-export type AuthRole = DemoRole;
+export type AuthRole = "admin" | "participant";
 
 export interface SignInResult {
   ok: boolean;
@@ -26,27 +20,139 @@ export interface SignInResult {
   role?: AuthRole;
 }
 
-interface SessionState {
-  userId: string | null;
-  role: AuthRole | null;
-  ready: boolean;
+export interface UserProfile {
+  id: string;
+  display_name: string;
+  role: string;
 }
 
-let state: SessionState = { userId: null, role: null, ready: false };
+export interface TeamMembership {
+  team_id: string;
+  team_name: string;
+  role: string;
+}
+
+export interface AuthState {
+  user: User | null;
+  profile: UserProfile | null;
+  team: TeamMembership | null;
+  role: AuthRole | null;
+  ready: boolean;
+  loading: boolean;
+}
+
+const initial: AuthState = {
+  user: null,
+  profile: null,
+  team: null,
+  role: null,
+  ready: false,
+  loading: true,
+};
+
+let state: AuthState = { ...initial };
 const listeners = new Set<() => void>();
 
-function setState(next: SessionState) {
-  state = next;
+function setState(next: Partial<AuthState>) {
+  state = { ...state, ...next };
   listeners.forEach((listener) => listener());
 }
 
 let initialized = false;
+let unsubscribeFn: (() => void) | null = null;
+
+async function resolveProfile(user: User): Promise<UserProfile | null> {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id, display_name, role")
+    .eq("id", user.id)
+    .single();
+
+  if (error || !data) return null;
+  return data as UserProfile;
+}
+
+async function resolveTeam(user: User): Promise<TeamMembership | null> {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("team_members")
+    .select("team_id, role, teams!inner(name)")
+    .eq("user_id", user.id)
+    .limit(1)
+    .maybeSingle();
+
+  if (error || !data) return null;
+
+  // Handle the nested teams relation
+  const teams = data.teams as unknown as { name: string } | null;
+  if (!teams) return null;
+
+  return {
+    team_id: data.team_id,
+    team_name: teams.name,
+    role: data.role,
+  };
+}
+
+function deriveRole(profile: UserProfile | null): AuthRole | null {
+  if (!profile) return null;
+  if (profile.role === "admin") return "admin";
+  if (profile.role === "participant") return "participant";
+  return null;
+}
+
+async function handleAuthChange(user: User | null) {
+  if (!user) {
+    setState({
+      user: null,
+      profile: null,
+      team: null,
+      role: null,
+      ready: true,
+      loading: false,
+    });
+    return;
+  }
+
+  const profile = await resolveProfile(user);
+  const role = deriveRole(profile);
+
+  // Only resolve team for participants
+  let team: TeamMembership | null = null;
+  if (role === "participant") {
+    team = await resolveTeam(user);
+  }
+
+  setState({
+    user,
+    profile,
+    team,
+    role,
+    ready: true,
+    loading: false,
+  });
+}
+
 function ensureInitialized() {
   if (initialized || typeof window === "undefined") return;
   initialized = true;
-  // Restore a previously stored demo session from the cookie.
-  const demoRole = getDemoRoleFromDocument();
-  setState({ userId: demoRole ? `demo-${demoRole}` : null, role: demoRole, ready: true });
+
+  const supabase = createClient();
+
+  // Subscribe to auth state changes
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    await handleAuthChange(session?.user ?? null);
+  });
+
+  unsubscribeFn = () => subscription.unsubscribe();
+
+  // Check for existing session
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    handleAuthChange(session?.user ?? null);
+  });
 }
 
 export function subscribeToSession(subscriber: () => void): () => void {
@@ -60,35 +166,80 @@ export function subscribeToSession(subscriber: () => void): () => void {
 /** True when a signed-in session holds the given role. */
 export function getSession(role: AuthRole): boolean {
   ensureInitialized();
-  return state.ready && state.userId !== null && state.role === role;
+  return state.ready && !state.loading && state.user !== null && state.role === role;
 }
 
-export async function signIn(email: string, password: string): Promise<SignInResult> {
+/** Get the full auth state. */
+export function getAuthState(): AuthState {
+  ensureInitialized();
+  return state;
+}
+
+export async function signIn(
+  email: string,
+  password: string
+): Promise<SignInResult> {
   ensureInitialized();
 
-  const demoRole = demoRoleFromCredentials(email, password);
-  if (demoRole) {
-    clearDemoRole();
-    setDemoRole(demoRole);
-    setState({ userId: `demo-${demoRole}`, role: demoRole, ready: true });
-    return { ok: true, role: demoRole };
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error) {
+    // Map Supabase error messages to user-friendly messages
+    const msg = error.message.toLowerCase();
+    if (msg.includes("invalid login credentials")) {
+      return { ok: false, error: "Invalid email or password." };
+    }
+    if (msg.includes("email not confirmed")) {
+      return { ok: false, error: "Please confirm your email before signing in." };
+    }
+    return { ok: false, error: error.message };
   }
 
-  return {
-    ok: false,
-    error: "Invalid credentials. Use one of the demo accounts shown below.",
-  };
-}
+  if (!data.user) {
+    return { ok: false, error: "Sign in failed — no user returned." };
+  }
 
-export function signInDemo(role: AuthRole): SignInResult {
-  ensureInitialized();
-  clearDemoRole();
-  setDemoRole(role);
-  setState({ userId: `demo-${role}`, role, ready: true });
+  // Profile will be resolved by onAuthStateChange listener
+  // Wait briefly for state to update
+  const profile = await resolveProfile(data.user);
+  const role = deriveRole(profile);
+
+  if (!role) {
+    // Sign out if profile is missing or has invalid role
+    await supabase.auth.signOut();
+    return {
+      ok: false,
+      error:
+        "Account does not have a valid role. Contact your administrator.",
+    };
+  }
+
   return { ok: true, role };
 }
 
 export async function signOut(): Promise<void> {
-  clearDemoRole();
-  setState({ userId: null, role: null, ready: true });
+  ensureInitialized();
+
+  const supabase = createClient();
+  await supabase.auth.signOut();
+
+  setState({
+    user: null,
+    profile: null,
+    team: null,
+    role: null,
+    ready: true,
+    loading: false,
+  });
+}
+
+/** Cleanup function for when the module is no longer needed. */
+export function cleanupAuth(): void {
+  unsubscribeFn?.();
+  unsubscribeFn = null;
+  initialized = false;
 }

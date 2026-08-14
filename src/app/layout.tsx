@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { EB_Garamond } from "next/font/google";
 import localFont from "next/font/local";
 import { SandboxProvider } from "@/context/SandboxContext";
+import { RealtimeProvider } from "@/lib/realtime";
+import { AuthProvider } from "@/lib/auth-context";
+import { CompetitionContextProvider } from "@/lib/competition-context";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
@@ -30,7 +33,7 @@ const ebGaramond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "SANDBOX --- Live Stock Market Simulation",
+  title: "SANDBOX",
   description: "A live market simulation where teams trade, react, and compete.",
 };
 
@@ -45,12 +48,18 @@ export default function RootLayout({
       className={`dark ${googleSans.variable} ${ebGaramond.variable}`}
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
-        <SandboxProvider>
-          <TooltipProvider>
-            {children}
-            <Toaster />
-          </TooltipProvider>
-        </SandboxProvider>
+        <RealtimeProvider>
+          <AuthProvider>
+            <CompetitionContextProvider>
+              <SandboxProvider>
+                <TooltipProvider>
+                  {children}
+                  <Toaster />
+                </TooltipProvider>
+              </SandboxProvider>
+            </CompetitionContextProvider>
+          </AuthProvider>
+        </RealtimeProvider>
       </body>
     </html>
   );

@@ -16,6 +16,25 @@ export function formatINR(val: number): string {
   return isNegative ? `-${formatted}` : formatted;
 }
 
+/**
+ * Format paise (integer) to INR display string with 2 decimal places.
+ * Uses the exact integer paise value — no floating-point rounding.
+ *
+ * 320000 paise → ₹3,200.00
+ * 320050 paise → ₹3,200.50
+ * 320099 paise → ₹3,200.99
+ * 0 paise      → ₹0.00
+ */
+export function formatPaise(paise: number): string {
+  const isNegative = paise < 0;
+  const absPaise = Math.abs(paise);
+  const rupees = Math.floor(absPaise / 100);
+  const paiseRemainder = absPaise % 100;
+  const paiseStr = paiseRemainder.toString().padStart(2, "0");
+  const formatted = new Intl.NumberFormat("en-IN").format(rupees);
+  return isNegative ? `-₹${formatted}.${paiseStr}` : `₹${formatted}.${paiseStr}`;
+}
+
 export function formatPercent(val: number): string {
   const sign = val > 0 ? "+" : "";
   return `${sign}${val.toFixed(2)}%`;

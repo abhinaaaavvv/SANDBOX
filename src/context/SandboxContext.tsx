@@ -28,14 +28,20 @@ import {
   ViewRole,
 } from "@/lib/competition/types";
 import { useAuthoritativeTimer } from "@/hooks/useAuthoritativeTimer";
+import { useMarketData } from "@/hooks/useMarketData";
+import { useHoldings } from "@/hooks/useHoldings";
+import { useTradeHistory } from "@/hooks/useTradeHistory";
+import { useCashBalance } from "@/hooks/useCashBalance";
+import { useTradeExecution } from "@/hooks/useTradeExecution";
 
 /**
- * React bridge over the MockCompetitionEngine.
+ * React bridge over the MockCompetitionEngine with real market data.
  *
- * All competition state lives in the engine (lib/competition); this provider
- * only subscribes to its snapshot, derives the countdown timer, and forwards
- * UI events (toasts) to Sonner. Components keep using useSandboxStore()
- * unchanged.
+ * Competition state (rounds, market status, timer) comes from the mock engine.
+ * Market data (stocks, prices) comes from Supabase via useMarketData.
+ * Other mock data (holdings, trades, portfolio, leaderboard) remains from the engine.
+ *
+ * This is an incremental migration: only market data is replaced with real data.
  */
 const engine = getMockEngine();
 
@@ -65,8 +71,7 @@ const engineActions = {
   playVideo: () => engine.playVideo(),
   stopVideo: () => engine.stopVideo(),
   resetCompetition: () => engine.resetCompetition(),
-  executeBuy: (stockId: string, quantity: number) => engine.executeBuy(stockId, quantity),
-  executeSell: (stockId: string, quantity: number) => engine.executeSell(stockId, quantity),
+  // executeBuy/executeSell are provided by SandboxProvider via useTradeExecution
   setViewRole: (role: ViewRole) => engine.setRole(role),
   syncStateFromBackend: (payload: Partial<RealtimeEventPayload>) =>
     engine.applyRemote(payload as RealtimeEventPayload),
@@ -91,6 +96,11 @@ interface SandboxContextType {
   totalPortfolioValue: number;
   totalProfitLoss: number;
   totalProfitLossPercent: number;
+
+  // Market Data State
+  isMarketDataLoading: boolean;
+  marketDataError: string | null;
+  refetchMarketData: () => Promise<void>;
 
   // Admin Context
   pendingPriceChanges: PendingPriceChange[];
@@ -142,6 +152,32 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     engine.getSnapshot()
   );
   useEffect(() => engine.subscribe(() => setSnapshot(engine.getSnapshot())), []);
+
+  // Real market data from Supabase
+  const {
+    stocks: marketStocks,
+    isLoading: isMarketDataLoading,
+    error: marketDataError,
+    refetch: refetchMarketData,
+  } = useMarketData();
+
+  // Real holdings, transactions, and cash from Supabase
+  const {
+    holdings: realHoldings,
+    refetch: refetchHoldings,
+  } = useHoldings();
+  const {
+    transactions: realTransactions,
+    refetch: refetchTransactions,
+  } = useTradeHistory();
+  const {
+    cash: realCash,
+    initialCapital,
+    refetch: refetchCash,
+  } = useCashBalance();
+
+  // Real trade execution via execute_trade() RPC
+  const { executeBuy: realExecuteBuy, executeSell: realExecuteSell } = useTradeExecution();
 
   // Authoritative countdown derived from the round's end timestamp. Ticks for
   // the whole round window (even while trading is paused or the market closed) —
@@ -231,15 +267,24 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       timerSeconds,
       teamName: snapshot.teamName,
 
-      // Trading state
-      cash: snapshot.cash,
-      stocks: snapshot.stocks,
-      holdings: snapshot.holdings,
-      transactions: snapshot.transactions,
+      // Trading state — real data from Supabase
+      cash: realCash,
+      // Use real market data from Supabase instead of mock engine
+      stocks: marketStocks,
+      holdings: realHoldings,
+      transactions: realTransactions,
       leaderboard: snapshot.leaderboard,
-      totalPortfolioValue: snapshot.totalPortfolioValue,
-      totalProfitLoss: snapshot.totalProfitLoss,
-      totalProfitLossPercent: snapshot.totalProfitLossPercent,
+      totalPortfolioValue: realCash + realHoldings.reduce((sum, h) => sum + h.totalValue, 0),
+      // Authoritative P/L: portfolio_value - initial_capital (Phase 6 formula)
+      totalProfitLoss: (realCash + realHoldings.reduce((sum, h) => sum + h.totalValue, 0)) - initialCapital,
+      totalProfitLossPercent: initialCapital > 0
+        ? (((realCash + realHoldings.reduce((sum, h) => sum + h.totalValue, 0)) - initialCapital) / initialCapital) * 100
+        : 0,
+
+      // Market data state
+      isMarketDataLoading,
+      marketDataError,
+      refetchMarketData,
 
       // Admin context
       pendingPriceChanges: snapshot.pendingPriceChanges,
@@ -252,10 +297,48 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       addToast,
       isInitializing,
 
-      // Admin actions
+      // Admin actions (engine operations — the backend-replacement boundary)
       ...engineActions,
+
+      // Participant trade actions — real execute_trade() RPC with refetch
+      executeBuy: async (stockId: string, quantity: number) => {
+        const result = await realExecuteBuy(stockId, quantity);
+        if (result.success) {
+          refetchHoldings();
+          refetchCash();
+          refetchTransactions();
+        }
+        return result;
+      },
+      executeSell: async (stockId: string, quantity: number) => {
+        const result = await realExecuteSell(stockId, quantity);
+        if (result.success) {
+          refetchHoldings();
+          refetchCash();
+          refetchTransactions();
+        }
+        return result;
+      },
     }),
-    [snapshot, timerSeconds, addToast, isInitializing]
+    [
+      snapshot,
+      timerSeconds,
+      addToast,
+      isInitializing,
+      marketStocks,
+      isMarketDataLoading,
+      marketDataError,
+      refetchMarketData,
+      realHoldings,
+      realTransactions,
+      realCash,
+      initialCapital,
+      realExecuteBuy,
+      realExecuteSell,
+      refetchHoldings,
+      refetchCash,
+      refetchTransactions,
+    ]
   );
 
   return <SandboxContext.Provider value={value}>{children}</SandboxContext.Provider>;

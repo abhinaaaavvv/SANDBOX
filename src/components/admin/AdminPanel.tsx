@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 import { useSandboxStore } from "@/context/SandboxContext";
-import { formatINR, formatPercent } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatPaise, formatINR, formatPercent, cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -104,6 +103,7 @@ export const AdminPanel: React.FC = () => {
     // Shock relative to the pending price when one is already queued, so
     // stacking a shift refines the queued value instead of discarding it.
     const pending = pendingPriceChanges.find((p) => p.stockId === stockId);
+    // Admin UI works in rupees (mock engine format). pending.newPrice is rupees.
     const base = pending ? pending.newPrice : stock.currentPrice;
     const newP = Math.round(base * (1 + pct / 100));
     setEditedPrices((prev) => ({ ...prev, [stockId]: String(newP) }));
@@ -466,7 +466,7 @@ export const AdminPanel: React.FC = () => {
                     </TableCell>
 
                     <TableCell className="text-right tabular-nums text-muted-foreground">
-                      {formatINR(stock.currentPrice)}
+                      {stock.quoteAvailable ? formatPaise(stock.currentPricePaise) : "N/A"}
                     </TableCell>
 
                     <TableCell className="text-center">

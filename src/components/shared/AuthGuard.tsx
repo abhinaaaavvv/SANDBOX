@@ -18,10 +18,12 @@ const LOGIN_PATHS: Record<AuthRole, string> = {
 /**
  * Client-side session boundary for the console route groups.
  *
- * This phase uses mock sessions (lib/auth); the guard prevents rendering any
- * console UI for a role that has not signed in, and keeps participant and
- * admin sessions strictly separate. Real authorization will be enforced
- * server-side once a backend exists.
+ * Uses Supabase Auth via the subscribeToSession mechanism. The guard prevents
+ * rendering any console UI for a role that has not signed in, and keeps
+ * participant and admin sessions strictly separate.
+ *
+ * Server-side authorization is enforced by RLS and SECURITY DEFINER RPCs.
+ * This guard is UX/navigation protection, not a security boundary.
  */
 export const AuthGuard: React.FC<AuthGuardProps> = ({ role, children }) => {
   const router = useRouter();

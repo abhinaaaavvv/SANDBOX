@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { Stock } from "@/types/sandbox";
 import { useSandboxStore } from "@/context/SandboxContext";
-import { formatINR } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatPaise, cn } from "@/lib/utils";
 import { usePriceFlash } from "@/hooks/usePriceFlash";
 import { Search, ArrowUpDown } from "lucide-react";
 import {
@@ -24,7 +23,16 @@ interface MarketTableProps {
 }
 
 const PriceCell: React.FC<{ stock: Stock }> = ({ stock }) => {
-  const flash = usePriceFlash(stock.currentPrice);
+  const flash = usePriceFlash(stock.currentPricePaise);
+
+  if (!stock.quoteAvailable) {
+    return (
+      <span className="tabular-nums text-muted-foreground italic">
+        N/A
+      </span>
+    );
+  }
+
   return (
     <span
       className={cn(
@@ -33,7 +41,7 @@ const PriceCell: React.FC<{ stock: Stock }> = ({ stock }) => {
         flash === "down" && "price-flash-down"
       )}
     >
-      {formatINR(stock.currentPrice)}
+      {formatPaise(stock.currentPricePaise)}
     </span>
   );
 };
@@ -41,7 +49,7 @@ const PriceCell: React.FC<{ stock: Stock }> = ({ stock }) => {
 export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
   const { stocks, holdings, marketStatus } = useSandboxStore();
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortField, setSortField] = useState<"symbol" | "currentPrice" | "changePercent">(
+  const [sortField, setSortField] = useState<"symbol" | "currentPricePaise" | "changePercent">(
     "symbol"
   );
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -50,12 +58,16 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
     (s) =>
       s.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
       s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      s.sector.toLowerCase().includes(searchTerm.toLowerCase())
+      (s.sector?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false)
   );
 
   const sorted = [...filtered].sort((a, b) => {
-    let valA: string | number = a[sortField];
-    let valB: string | number = b[sortField];
+    let valA: string | number | undefined = a[sortField];
+    let valB: string | number | undefined = b[sortField];
+    // Undefined sorts to end
+    if (valA === undefined && valB === undefined) return 0;
+    if (valA === undefined) return 1;
+    if (valB === undefined) return -1;
     if (typeof valA === "string") {
       valA = valA.toLowerCase();
       valB = (valB as string).toLowerCase();
@@ -65,7 +77,7 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
     return 0;
   });
 
-  const toggleSort = (field: "symbol" | "currentPrice" | "changePercent") => {
+  const toggleSort = (field: "symbol" | "currentPricePaise" | "changePercent") => {
     if (sortField === field) {
       setSortOrder((o) => (o === "asc" ? "desc" : "asc"));
     } else {
@@ -75,7 +87,7 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
   };
 
   const sortKeyHandler =
-    (field: "symbol" | "currentPrice" | "changePercent") =>
+    (field: "symbol" | "currentPricePaise" | "changePercent") =>
     (e: React.KeyboardEvent) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -128,15 +140,15 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
             </TableHead>
             <TableHead
               scope="col"
-              aria-sort={sortField === "currentPrice" ? (sortOrder === "asc" ? "ascending" : "descending") : "none"}
+              aria-sort={sortField === "currentPricePaise" ? (sortOrder === "asc" ? "ascending" : "descending") : "none"}
               className="cursor-pointer select-none text-right"
-              onClick={() => toggleSort("currentPrice")}
+              onClick={() => toggleSort("currentPricePaise")}
             >
               <span
                 role="button"
                 tabIndex={0}
                 className="flex items-center justify-end gap-1"
-                onKeyDown={sortKeyHandler("currentPrice")}
+                onKeyDown={sortKeyHandler("currentPricePaise")}
               >
                 Price <ArrowUpDown className="size-3 opacity-60" />
               </span>
@@ -164,7 +176,8 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
           {sorted.map((stock) => {
             const holding = holdings.find((h) => h.stockId === stock.id);
             const ownedQty = holding ? holding.quantity : 0;
-            const isPositive = stock.change >= 0;
+            const changeAvailable = stock.change != null && stock.changePercent != null;
+            const isPositive = changeAvailable && stock.change! >= 0;
 
             return (
               <TableRow key={stock.id}>
@@ -174,6 +187,9 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
                     <span className="hidden text-xs text-muted-foreground lg:inline">
                       {stock.name}
                     </span>
+                    {!stock.quoteAvailable && (
+                      <span className="text-xs text-yellow-500" title="No market quote available">⚠</span>
+                    )}
                   </div>
                 </TableCell>
 
@@ -182,10 +198,14 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
                 </TableCell>
 
                 <TableCell className="text-right font-medium tabular-nums">
-                  <span className={cn(isPositive ? "text-up" : "text-down")}>
-                    {isPositive ? "+" : ""}
-                    {stock.change.toFixed(0)} ({stock.changePercent.toFixed(2)}%)
-                  </span>
+                  {changeAvailable ? (
+                    <span className={cn(isPositive ? "text-up" : "text-down")}>
+                      {isPositive ? "+" : ""}
+                      {stock.change!.toFixed(0)} ({stock.changePercent!.toFixed(2)}%)
+                    </span>
+                  ) : (
+                    <span className="text-muted-foreground italic">N/A</span>
+                  )}
                 </TableCell>
 
                 <TableCell className="text-center text-sm tabular-nums">
@@ -203,7 +223,7 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
                     <Button
                       variant="buy"
                       size="sm"
-                      disabled={isTradingDisabled}
+                      disabled={isTradingDisabled || !stock.quoteAvailable}
                       onClick={() => onTrade(stock, "BUY")}
                     >
                       Buy
@@ -211,7 +231,7 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
                     <Button
                       variant="sell"
                       size="sm"
-                      disabled={isTradingDisabled || ownedQty === 0}
+                      disabled={isTradingDisabled || ownedQty === 0 || !stock.quoteAvailable}
                       onClick={() => onTrade(stock, "SELL")}
                     >
                       Sell

@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { DEMO_ACCOUNTS } from "@/lib/demo-session";
-import { signIn, signInDemo, getSession, type AuthRole } from "@/lib/auth";
+import { signIn, getSession, type AuthRole } from "@/lib/auth";
 import { ArrowLeft, ShieldAlert } from "lucide-react";
 
 interface LoginFormProps {
@@ -36,9 +34,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
     }
   }, [mode, router]);
 
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isSubmitting) return; // guard against rapid double-submits
+    if (isSubmitting) return;
     setError(null);
     setIsSubmitting(true);
 
@@ -49,21 +47,17 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
       return;
     }
 
-    // Route to the console matching the account's real role (a participant
-    // signing in from the admin portal lands on /participant, and vice versa).
-    router.replace(result.role === "admin" ? "/admin" : "/participant");
-  };
-
-  const openDemo = () => {
-    // One-click demo entry that matches this page's own role only.
-    const result = signInDemo(mode);
+    // Route to the console matching the account's real role
     router.replace(result.role === "admin" ? "/admin" : "/participant");
   };
 
   return (
     <div className="flex min-h-screen flex-col">
       <header className="flex items-center justify-between border-b border-border px-6 py-4 lg:px-10">
-        <Link href="/" className="font-garamond text-xl font-semibold tracking-tight text-foreground select-none">
+        <Link
+          href="/"
+          className="font-garamond text-xl font-semibold tracking-tight text-foreground select-none"
+        >
           SANDBOX
         </Link>
         <Link
@@ -80,7 +74,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
           <p className="mb-2 text-xs font-medium tracking-wide text-muted-foreground">
             {mode === "admin" ? "Administrator Access" : "Team Access"}
           </p>
-          <h1 className="mb-8 text-3xl font-semibold tracking-tight text-foreground">
+          <h1 className="font-garamond mb-8 text-3xl font-semibold tracking-tight text-foreground">
             {title}
           </h1>
 
@@ -91,7 +85,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
                 id={`${mode}-email`}
                 type="email"
                 autoComplete="email"
-                placeholder="team@college.edu"
+                placeholder="you@college.edu"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -116,30 +110,18 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
               </div>
             )}
 
-            <Button type="submit" size="lg" disabled={isSubmitting} className="mt-2 w-full">
+            <Button
+              type="submit"
+              size="lg"
+              disabled={isSubmitting}
+              className="mt-2 w-full"
+            >
               {isSubmitting ? "Signing In…" : "Sign In"}
             </Button>
           </form>
 
-          <Separator className="my-6" />
-          <div className="space-y-2 text-center text-xs text-muted-foreground">
+          <div className="mt-6 text-center text-xs text-muted-foreground">
             <p>Access is provisioned by the competition administrator.</p>
-            <p className="font-medium text-foreground">
-              {mode === "admin" ? "Demo admin account:" : "Demo team account:"}
-            </p>
-            <p>
-              {DEMO_ACCOUNTS[mode].email} / {DEMO_ACCOUNTS[mode].password}
-            </p>
-            <div className="mt-3">
-              <Button
-                type="button"
-                variant="secondary"
-                className="w-full"
-                onClick={openDemo}
-              >
-                Open {mode === "admin" ? "Admin" : "Participant"} Demo
-              </Button>
-            </div>
           </div>
         </div>
       </main>
