@@ -339,6 +339,10 @@ export async function resolveCompetitionContext(
   } = await supabase.auth.getUser();
 
   if (authError || !user) {
+    const isNoSession = authError?.message === "Auth session missing!";
+    if (isNoSession) {
+      return { isLoading: true, error: null };
+    }
     console.error("[CompetitionContext] AUTH_ERROR:", authError?.message ?? "Not authenticated", authError);
     return {
       isLoading: false,
@@ -495,12 +499,15 @@ export const CompetitionContextProvider: React.FC<{
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event) => {
-      if (event === "SIGNED_IN" || event === "SIGNED_OUT" || event === "TOKEN_REFRESHED") {
+      if (
+        event === "INITIAL_SESSION" ||
+        event === "SIGNED_IN" ||
+        event === "SIGNED_OUT" ||
+        event === "TOKEN_REFRESHED"
+      ) {
         await resolve();
       }
     });
-
-    resolve();
 
     return () => {
       cancelled = true;
