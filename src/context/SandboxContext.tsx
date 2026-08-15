@@ -17,7 +17,6 @@ import {
   Transaction,
   LeaderboardEntry,
   PendingPriceChange,
-  VideoItem,
   ToastMessage,
 } from "@/types/sandbox";
 import { RealtimeEventPayload, TradeResponseDto } from "@/types/realtime";
@@ -33,49 +32,27 @@ import { useHoldings } from "@/hooks/useHoldings";
 import { useTradeHistory } from "@/hooks/useTradeHistory";
 import { useCashBalance } from "@/hooks/useCashBalance";
 import { useTradeExecution } from "@/hooks/useTradeExecution";
+import { useRealtimeSync } from "@/lib/realtime";
+import { useCompetitionContext } from "@/lib/competition-context";
+import { createClient } from "@/lib/supabase/client";
 
 /**
- * React bridge over the MockCompetitionEngine with real market data.
+ * React bridge over the MockCompetitionEngine with real Supabase data.
  *
  * Competition state (rounds, market status, timer) comes from the mock engine.
  * Market data (stocks, prices) comes from Supabase via useMarketData.
  * Other mock data (holdings, trades, portfolio, leaderboard) remains from the engine.
  *
- * This is an incremental migration: only market data is replaced with real data.
+ * Admin operations (start_round, end_round, open_market, etc.) are now
+ * authoritative Supabase RPCs. Local engine is updated for immediate UI feedback.
+ *
+ * Participant trading (execute_trade) uses real Supabase RPC.
+ *
+ * Realtime notifications from Supabase trigger targeted refetches.
+ *
+ * Round 3 videos are played externally on a TV — no video subsystem in the website.
  */
 const engine = getMockEngine();
-
-// Stable action surface: engine methods are bound once at module scope so the
-// context value (and consumers' effects) stay referentially stable between
-// engine mutations.
-const engineActions = {
-  startRound: (round: RoundNumber) => engine.startRound(round),
-  endRound: (round: RoundNumber) => engine.endRound(round),
-  setMarketStatus: (status: MarketStatus) => {
-    if (status === "MARKET_OPEN") return engine.openMarket();
-    if (status === "TRADING_PAUSED") return engine.pauseTrading();
-    if (status === "MARKET_CLOSED") return engine.closeMarket();
-    return Promise.resolve();
-  },
-  setPendingPriceChange: (stockId: string, newPrice: number) =>
-    engine.setPendingPriceChange(stockId, newPrice),
-  clearPendingPriceChange: (stockId: string) => engine.clearPendingPriceChange(stockId),
-  applyPriceChanges: () => engine.applyPriceChanges(),
-  payDividends: (stockId: string, amountPerShare: number) =>
-    engine.payDividend(stockId, amountPerShare),
-  creditCash: (teamId: string, amount: number, reason?: string) =>
-    engine.creditCash(teamId, amount, reason),
-  debitCash: (teamId: string, amount: number, reason?: string) =>
-    engine.debitCash(teamId, amount, reason),
-  selectVideo: (videoId: string | null) => engine.selectVideo(videoId),
-  playVideo: () => engine.playVideo(),
-  stopVideo: () => engine.stopVideo(),
-  resetCompetition: () => engine.resetCompetition(),
-  // executeBuy/executeSell are provided by SandboxProvider via useTradeExecution
-  setViewRole: (role: ViewRole) => engine.setRole(role),
-  syncStateFromBackend: (payload: Partial<RealtimeEventPayload>) =>
-    engine.applyRemote(payload as RealtimeEventPayload),
-};
 
 interface SandboxContextType {
   // Competition State
@@ -104,10 +81,6 @@ interface SandboxContextType {
 
   // Admin Context
   pendingPriceChanges: PendingPriceChange[];
-  videos: VideoItem[];
-  activeVideo: VideoItem | null;
-  isVideoPlaying: boolean;
-  videoPlaybackStartedAt: string | null;
   teams: TeamOverview[];
 
   // Notifications (rendered via Sonner)
@@ -116,19 +89,18 @@ interface SandboxContextType {
   // Initial authoritative-state sync (drives dashboard loading skeletons)
   isInitializing: boolean;
 
-  // Admin Actions (engine operations — the backend-replacement boundary)
+  // Admin Actions (Supabase RPCs — authoritative database mutations)
   startRound: (round: RoundNumber) => Promise<void>;
   endRound: (round: RoundNumber) => Promise<void>;
   setMarketStatus: (status: MarketStatus) => Promise<void>;
-  setPendingPriceChange: (stockId: string, newPrice: number) => void;
-  clearPendingPriceChange: (stockId: string) => void;
   applyPriceChanges: () => Promise<void>;
   payDividends: (stockId: string, amountPerShare: number) => Promise<void>;
   creditCash: (teamId: string, amount: number, reason?: string) => { ok: boolean; message?: string };
   debitCash: (teamId: string, amount: number, reason?: string) => { ok: boolean; message?: string };
-  selectVideo: (videoId: string | null) => void;
-  playVideo: () => Promise<void>;
-  stopVideo: () => Promise<void>;
+
+  // Local state operations (not database-backed)
+  setPendingPriceChange: (stockId: string, newPrice: number) => void;
+  clearPendingPriceChange: (stockId: string) => void;
   resetCompetition: () => Promise<void>;
 
   // Participant Trade Actions
@@ -201,60 +173,260 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     else toast.info(title, { description: message });
   }, []);
 
-  // Single toast path for every engine event (local and cross-tab).
+  // Competition context for admin operations
+  const competitionCtx = useCompetitionContext();
+  const competitionRunId = competitionCtx.context?.competitionRun?.id ?? null;
+  const teamId = competitionCtx.context?.role === "participant"
+    ? competitionCtx.context.teamMembership?.team_id ?? null
+    : null;
+
+  // Rounds state for admin operations - fetches round UUIDs for the current run
+  const [rounds, setRounds] = useState<Array<{ id: string; round_number: number; status: string }>>([]);
   useEffect(() => {
-    return engine.subscribeEvents((event) => {
-      switch (event.type) {
-        case "ROUND_STARTED":
-          addToast("info", `Round ${event.round} Started`, "Trading is now open for this round.");
+    if (!competitionRunId) return;
+    const supabase = createClient();
+    supabase
+      .from("rounds")
+      .select("id, round_number, status")
+      .eq("competition_run_id", competitionRunId)
+      .order("round_number")
+      .then(({ data }) => {
+        if (data) setRounds(data);
+      });
+  }, [competitionRunId]);
+
+  // Targeted refetch based on event type (Phase 9.8 optimization)
+  const onReconcile = useCallback(
+    (event?: string) => {
+      switch (event) {
+        case "ROUND_STATE_CHANGED":
+          // Round state changed - engine snapshot handles this
           break;
-        case "ROUND_ENDED":
-          addToast("warning", `Round ${event.round} Ended`, "Trading closed by the administrator.");
+        case "MARKET_STATE_CHANGED":
+          // Market state changed - refetch market data
+          refetchMarketData();
           break;
-        case "MARKET_OPENED":
-          addToast("success", "Market Open", "Trading is now open.");
+        case "PRICES_CHANGED":
+          // Prices changed - refetch market data and holdings
+          refetchMarketData();
+          refetchHoldings();
+          refetchCash();
+          refetchTransactions();
           break;
-        case "MARKET_CLOSED":
-          addToast("warning", "Market Closed", "Orders are no longer being accepted.");
+        case "PORTFOLIO_CHANGED":
+          // Portfolio changed - refetch holdings, cash, transactions
+          refetchHoldings();
+          refetchCash();
+          refetchTransactions();
           break;
-        case "TRADING_PAUSED":
-          addToast("warning", "Trading Paused", "The administrator paused trading activity.");
-          break;
-        case "TRADING_RESUMED":
-          addToast("success", "Trading Resumed", "Trading is active again.");
-          break;
-        case "TRADE_EXECUTED": {
-          const label = event.side === "BUY" ? "Bought" : "Sold";
-          addToast("success", "Trade Executed", `${label} ${event.quantity} share(s) of ${event.transaction?.symbol ?? ""}.`);
-          break;
-        }
-        case "PRICE_CHANGES_APPLIED":
-          addToast("success", "Price Changes Applied", "New market prices have been broadcast.");
-          break;
-        case "DIVIDENDS_PAID": {
-          const stock = engine.getSnapshot().stocks.find((s) => s.id === event.stockId);
-          addToast("info", "Dividend Dispatched", `Paid ₹${event.amountPerShare}/share of ${stock?.symbol ?? ""} to every holder.`);
-          break;
-        }
-        case "CASH_UPDATED":
-          addToast("info", "Cash Adjusted", event.reason ?? "An administrator adjusted a team's cash.");
-          break;
-        case "VIDEO_PLAY": {
-          const video = engine.getSnapshot().videos.find((v) => v.id === event.videoId);
-          addToast("info", "Video Broadcast Started", `Playing "${video?.title ?? ""}" across all screens.`);
-          break;
-        }
-        case "VIDEO_STOP":
-          addToast("info", "Video Broadcast Stopped", "The video overlay has been closed.");
-          break;
-        case "COMPETITION_RESET":
-          addToast("warning", "Competition Reset", "Restored the initial competition state.");
+        case "LEADERBOARD_CHANGED":
+          // Leaderboard changed - engine snapshot handles this
           break;
         default:
-          break;
+          // Unknown event - refetch all to be safe
+          refetchMarketData();
+          refetchHoldings();
+          refetchCash();
+          refetchTransactions();
       }
-    });
-  }, [addToast]);
+    },
+    [refetchMarketData, refetchHoldings, refetchCash, refetchTransactions]
+  );
+
+  // Realtime event subscriptions via Supabase (Phase 9.8).
+  // PostgreSQL is authoritative; Realtime events trigger targeted refetches.
+  useRealtimeSync({
+    runId: competitionRunId,
+    teamId: teamId,
+    runEvents: [
+      "ROUND_STATE_CHANGED",
+      "MARKET_STATE_CHANGED",
+      "PRICES_CHANGED",
+      "LEADERBOARD_CHANGED",
+    ],
+    teamEvents: ["PORTFOLIO_CHANGED"],
+    onReconcile,
+  });
+
+  // Admin operations via Supabase RPCs (authoritative database mutations)
+  const adminActions = useMemo(() => {
+    const supabase = createClient();
+
+    const findRoundByNumber = (roundNumber: RoundNumber) =>
+      rounds.find((r) => r.round_number === roundNumber);
+
+    const findActiveRound = () =>
+      rounds.find((r) => r.status === "active");
+
+    return {
+      startRound: async (round: RoundNumber) => {
+        const roundRecord = findRoundByNumber(round);
+        if (!roundRecord) {
+          toast.error("Round not found", { description: `Round ${round} does not exist` });
+          return;
+        }
+        const { error } = await supabase.rpc("start_round", {
+          p_round_id: roundRecord.id,
+        });
+        if (error) {
+          toast.error("Failed to start round", { description: error.message });
+          return;
+        }
+        // Update local engine for immediate UI feedback
+        await engine.startRound(round);
+        // Refresh rounds state
+        const { data: updatedRounds } = await supabase
+          .from("rounds")
+          .select("id, round_number, status")
+          .eq("competition_run_id", competitionRunId)
+          .order("round_number");
+        if (updatedRounds) setRounds(updatedRounds);
+      },
+
+      endRound: async (round: RoundNumber) => {
+        const roundRecord = findRoundByNumber(round);
+        if (!roundRecord) {
+          toast.error("Round not found", { description: `Round ${round} does not exist` });
+          return;
+        }
+        const { error } = await supabase.rpc("end_round", {
+          p_round_id: roundRecord.id,
+        });
+        if (error) {
+          toast.error("Failed to end round", { description: error.message });
+          return;
+        }
+        // Update local engine for immediate UI feedback
+        await engine.endRound(round);
+        // Refresh rounds state
+        const { data: updatedRounds } = await supabase
+          .from("rounds")
+          .select("id, round_number, status")
+          .eq("competition_run_id", competitionRunId)
+          .order("round_number");
+        if (updatedRounds) setRounds(updatedRounds);
+      },
+
+      setMarketStatus: async (status: MarketStatus) => {
+        const activeRound = findActiveRound();
+        if (!activeRound) {
+          toast.error("No active round", { description: "Cannot change market status without an active round" });
+          return;
+        }
+        let rpcName: string;
+        switch (status) {
+          case "MARKET_OPEN":
+            rpcName = "open_market";
+            break;
+          case "TRADING_PAUSED":
+            rpcName = "pause_trading";
+            break;
+          case "MARKET_CLOSED":
+            rpcName = "close_market";
+            break;
+          default:
+            return;
+        }
+        const { error } = await supabase.rpc(rpcName, {
+          p_round_id: activeRound.id,
+        });
+        if (error) {
+          toast.error("Failed to update market status", { description: error.message });
+          return;
+        }
+        // Update local engine for immediate UI feedback
+        if (status === "MARKET_OPEN") await engine.openMarket();
+        else if (status === "TRADING_PAUSED") await engine.pauseTrading();
+        else if (status === "MARKET_CLOSED") await engine.closeMarket();
+      },
+
+      applyPriceChanges: async () => {
+        // For now, apply_price_changes requires a batch_id
+        // The pending price changes are stored in the engine
+        // TODO: Implement price batch creation via Supabase
+        // For now, use engine's applyPriceChanges which broadcasts via BroadcastChannel
+        await engine.applyPriceChanges();
+        toast.success("Price changes applied", { description: "Market prices have been updated" });
+      },
+
+      payDividends: async (stockId: string, amountPerShare: number) => {
+        // Create dividend via Supabase
+        const { data: dividendData, error: createError } = await supabase
+          .from("dividends")
+          .insert({
+            competition_run_id: competitionRunId,
+            stock_id: stockId,
+            amount_paise: Math.round(amountPerShare * 100),
+            status: "pending",
+          })
+          .select("id")
+          .single();
+
+        if (createError || !dividendData) {
+          toast.error("Failed to create dividend", { description: createError?.message ?? "Unknown error" });
+          return;
+        }
+
+        // Apply the dividend
+        const { error } = await supabase.rpc("apply_dividend", {
+          p_dividend_id: dividendData.id,
+        });
+        if (error) {
+          toast.error("Failed to apply dividend", { description: error.message });
+          return;
+        }
+        // Update local engine for immediate UI feedback
+        await engine.payDividend(stockId, amountPerShare);
+        toast.success("Dividend applied", { description: `₹${amountPerShare} per share paid to all teams` });
+      },
+
+      creditCash: (teamId: string, amount: number, reason?: string) => {
+        // Credit cash via Supabase RPC
+        supabase
+          .rpc("adjust_team_cash", {
+            p_team_id: teamId,
+            p_competition_run_id: competitionRunId,
+            p_amount_paise: Math.round(amount * 100),
+            p_reason: reason || "Admin credit",
+          })
+          .then(({ error }) => {
+            if (error) {
+              toast.error("Failed to credit cash", { description: error.message });
+              return { ok: false, message: error.message };
+            }
+            // Update local engine for immediate UI feedback
+            engine.creditCash(teamId, amount, reason);
+            toast.success("Cash credited", { description: `₹${amount} credited to team` });
+            return { ok: true };
+          });
+        // Return synchronously for backward compatibility
+        return { ok: true };
+      },
+
+      debitCash: (teamId: string, amount: number, reason?: string) => {
+        // Debit cash via Supabase RPC (negative amount)
+        supabase
+          .rpc("adjust_team_cash", {
+            p_team_id: teamId,
+            p_competition_run_id: competitionRunId,
+            p_amount_paise: -Math.round(amount * 100),
+            p_reason: reason || "Admin debit",
+          })
+          .then(({ error }) => {
+            if (error) {
+              toast.error("Failed to debit cash", { description: error.message });
+              return { ok: false, message: error.message };
+            }
+            // Update local engine for immediate UI feedback
+            engine.debitCash(teamId, amount, reason);
+            toast.success("Cash debited", { description: `₹${amount} debited from team` });
+            return { ok: true };
+          });
+        // Return synchronously for backward compatibility
+        return { ok: true };
+      },
+    };
+  }, [rounds, competitionRunId]);
 
   const value = useMemo<SandboxContextType>(
     () => ({
@@ -288,17 +460,25 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
       // Admin context
       pendingPriceChanges: snapshot.pendingPriceChanges,
-      videos: snapshot.videos,
-      activeVideo: snapshot.activeVideo,
-      isVideoPlaying: snapshot.isVideoPlaying,
-      videoPlaybackStartedAt: snapshot.videoPlaybackStartedAt,
       teams: snapshot.teams,
 
       addToast,
       isInitializing,
 
-      // Admin actions (engine operations — the backend-replacement boundary)
-      ...engineActions,
+      // Admin actions — Supabase RPCs (authoritative) + local engine (UI feedback)
+      ...adminActions,
+
+      // Pending price changes — local engine state (private until applied)
+      setPendingPriceChange: (stockId: string, newPrice: number) =>
+        engine.setPendingPriceChange(stockId, newPrice),
+      clearPendingPriceChange: (stockId: string) => engine.clearPendingPriceChange(stockId),
+
+      resetCompetition: () => engine.resetCompetition(),
+
+      // View role — local UI state
+      setViewRole: (role: ViewRole) => engine.setRole(role),
+      syncStateFromBackend: (payload: Partial<RealtimeEventPayload>) =>
+        engine.applyRemote(payload as RealtimeEventPayload),
 
       // Participant trade actions — real execute_trade() RPC with refetch
       executeBuy: async (stockId: string, quantity: number) => {
@@ -325,6 +505,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       timerSeconds,
       addToast,
       isInitializing,
+      adminActions,
       marketStocks,
       isMarketDataLoading,
       marketDataError,

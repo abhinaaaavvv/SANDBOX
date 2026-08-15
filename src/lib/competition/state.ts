@@ -5,7 +5,6 @@ import {
   INITIAL_CASH,
   INITIAL_STOCKS,
   INITIAL_TEAMS,
-  PRESET_VIDEOS,
 } from "@/lib/mockData";
 import {
   CompetitionSnapshot,
@@ -33,10 +32,6 @@ export function createInitialState(): MockCompetitionState {
       dividendsReceived: 0,
     })),
     activeTeamId: DEFAULT_TEAM_ID,
-    videos: PRESET_VIDEOS.map((v) => ({ ...v })),
-    activeVideo: null,
-    isVideoPlaying: false,
-    videoPlaybackStartedAt: null,
   };
 }
 
@@ -87,16 +82,6 @@ export function applyEventToState(state: MockCompetitionState, event: RealtimeEv
         if (team) team.cash = event.cash;
       }
       break;
-    case "VIDEO_PLAY":
-      state.activeVideo =
-        state.videos.find((v) => v.id === event.videoId) ?? state.activeVideo;
-      state.isVideoPlaying = true;
-      state.videoPlaybackStartedAt = event.playbackStartedAt ?? event.timestamp;
-      break;
-    case "VIDEO_STOP":
-      state.isVideoPlaying = false;
-      state.videoPlaybackStartedAt = null;
-      break;
     case "COMPETITION_RESET": {
       const fresh = createInitialState();
       state.currentRound = fresh.currentRound;
@@ -106,9 +91,6 @@ export function applyEventToState(state: MockCompetitionState, event: RealtimeEv
       state.stocks = fresh.stocks;
       state.pendingPriceChanges = fresh.pendingPriceChanges;
       state.teams = fresh.teams;
-      state.activeVideo = fresh.activeVideo;
-      state.isVideoPlaying = fresh.isVideoPlaying;
-      state.videoPlaybackStartedAt = fresh.videoPlaybackStartedAt;
       break;
     }
     default:
@@ -264,10 +246,6 @@ export function buildSnapshot(
     stocks: state.stocks,
     // Pending prices are strictly admin-private — participants never see them.
     pendingPriceChanges: isAdminView ? state.pendingPriceChanges : [],
-    videos: state.videos,
-    activeVideo: state.activeVideo,
-    isVideoPlaying: state.isVideoPlaying,
-    videoPlaybackStartedAt: state.videoPlaybackStartedAt,
     activeTeamId: active.id,
     teamName: active.name,
     cash: active.cash,

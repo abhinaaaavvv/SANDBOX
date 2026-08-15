@@ -45,9 +45,6 @@ export const AdminPanel: React.FC = () => {
     roundEndsAt,
     stocks,
     pendingPriceChanges,
-    videos,
-    activeVideo,
-    isVideoPlaying,
     teams,
     startRound,
     endRound,
@@ -58,9 +55,6 @@ export const AdminPanel: React.FC = () => {
     payDividends,
     creditCash,
     debitCash,
-    selectVideo,
-    playVideo,
-    stopVideo,
     resetCompetition,
     addToast,
   } = useSandboxStore();
@@ -243,57 +237,6 @@ export const AdminPanel: React.FC = () => {
                   </div>
                 );
               })}
-            </div>
-          </Panel>
-
-          {/* Video broadcast engine */}
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>Round 3 Video Broadcast Engine</PanelTitle>
-              {isVideoPlaying && <Badge variant="warn">Broadcast Active</Badge>}
-            </PanelHeader>
-            <div className="flex flex-col gap-2 p-4">
-              {videos.map((vid) => {
-                const isSelected = activeVideo?.id === vid.id;
-                return (
-                  <div
-                    key={vid.id}
-                    className={cn(
-                      "flex items-start justify-between gap-2 rounded-md border px-3 py-2.5",
-                      isSelected ? "border-ring bg-muted" : "border-border bg-card"
-                    )}
-                  >
-                    <div>
-                      <div className="text-sm font-medium text-foreground">{vid.title}</div>
-                      <div className="mt-0.5 text-xs leading-tight text-muted-foreground">
-                        {vid.description}
-                      </div>
-                    </div>
-                    <Button
-                      variant={isSelected ? "default" : "outline"}
-                      size="sm"
-                      className="shrink-0"
-                      onClick={() => selectVideo(vid.id)}
-                    >
-                      {isSelected ? "Selected" : "Select"}
-                    </Button>
-                  </div>
-                );
-              })}
-
-              <div className="flex items-center gap-2 pt-1">
-                <Button
-                  variant="secondary"
-                  className="flex-1"
-                  disabled={!activeVideo || isVideoPlaying}
-                  onClick={playVideo}
-                >
-                  Play Video
-                </Button>
-                <Button variant="sell" disabled={!isVideoPlaying} onClick={stopVideo}>
-                  Stop
-                </Button>
-              </div>
             </div>
           </Panel>
 

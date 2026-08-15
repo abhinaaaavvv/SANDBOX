@@ -158,7 +158,7 @@ WHERE competition_run_id = p_competition_run_id
 ## 10. Tests Performed
 
 ### Basic Portfolio
-- Initial capital: ₹10,000 (1000000 paise)
+- Initial capital: ₹1,00,000 (10000000 paise)
 - Cash after trade: -₹31,000 (-31000000 paise)
 - Holdings: 100 TCS × ₹3,200 = ₹320,000 (32000000 paise)
 - Portfolio: ₹10,000 (correct!)

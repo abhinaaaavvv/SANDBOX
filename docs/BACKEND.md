@@ -102,7 +102,7 @@ Administrators manually control stock price changes.
 
 Video trading round.
 
-Administrators control stock price changes while participants trade based on synchronized video content.
+Administrators control stock price changes while participants trade based on video content played externally on a TV.
 
 Each round lasts 15 minutes.
 
@@ -265,8 +265,6 @@ pending_price_changes
 
 dividends
 dividend_payments
-
-videos
 
 competition_events
 
@@ -722,49 +720,36 @@ Realtime subscriptions should be designed after the underlying database schema a
 
 # 22. Round 3 Video Architecture
 
-Round 3 requires synchronized video playback.
+Round 3 videos are played externally on a TV, not within the SANDBOX website.
 
-The admin is authoritative for playback state.
+The website is NOT responsible for:
+- video hosting
+- video playback
+- video synchronization
+- video controls
+- video Storage
+- video Realtime events
 
-Relevant state may include:
-
-```text
-video
-playing/paused
-position
-started_at
-updated_at
-```
-
-The exact synchronization mechanism will be designed during the Round 3 implementation phase.
-
-Do not make each browser independently authoritative.
-
-The system must tolerate:
-
-- network latency
-- reconnects
-- devices joining late
-- paused playback
-- seeks
+The website continues handling all competition functionality:
+- authentication
+- rounds
+- market
+- trading
+- holdings
+- cash
+- portfolio
+- P/L
+- leaderboard
+- admin operations
+- existing Realtime synchronization
 
 ---
 
 # 23. Supabase Storage
 
-Round 3 videos will use Supabase Storage.
+Supabase Storage is available for future use but is NOT used for video storage.
 
-Videos should not be stored directly inside PostgreSQL.
-
-The database should store metadata/reference information in:
-
-```text
-videos
-```
-
-Storage access must be controlled appropriately.
-
-Participants should only receive access to videos they are authorized to view.
+Video content is managed externally and played on a TV during Round 3.
 
 ---
 

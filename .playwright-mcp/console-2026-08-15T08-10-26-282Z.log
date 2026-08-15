@@ -1,0 +1,22 @@
+[     468ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     562ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1959ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1978ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   63782ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/trades?select=id,stock_id,side,quantity,stocks(symbol,name)&limit=3:0
+[   88769ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/trades?select=id,stock_id,side,quantity,stocks(symbol,name)&limit=3&order=executed_at.desc:0
+[  240433ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  241151ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  241187ms] [LOG] [Fast Refresh] done in 818ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  241259ms] [LOG] [Fast Refresh] done in 818ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  241619ms] [LOG] [Fast Refresh] done in 818ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  242828ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  243017ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  245255ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  245289ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

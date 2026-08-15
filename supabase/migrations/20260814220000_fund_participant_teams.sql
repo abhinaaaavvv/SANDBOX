@@ -12,11 +12,11 @@
 INSERT INTO public.cash_ledger (team_id, competition_run_id, entry_type, amount_paise, description, created_by, created_at)
 VALUES
   -- Demo Team Alpha (Team Alpha captain + Team Beta member)
-  ('54a71903-2a98-4872-a592-797c838174f3', 'd1d8bcaf-d8e3-4b75-902b-e9ee981d9796', 'initial_capital', 1000000, 'Initial capital', '479b2b61-2c1c-43ce-8992-949660911327', now()),
+  ('54a71903-2a98-4872-a592-797c838174f3', 'd1d8bcaf-d8e3-4b75-902b-e9ee981d9796', 'initial_capital', 10000000, 'Initial capital', '479b2b61-2c1c-43ce-8992-949660911327', now()),
   -- SANDBOX Test — Alpha (Test Alpha 1 + Test Alpha 2)
-  ('4af2d7f5-eed8-4068-8bb5-8b363dcfe712', 'd1d8bcaf-d8e3-4b75-902b-e9ee981d9796', 'initial_capital', 1000000, 'Initial capital', '479b2b61-2c1c-43ce-8992-949660911327', now()),
+  ('4af2d7f5-eed8-4068-8bb5-8b363dcfe712', 'd1d8bcaf-d8e3-4b75-902b-e9ee981d9796', 'initial_capital', 10000000, 'Initial capital', '479b2b61-2c1c-43ce-8992-949660911327', now()),
   -- SANDBOX Test — Beta (Test Beta 1 + Test Beta 2)
-  ('d62a2acc-abf0-4347-baa4-f8464a061c82', 'd1d8bcaf-d8e3-4b75-902b-e9ee981d9796', 'initial_capital', 1000000, 'Initial capital', '479b2b61-2c1c-43ce-8992-949660911327', now()),
+  ('d62a2acc-abf0-4347-baa4-f8464a061c82', 'd1d8bcaf-d8e3-4b75-902b-e9ee981d9796', 'initial_capital', 10000000, 'Initial capital', '479b2b61-2c1c-43ce-8992-949660911327', now()),
   -- SANDBOX Test — Gamma (Test Gamma 1)
-  ('b056329e-5507-43cf-8e3f-352751988718', 'd1d8bcaf-d8e3-4b75-902b-e9ee981d9796', 'initial_capital', 1000000, 'Initial capital', '479b2b61-2c1c-43ce-8992-949660911327', now())
-ON CONFLICT DO NOTHING;
+  ('b056329e-5507-43cf-8e3f-352751988718', 'd1d8bcaf-d8e3-4b75-902b-e9ee981d9796', 'initial_capital', 10000000, 'Initial capital', '479b2b61-2c1c-43ce-8992-949660911327', now())
+ON CONFLICT (team_id, competition_run_id, entry_type) DO UPDATE SET amount_paise = 10000000;

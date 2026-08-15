@@ -1,0 +1,225 @@
+- generic:
+  - generic:
+    - banner:
+      - generic:
+        - generic:
+          - generic:
+            - generic: SANDBOX
+            - generic: Live Market Simulation
+          - generic:
+            - generic: Round 01
+            - generic: Market Open
+            - generic: "--:--"
+        - generic:
+          - generic:
+            - generic: "Team:"
+            - generic: Nexus Traders
+          - button: Sign Out
+    - generic:
+      - generic:
+        - generic:
+          - generic: Cash Available
+          - generic: ₹10,000.00
+          - generic: Liquid capital for order execution
+        - generic:
+          - generic: Portfolio Value
+          - generic: ₹10,000.00
+          - generic: Cash + active market positions
+        - generic:
+          - generic: Total Profit / Loss
+          - generic: +₹0.00
+          - generic: 0.00% return
+      - generic:
+        - tablist:
+          - tab [selected]: Market Desk
+          - tab: Holdings & Portfolio
+          - tab: Live Leaderboard
+          - tab: Transaction Log
+        - tabpanel:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Market Securities
+                    - generic: (3 securities)
+                  - generic:
+                    - textbox:
+                      - /placeholder: Search ticker or name…
+                - generic:
+                  - table:
+                    - rowgroup:
+                      - row:
+                        - columnheader:
+                          - button: Security
+                        - columnheader:
+                          - button: Price
+                        - columnheader:
+                          - button: Change
+                        - columnheader: Owned
+                        - columnheader: Action
+                    - rowgroup:
+                      - row:
+                        - cell:
+                          - generic:
+                            - generic: HDFC
+                            - generic: HDFC Bank
+                        - cell: ₹1,650.00
+                        - cell: N/A
+                        - cell: —
+                        - cell:
+                          - generic:
+                            - button: Buy
+                            - button [disabled]: Sell
+                      - row:
+                        - cell:
+                          - generic:
+                            - generic: INFY
+                            - generic: Infosys Limited
+                        - cell: ₹1,400.00
+                        - cell: N/A
+                        - cell: —
+                        - cell:
+                          - generic:
+                            - button: Buy
+                            - button [disabled]: Sell
+                      - row:
+                        - cell:
+                          - generic:
+                            - generic: TCS
+                            - generic: Tata Consultancy Services
+                        - cell: ₹4,000.00
+                        - cell: N/A
+                        - cell: —
+                        - cell:
+                          - generic:
+                            - button: Buy
+                            - button [disabled]: Sell
+            - generic:
+              - generic:
+                - generic:
+                  - generic: Live Leaderboard
+                  - generic: Ranked by portfolio value
+                - generic:
+                  - table:
+                    - rowgroup:
+                      - row:
+                        - columnheader: Rank
+                        - columnheader: Team
+                        - columnheader: Portfolio Value
+                        - columnheader: Total P/L
+                    - rowgroup:
+                      - row:
+                        - cell: "1"
+                        - cell:
+                          - generic: Alpha Capital
+                        - cell: ₹1,45,400
+                        - cell:
+                          - generic: +₹45,400 (+45.40%)
+                      - row:
+                        - cell: "2"
+                        - cell:
+                          - generic:
+                            - generic: Nexus Traders
+                            - generic: You
+                        - cell: ₹1,18,500
+                        - cell:
+                          - generic: +₹18,500 (+18.50%)
+                      - row:
+                        - cell: "3"
+                        - cell:
+                          - generic: Phoenix Ventures
+                        - cell: ₹1,07,550
+                        - cell:
+                          - generic: +₹7,550 (+7.55%)
+                      - row:
+                        - cell: "4"
+                        - cell:
+                          - generic: Nova Arbitrage
+                        - cell: ₹1,06,640
+                        - cell:
+                          - generic: +₹6,640 (+6.64%)
+                      - row:
+                        - cell: "5"
+                        - cell:
+                          - generic: Sigma Quant
+                        - cell: ₹1,04,220
+                        - cell:
+                          - generic: +₹4,220 (+4.22%)
+                      - row:
+                        - cell: "6"
+                        - cell:
+                          - generic: Zenith Holdings
+                        - cell: ₹1,03,700
+                        - cell:
+                          - generic: +₹3,700 (+3.70%)
+              - generic:
+                - generic:
+                  - generic: Transaction History
+                  - generic: 0 entries
+                - generic:
+                  - table:
+                    - rowgroup:
+                      - row:
+                        - columnheader: Time
+                        - columnheader: Type
+                        - columnheader: Security
+                        - columnheader: Qty
+                        - columnheader: Exec Price
+                        - columnheader: Total
+                    - rowgroup:
+                      - row:
+                        - cell: No transactions logged
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]
+  - alert
+  - dialog [ref=e679]:
+    - generic [ref=e680]:
+      - generic [ref=e681]:
+        - generic [ref=e682]: Buy order
+        - heading "HDFC" [level=2] [ref=e683]
+        - generic [ref=e684]: HDFC Bank
+      - paragraph [ref=e685]: BUY order for HDFC
+    - generic [ref=e686]:
+      - generic [ref=e687]:
+        - generic [ref=e688]:
+          - generic [ref=e689]: Current Price
+          - generic [ref=e690]: ₹1,650.00
+        - generic [ref=e691]:
+          - generic [ref=e692]: 24H Change
+          - generic [ref=e693]: N/A
+      - generic [ref=e694]:
+        - generic [ref=e695]: Available cash
+        - generic [ref=e696]: ₹10,000.00
+      - generic [ref=e697]:
+        - generic [ref=e698]:
+          - generic [ref=e699]: Quantity
+          - button "Max (6)" [active] [ref=e700]
+        - generic [ref=e701]:
+          - button "Decrease quantity" [ref=e702]: −
+          - generic [ref=e703]:
+            - spinbutton "Quantity" [ref=e704]: "10"
+            - generic [ref=e705]:
+              - button "Increase value" [ref=e706]
+              - button "Decrease value" [ref=e709]
+          - button "Increase quantity" [ref=e712]: +
+        - generic [ref=e713]:
+          - button "5" [ref=e714]
+          - button "10" [ref=e715]
+          - button "25" [ref=e716]
+          - button "50" [ref=e717]
+          - button "100" [ref=e718]
+      - generic [ref=e719]:
+        - generic [ref=e720]:
+          - generic [ref=e721]: Price per share
+          - generic [ref=e722]: ₹1,650.00
+        - generic [ref=e723]:
+          - generic [ref=e724]: Brokerage / fee
+          - generic [ref=e725]: ₹0
+        - generic [ref=e726]:
+          - generic [ref=e727]: Estimated total
+          - generic [ref=e728]: ₹16,500.00
+      - generic [ref=e729]:
+        - button "Cancel" [ref=e730]
+        - button "Confirm Buy" [ref=e731]
+    - button "Close" [ref=e732]

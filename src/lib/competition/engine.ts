@@ -426,39 +426,6 @@ export class MockCompetitionEngine {
   }
 
   // -------------------------------------------------------------------------
-  // Video broadcast
-  // -------------------------------------------------------------------------
-
-  selectVideo(videoId: string | null) {
-    this.mutateLocal((state) => {
-      if (!videoId) {
-        state.activeVideo = null;
-        state.isVideoPlaying = false;
-        state.videoPlaybackStartedAt = null;
-        return;
-      }
-      const found = state.videos.find((v) => v.id === videoId);
-      if (found) state.activeVideo = found;
-    });
-  }
-
-  async playVideo(): Promise<void> {
-    const video = this.state.activeVideo;
-    if (!video) return;
-    const startedAt = this.nowIso();
-    this.commit({
-      type: "VIDEO_PLAY",
-      timestamp: startedAt,
-      videoId: video.id,
-      playbackStartedAt: startedAt,
-    });
-  }
-
-  async stopVideo(): Promise<void> {
-    this.commit({ type: "VIDEO_STOP", timestamp: this.nowIso() });
-  }
-
-  // -------------------------------------------------------------------------
   // Competition
   // -------------------------------------------------------------------------
 

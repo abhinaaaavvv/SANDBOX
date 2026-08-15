@@ -8,7 +8,8 @@ import { CompetitionContextProvider } from "@/lib/competition-context";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
-
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 /**
  * Google Sans is a restricted-license family served by the Google Fonts API
  * but not exposed through next/font/google. We self-host the Latin-subset
@@ -60,6 +61,8 @@ export default function RootLayout({
             </CompetitionContextProvider>
           </AuthProvider>
         </RealtimeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -1,0 +1,1046 @@
+[     272ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     328ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1478ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1487ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   11755ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/auth/v1/token?grant_type=password:0
+[  114913ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/auth/v1/token?grant_type=password:0
+[  644958ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  645688ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  645715ms] [LOG] [Fast Refresh] done in 823ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  645795ms] [LOG] [Fast Refresh] done in 823ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  646156ms] [LOG] [Fast Refresh] done in 823ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  647574ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  648127ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  649987ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  650002ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  678951ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  678961ms] [LOG] [Fast Refresh] done in 110ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3302484ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3302499ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3893414ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3893422ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4161884ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4162156ms] [LOG] [Fast Refresh] done in 372ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4183963ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4186405ms] [LOG] [Fast Refresh] done in 2492ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4186511ms] [LOG] [Fast Refresh] done in 2492ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4186804ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4187146ms] [LOG] [Fast Refresh] done in 444ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4251287ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4251400ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4251445ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4251755ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4251935ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4252004ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4252158ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4252208ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4253406ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4278101ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4278145ms] [LOG] [Fast Refresh] done in 56ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4278203ms] [LOG] [Fast Refresh] done in 56ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4278288ms] [LOG] [Fast Refresh] done in 56ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4280281ms] [LOG] [Fast Refresh] done in 56ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4292127ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4292210ms] [LOG] [Fast Refresh] done in 13ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4294277ms] [LOG] [Fast Refresh] done in 13ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4308472ms] [LOG] [Fast Refresh] done in 13ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4335653ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4335935ms] [LOG] [Fast Refresh] done in 314ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4335995ms] [LOG] [Fast Refresh] done in 314ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4337969ms] [LOG] [Fast Refresh] done in 314ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4367286ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4367374ms] [LOG] [Fast Refresh] done in 75ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4367482ms] [LOG] [Fast Refresh] done in 75ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4369389ms] [LOG] [Fast Refresh] done in 75ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4381361ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4381403ms] [LOG] [Fast Refresh] done in 95ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4381518ms] [LOG] [Fast Refresh] done in 95ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4383481ms] [LOG] [Fast Refresh] done in 95ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4417965ms] [LOG] [Fast Refresh] done in 95ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4423579ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4423950ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4424366ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4425919ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4447662ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4465858ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4467100ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4468445ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4505492ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4545060ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4547071ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4548127ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4557738ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=70ZJIlENjKagg8LY8tNtK' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 4561101ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4580296ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4580639ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4580942ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4580993ms] [LOG] [Fast Refresh] done in 229ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4581684ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4582788ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4582807ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4582970ms] [LOG] [Fast Refresh] done in 1386ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4587579ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4589305ms] [LOG] [Fast Refresh] done in 1828ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4689207ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4690132ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4690378ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4690394ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4690632ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4691278ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4692594ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4696965ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4701722ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4702772ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4703978ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4707797ms] [LOG] [Fast Refresh] done in 1020ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4723044ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4723393ms] [LOG] [Fast Refresh] done in 382ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4723430ms] [LOG] [Fast Refresh] done in 382ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4723931ms] [LOG] [Fast Refresh] done in 382ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4725618ms] [LOG] [Fast Refresh] done in 382ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4737552ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4739011ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4739038ms] [LOG] [Fast Refresh] done in 1554ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4739215ms] [LOG] [Fast Refresh] done in 1554ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4739376ms] [LOG] [Fast Refresh] done in 1554ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4740658ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4741140ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4743168ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4743189ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4761109ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4762055ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4762120ms] [LOG] [Fast Refresh] done in 1077ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4762167ms] [LOG] [Fast Refresh] done in 1077ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4762230ms] [LOG] [Fast Refresh] done in 1077ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4762399ms] [LOG] [Fast Refresh] done in 1077ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4763019ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4763088ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4764212ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4764225ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4765808ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4766001ms] [LOG] [Fast Refresh] done in 255ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4766019ms] [LOG] [Fast Refresh] done in 255ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4766323ms] [LOG] [Fast Refresh] done in 255ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4766512ms] [LOG] [Fast Refresh] done in 255ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4766696ms] [LOG] [Fast Refresh] done in 255ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4767012ms] [LOG] [Fast Refresh] done in 255ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4775020ms] [LOG] [Fast Refresh] done in 255ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4783894ms] [LOG] [Fast Refresh] done in 255ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4789406ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4789469ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4789702ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4790123ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4790863ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4795047ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4796869ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4799578ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4801454ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4802841ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4805479ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4805834ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4806022ms] [LOG] [Fast Refresh] done in 3092ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4806265ms] [LOG] [Fast Refresh] done in 3092ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4806706ms] [LOG] [Fast Refresh] done in 3092ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4808956ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4809170ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4809786ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4811738ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4811790ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4811981ms] [LOG] [Fast Refresh] done in 2323ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4820101ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4820222ms] [LOG] [Fast Refresh] done in 231ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4938807ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4944128ms] [ERROR] ./src/components/shared/LeaderboardTable.tsx:69:15
+Error: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+  67 |                 className={"bg-muted/50"}
+  68 |               >
+> 69 |               >
+     |               ^
+  70 |                 <TableCell
+  71 |                   className={cn(
+  72 |                     "text-center font-semibold tabular-nums",
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LeaderboardTable.tsx:
+./src/components/shared/LeaderboardTable.tsx:69:15
+  67 |                 className={"bg-muted/50"}
+  68 |               >
+> 69 |               >
+     |               ^
+  70 |                 <TableCell
+  71 |                   className={cn(
+  72 |                     "text-center font-semibold tabular-nums",
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/LeaderboardTable.tsx [Client Component Browser]
+    ./src/components/admin/AdminPanel.tsx [Client Component Browser]
+    ./src/app/admin/(console)/page.tsx [Client Component Browser]
+    ./src/app/admin/(console)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/LeaderboardTable.tsx [Client Component SSR]
+    ./src/components/admin/AdminPanel.tsx [Client Component SSR]
+    ./src/app/admin/(console)/page.tsx [Client Component SSR]
+    ./src/app/admin/(console)/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4944975ms] [ERROR] ./src/components/shared/LeaderboardTable.tsx:69:15
+Error: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+  67 |                 className={"bg-muted/50"}
+  68 |               >
+> 69 |               >
+     |               ^
+  70 |                 <TableCell
+  71 |                   className={cn(
+  72 |                     "text-center font-semibold tabular-nums",
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LeaderboardTable.tsx:
+./src/components/shared/LeaderboardTable.tsx:69:15
+  67 |                 className={"bg-muted/50"}
+  68 |               >
+> 69 |               >
+     |               ^
+  70 |                 <TableCell
+  71 |                   className={cn(
+  72 |                     "text-center font-semibold tabular-nums",
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/LeaderboardTable.tsx [Client Component Browser]
+    ./src/components/admin/AdminPanel.tsx [Client Component Browser]
+    ./src/app/admin/(console)/page.tsx [Client Component Browser]
+    ./src/app/admin/(console)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/LeaderboardTable.tsx [Client Component SSR]
+    ./src/components/admin/AdminPanel.tsx [Client Component SSR]
+    ./src/app/admin/(console)/page.tsx [Client Component SSR]
+    ./src/app/admin/(console)/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4944990ms] [ERROR] ./src/components/shared/LeaderboardTable.tsx:69:15
+Error: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+  67 |                 className={"bg-muted/50"}
+  68 |               >
+> 69 |               >
+     |               ^
+  70 |                 <TableCell
+  71 |                   className={cn(
+  72 |                     "text-center font-semibold tabular-nums",
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LeaderboardTable.tsx:
+./src/components/shared/LeaderboardTable.tsx:69:15
+  67 |                 className={"bg-muted/50"}
+  68 |               >
+> 69 |               >
+     |               ^
+  70 |                 <TableCell
+  71 |                   className={cn(
+  72 |                     "text-center font-semibold tabular-nums",
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/LeaderboardTable.tsx [Client Component Browser]
+    ./src/components/admin/AdminPanel.tsx [Client Component Browser]
+    ./src/app/admin/(console)/page.tsx [Client Component Browser]
+    ./src/app/admin/(console)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/LeaderboardTable.tsx [Client Component SSR]
+    ./src/components/admin/AdminPanel.tsx [Client Component SSR]
+    ./src/app/admin/(console)/page.tsx [Client Component SSR]
+    ./src/app/admin/(console)/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4945066ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4947985ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4949618ms] [ERROR] ./src/components/shared/LeaderboardTable.tsx:69:15
+Error: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+  67 |                 className={"bg-muted/50"}
+  68 |               >
+> 69 |               >
+     |               ^
+  70 |                 <TableCell
+  71 |                   className={cn(
+  72 |                     "text-center font-semibold tabular-nums",
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LeaderboardTable.tsx:
+./src/components/shared/LeaderboardTable.tsx:69:15
+  67 |                 className={"bg-muted/50"}
+  68 |               >
+> 69 |               >
+     |               ^
+  70 |                 <TableCell
+  71 |                   className={cn(
+  72 |                     "text-center font-semibold tabular-nums",
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/LeaderboardTable.tsx [Client Component Browser]
+    ./src/components/admin/AdminPanel.tsx [Client Component Browser]
+    ./src/app/admin/(console)/page.tsx [Client Component Browser]
+    ./src/app/admin/(console)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/LeaderboardTable.tsx [Client Component SSR]
+    ./src/components/admin/AdminPanel.tsx [Client Component SSR]
+    ./src/app/admin/(console)/page.tsx [Client Component SSR]
+    ./src/app/admin/(console)/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4980689ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4981617ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4981694ms] [LOG] [Fast Refresh] done in 1032ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4981710ms] [LOG] [Fast Refresh] done in 1032ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4982784ms] [LOG] [Fast Refresh] done in 1032ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4983028ms] [LOG] [Fast Refresh] done in 1032ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4985193ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4985911ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4988808ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4988839ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5019539ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5020915ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5021034ms] [LOG] [Fast Refresh] done in 1525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5021096ms] [LOG] [Fast Refresh] done in 1525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5021333ms] [LOG] [Fast Refresh] done in 1525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5021721ms] [LOG] [Fast Refresh] done in 1525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5021840ms] [LOG] [Fast Refresh] done in 1525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5023086ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5023440ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5025426ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5025441ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5053426ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5053883ms] [LOG] [Fast Refresh] done in 394ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5054048ms] [LOG] [Fast Refresh] done in 394ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5055923ms] [LOG] [Fast Refresh] done in 394ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5103994ms] [LOG] [Fast Refresh] done in 394ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5542910ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5542919ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6038240ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6038854ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6038882ms] [LOG] [Fast Refresh] done in 712ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6039041ms] [LOG] [Fast Refresh] done in 712ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6039177ms] [LOG] [Fast Refresh] done in 712ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6040074ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6040336ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6042275ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6042289ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6082766ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6083661ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6083701ms] [LOG] [Fast Refresh] done in 983ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6083702ms] [LOG] [Fast Refresh] done in 983ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6084106ms] [LOG] [Fast Refresh] done in 983ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6084108ms] [LOG] [Fast Refresh] done in 983ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6084764ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6084886ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6086466ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6086486ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6103470ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6104004ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6104146ms] [LOG] [Fast Refresh] done in 633ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6104296ms] [LOG] [Fast Refresh] done in 633ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6104673ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6104752ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6105802ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6105816ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6139197ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6139718ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6139763ms] [LOG] [Fast Refresh] done in 645ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6139885ms] [LOG] [Fast Refresh] done in 645ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6140483ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6140553ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6141663ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6141674ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6163761ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6164404ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6164428ms] [LOG] [Fast Refresh] done in 760ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6164536ms] [LOG] [Fast Refresh] done in 760ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6164646ms] [LOG] [Fast Refresh] done in 760ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6164750ms] [LOG] [Fast Refresh] done in 760ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6165273ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6165332ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6166465ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6166469ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6208284ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6208703ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6208718ms] [LOG] [Fast Refresh] done in 518ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6208811ms] [LOG] [Fast Refresh] done in 518ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6209013ms] [LOG] [Fast Refresh] done in 518ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6209494ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6209562ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6210937ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6210943ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6223655ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6224092ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6224182ms] [LOG] [Fast Refresh] done in 537ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6224326ms] [LOG] [Fast Refresh] done in 537ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6224782ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6224843ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6226116ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6226128ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6238409ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6238797ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6238888ms] [LOG] [Fast Refresh] done in 487ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6239037ms] [LOG] [Fast Refresh] done in 487ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6239388ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6239435ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6240235ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6240239ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6260046ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6260601ms] [ERROR] ./src/context/SandboxContext.tsx:223:28
+Error: Expected ';', got '('
+  221 |   setPendingPriceChange: (stockId: string, newPrice: numbe...
+  222 |   clearPendingPriceChange: (stockId: string) => void;
+> 223 |   applyPriceChanges: async (priceChanges: { stockId: strin...
+      |                            ^
+  224 |   payDividends: (stockId: string, amountPerShare: number) ...
+  225 |   creditCash: (teamId: string, amount: number, reason?: st...
+  226 |   debitCash: (teamId: string, amount: number, reason?: str...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/context/SandboxContext.tsx:
+./src/context/SandboxContext.tsx:223:28
+  221 |   setPendingPriceChange: (stockId: string, newPrice: numbe...
+  222 |   clearPendingPriceChange: (stockId: string) => void;
+> 223 |   applyPriceChanges: async (priceChanges: { stockId: strin...
+      |                            ^
+  224 |   payDividends: (stockId: string, amountPerShare: number) ...
+  225 |   creditCash: (teamId: string, amount: number, reason?: st...
+  226 |   debitCash: (teamId: string, amount: number, reason?: str...
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6289305ms] [ERROR] ./src/context/SandboxContext.tsx:230:27
+Error: Expected ';', got '('
+  228 |   playVideo: () => Promise<void>;
+  229 |   stopVideo: () => Promise<void>;
+> 230 |   resetCompetition: async () => Promise<void>;
+      |                           ^
+  231 |
+  232 |   // Participant Trade Actions
+  233 |   executeBuy: (stockId: string, quantity: number) => Promi...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/context/SandboxContext.tsx:
+./src/context/SandboxContext.tsx:230:27
+  228 |   playVideo: () => Promise<void>;
+  229 |   stopVideo: () => Promise<void>;
+> 230 |   resetCompetition: async () => Promise<void>;
+      |                           ^
+  231 |
+  232 |   // Participant Trade Actions
+  233 |   executeBuy: (stockId: string, quantity: number) => Promi...
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6289399ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6372723ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6373443ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6373492ms] [LOG] [Fast Refresh] done in 834ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6373664ms] [LOG] [Fast Refresh] done in 834ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6373667ms] [LOG] [Fast Refresh] done in 834ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6373804ms] [LOG] [Fast Refresh] done in 834ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6374563ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6374647ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6376663ms] [LOG] [Realtime] Initial subscribe — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6376674ms] [LOG] [Realtime] Reconnected — firing reconcile @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6393703ms] [ERROR] ./src/context/SandboxContext.tsx:223:28
+Error: Expected ';', got '('
+  221 |   setPendingPriceChange: (stockId: string, newPrice: numbe...
+  222 |   clearPendingPriceChange: (stockId: string) => void;
+> 223 |   applyPriceChanges: async (priceChanges: { stockId: strin...
+      |                            ^
+  224 |   payDividends: (stockId: string, amountPerShare: number) ...
+  225 |   creditCash: (teamId: string, amount: number, reason?: st...
+  226 |   debitCash: (teamId: string, amount: number, reason?: str...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/context/SandboxContext.tsx:
+./src/context/SandboxContext.tsx:223:28
+  221 |   setPendingPriceChange: (stockId: string, newPrice: numbe...
+  222 |   clearPendingPriceChange: (stockId: string) => void;
+> 223 |   applyPriceChanges: async (priceChanges: { stockId: strin...
+      |                            ^
+  224 |   payDividends: (stockId: string, amountPerShare: number) ...
+  225 |   creditCash: (teamId: string, amount: number, reason?: st...
+  226 |   debitCash: (teamId: string, amount: number, reason?: str...
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6393758ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6398263ms] [ERROR] ./src/context/SandboxContext.tsx:223:28
+Error: Expected ';', got '('
+  221 |   setPendingPriceChange: (stockId: string, newPrice: numbe...
+  222 |   clearPendingPriceChange: (stockId: string) => void;
+> 223 |   applyPriceChanges: async (priceChanges: { stockId: strin...
+      |                            ^
+  224 |   payDividends: (stockId: string, amountPerShare: number) ...
+  225 |   creditCash: (teamId: string, amount: number, reason?: st...
+  226 |   debitCash: (teamId: string, amount: number, reason?: str...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/context/SandboxContext.tsx:
+./src/context/SandboxContext.tsx:223:28
+  221 |   setPendingPriceChange: (stockId: string, newPrice: numbe...
+  222 |   clearPendingPriceChange: (stockId: string) => void;
+> 223 |   applyPriceChanges: async (priceChanges: { stockId: strin...
+      |                            ^
+  224 |   payDividends: (stockId: string, amountPerShare: number) ...
+  225 |   creditCash: (teamId: string, amount: number, reason?: st...
+  226 |   debitCash: (teamId: string, amount: number, reason?: str...
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6457162ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6459379ms] [ERROR] ./src/context/SandboxContext.tsx:34:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  32 | import { useHoldings } from "@/hooks/useHoldings";
+  33 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 34 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  35 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  36 |
+  37 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6484142ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6484716ms] [ERROR] ./src/context/SandboxContext.tsx:34:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  32 | import { useHoldings } from "@/hooks/useHoldings";
+  33 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 34 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  35 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  36 |
+  37 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6530199ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6530566ms] [ERROR] ./src/context/SandboxContext.tsx:34:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  32 | import { useHoldings } from "@/hooks/useHoldings";
+  33 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 34 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  35 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  36 |
+  37 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6558382ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6558991ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6601399ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6623274ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6624753ms] [ERROR] ./src/context/SandboxContext.tsx:34:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  32 | import { useHoldings } from "@/hooks/useHoldings";
+  33 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 34 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  35 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  36 |
+  37 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6637538ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6639728ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6658354ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6662716ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6662842ms] [LOG] [Fast Refresh] done in 4455ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6662923ms] [LOG] [Fast Refresh] done in 4455ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6663281ms] [LOG] [Fast Refresh] done in 4455ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6663550ms] [LOG] [Fast Refresh] done in 4455ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6664181ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6664419ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6673220ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6675774ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6781305ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6781403ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6862311ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6904591ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6904792ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6905376ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6905478ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6905678ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6906133ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6907060ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6916584ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6917371ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6926909ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6942027ms] [ERROR] ./src/context/SandboxContext.tsx:35:1
+Error: Module not found: Can't resolve '@/hooks/useCashBalance'
+  33 | import { useHoldings } from "@/hooks/useHoldings";
+  34 | import { useTradeHistory } from "@/hooks/useTradeHistory";
+> 35 | import { useCashBalance } from "@/hooks/useCashBalance";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  36 | import { useTradeExecution } from "@/hooks/useTradeExecution";
+  37 |
+  38 | /**
+
+Import map: aliased to relative './src/hooks/useCashBalance' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 6968156ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6968948ms] [LOG] [Fast Refresh] done in 771ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6969103ms] [LOG] [Fast Refresh] done in 896ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6969433ms] [LOG] [Fast Refresh] done in 896ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6971453ms] [LOG] [Fast Refresh] done in 896ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6972599ms] [LOG] [Fast Refresh] done in 896ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6973754ms] [LOG] [Fast Refresh] done in 896ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6973958ms] [LOG] [Fast Refresh] done in 896ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6974017ms] [LOG] [Fast Refresh] done in 896ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 7279266ms] [ERROR] ./src/context/SandboxContext.tsx:209:19
+Error: Expected ';', '}' or <eof>
+  207 |   }, []);    return unsub;    const unsub = useAuthRealtim...
+  208 |       currentRound: snapshot.currentRound,
+> 209 |       marketStatus: snapshot.marketStatus,
+      |                   ^
+  210 |       roundStartedAt: snapshot.roundStartedAt,
+  211 |       roundEndsAt: snapshot.roundEndsAt,
+  212 |       serverEndTimestamp: snapshot.roundEndsAt,
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/context/SandboxContext.tsx:
+./src/context/SandboxContext.tsx:209:19
+  207 |   }, []);    return unsub;    const unsub = useAuthRealtim...
+  208 |       currentRound: snapshot.currentRound,
+> 209 |       marketStatus: snapshot.marketStatus,
+      |                   ^
+  210 |       roundStartedAt: snapshot.roundStartedAt,
+  211 |       roundEndsAt: snapshot.roundEndsAt,
+  212 |       serverEndTimestamp: snapshot.roundEndsAt,
+
+Import trace:
+  Server Component:
+    ./src/context/SandboxContext.tsx
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 7279340ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 7286212ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 7286673ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 7286729ms] [LOG] [Fast Refresh] done in 577ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 7286890ms] [LOG] [Fast Refresh] done in 577ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 7287041ms] [LOG] [Fast Refresh] done in 577ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 7287879ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 7288122ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 7535309ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7536312ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7537317ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7538322ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7539325ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7544345ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7549357ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7554374ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7559437ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7564484ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7569573ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 7574793ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AdrW4xeYrIjgTwIoqdMZ3' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256

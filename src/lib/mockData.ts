@@ -1,12 +1,12 @@
-import { RoundNumber, Stock, Transaction, VideoItem } from "@/types/sandbox";
+import { RoundNumber, Stock, Transaction } from "@/types/sandbox";
 
-export const INITIAL_CASH = 100000;
+export const INITIAL_CASH = 10000000;
 
 /** Authoritative round duration used by the mock engine's timer. */
 export const ROUND_DURATION_SECONDS: Record<RoundNumber, number> = {
   1: 15 * 60, // Portfolio Building
   2: 15 * 60, // Newspaper Trading
-  3: 15 * 60, // Video Trading
+  3: 15 * 60, // Video Trading (video played externally on TV)
 };
 
 export const INITIAL_STOCKS: Stock[] = [
@@ -241,30 +241,3 @@ export const INITIAL_TEAMS: MockTeamSeed[] = [
 
 /** The team a locally signed-in participant controls in this simulation. */
 export const DEFAULT_TEAM_ID = "team-nexus";
-
-export const PRESET_VIDEOS: VideoItem[] = [
-  {
-    id: "vid-1",
-    title: "Market Shock --- Global Interest Rate Surge",
-    description: "Central reserve hikes interest rates unexpectedly by 75 bps causing volatility in financial and tech stocks.",
-    url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    durationSeconds: 15,
-    roundRequirement: 3,
-  },
-  {
-    id: "vid-2",
-    title: "Economic Boom --- Renewable Energy Breakthrough",
-    description: "Government announces massive ₹50,000 Cr green energy infrastructure subsidy package.",
-    url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    durationSeconds: 15,
-    roundRequirement: 3,
-  },
-  {
-    id: "vid-3",
-    title: "Quarterly Earnings Flash --- Tech Rally",
-    description: "Leading tech firms exceed revenue targets by 18%, sparking momentum across enterprise IT.",
-    url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    durationSeconds: 15,
-    roundRequirement: 3,
-  },
-];

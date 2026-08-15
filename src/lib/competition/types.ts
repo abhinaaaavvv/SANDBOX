@@ -6,7 +6,6 @@ import {
   Transaction,
   LeaderboardEntry,
   PendingPriceChange,
-  VideoItem,
 } from "@/types/sandbox";
 
 /** One simulated team's financial state (the engine's private ledger). */
@@ -36,10 +35,6 @@ export interface MockCompetitionState {
   pendingPriceChanges: PendingPriceChange[]; // admin-private, never broadcast
   teams: TeamState[];
   activeTeamId: string; // the team the local participant controls
-  videos: VideoItem[];
-  activeVideo: VideoItem | null;
-  isVideoPlaying: boolean;
-  videoPlaybackStartedAt: string | null;
 }
 
 /** Public, role-filtered read model handed to the React tree. */
@@ -61,10 +56,6 @@ export interface CompetitionSnapshot {
   stocks: Stock[];
   /** Only present for admin views; empty otherwise. */
   pendingPriceChanges: PendingPriceChange[];
-  videos: VideoItem[];
-  activeVideo: VideoItem | null;
-  isVideoPlaying: boolean;
-  videoPlaybackStartedAt: string | null;
   activeTeamId: string;
   teamName: string;
   cash: number;

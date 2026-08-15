@@ -77,15 +77,6 @@ export interface PendingPriceChange {
   changePercent: number;
 }
 
-export interface VideoItem {
-  id: string;
-  title: string;
-  description: string;
-  url: string;
-  durationSeconds: number;
-  roundRequirement?: number;
-}
-
 export interface ToastMessage {
   id: string;
   type: "success" | "warning" | "error" | "info";

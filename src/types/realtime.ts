@@ -6,7 +6,6 @@ import {
   Transaction,
   LeaderboardEntry,
   PendingPriceChange,
-  VideoItem,
 } from "@/types/sandbox";
 
 /**
@@ -28,8 +27,6 @@ export type RealtimeEventType =
   | "CASH_UPDATED"
   | "HOLDINGS_UPDATED"
   | "LEADERBOARD_UPDATED"
-  | "VIDEO_PLAY"
-  | "VIDEO_STOP"
   | "COMPETITION_RESET";
 
 /** Per-team payout record carried by a DIVIDENDS_PAID event. */
@@ -51,7 +48,6 @@ export interface RealtimeEventPayload {
   cash?: number;
   leaderboard?: LeaderboardEntry[];
   transaction?: Transaction;
-  videoId?: string;
 
   // ---- Engine operation fields (used to apply events idempotently) ----
   teamId?: string;
@@ -62,7 +58,6 @@ export interface RealtimeEventPayload {
   amountPerShare?: number;
   payments?: DividendPayment[];
   reason?: string;
-  playbackStartedAt?: string | null;
 }
 
 /**
@@ -80,9 +75,6 @@ export interface CompetitionStateResponse {
   holdings: Holding[];
   transactions: Transaction[];
   leaderboard: LeaderboardEntry[];
-  videos: VideoItem[];
-  activeVideoId?: string | null;
-  isVideoPlaying?: boolean;
   pendingPriceChanges?: PendingPriceChange[]; // Admin context only
 }
 

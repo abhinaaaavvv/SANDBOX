@@ -97,15 +97,6 @@ export interface RealtimeEventMap {
   DIVIDENDS_PAID: DividendsPaidPayload;
 }
 
-/** Typed event map for type-safe handlers. */
-export interface RealtimeEventMap {
-  ROUND_STATE_CHANGED: RoundStateChangedPayload;
-  MARKET_STATE_CHANGED: MarketStateChangedPayload;
-  PRICES_CHANGED: PricesChangedPayload;
-  PORTFOLIO_CHANGED: PortfolioChangedPayload;
-  LEADERBOARD_CHANGED: LeaderboardChangedPayload;
-}
-
 /** Handler function type for a specific event. */
 export type RealtimeHandler<T extends keyof RealtimeEventMap> = (
   payload: RealtimeEventMap[T]

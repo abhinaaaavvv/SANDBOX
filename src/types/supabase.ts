@@ -85,11 +85,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "cash_ledger_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
+            foreignKeyName: "cash_ledger_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
             foreignKeyName: "cash_ledger_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cash_ledger_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "cash_ledger_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["team_id"]
           },
           {
             foreignKeyName: "cash_ledger_team_id_fkey"
@@ -214,6 +242,20 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "dividend_payments_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
+            foreignKeyName: "dividend_payments_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
             foreignKeyName: "dividend_payments_dividend_id_fkey"
             columns: ["dividend_id"]
             isOneToOne: false
@@ -226,6 +268,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "stocks"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "dividend_payments_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "dividend_payments_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["team_id"]
           },
           {
             foreignKeyName: "dividend_payments_team_id_fkey"
@@ -274,6 +330,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "competition_runs"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "dividends_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
+            foreignKeyName: "dividends_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["competition_run_id"]
           },
           {
             foreignKeyName: "dividends_created_by_fkey"
@@ -328,11 +398,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "holdings_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
+            foreignKeyName: "holdings_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
             foreignKeyName: "holdings_stock_id_fkey"
             columns: ["stock_id"]
             isOneToOne: false
             referencedRelation: "stocks"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "holdings_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "holdings_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["team_id"]
           },
           {
             foreignKeyName: "holdings_team_id_fkey"
@@ -389,6 +487,34 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "idempotency_keys_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
+            foreignKeyName: "idempotency_keys_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
+            foreignKeyName: "idempotency_keys_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "idempotency_keys_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["team_id"]
+          },
+          {
             foreignKeyName: "idempotency_keys_team_id_fkey"
             columns: ["team_id"]
             isOneToOne: false
@@ -426,6 +552,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "competition_runs"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "market_quotes_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
+            foreignKeyName: "market_quotes_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["competition_run_id"]
           },
           {
             foreignKeyName: "market_quotes_stock_id_fkey"
@@ -512,6 +652,20 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "price_change_batches_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
+            foreignKeyName: "price_change_batches_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
             foreignKeyName: "price_change_batches_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
@@ -541,6 +695,33 @@ export type Database = {
           id?: string
           role?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      realtime_notifications: {
+        Row: {
+          channel: string
+          created_at: string
+          event_type: string
+          id: string
+          payload: Json
+          team_id: string | null
+        }
+        Insert: {
+          channel: string
+          created_at?: string
+          event_type: string
+          id?: string
+          payload?: Json
+          team_id?: string | null
+        }
+        Update: {
+          channel?: string
+          created_at?: string
+          event_type?: string
+          id?: string
+          payload?: Json
+          team_id?: string | null
         }
         Relationships: []
       }
@@ -591,6 +772,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "competition_runs"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rounds_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
+            foreignKeyName: "rounds_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["competition_run_id"]
           },
         ]
       }
@@ -647,6 +842,20 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["team_id"]
+          },
           {
             foreignKeyName: "team_members_team_id_fkey"
             columns: ["team_id"]
@@ -733,6 +942,20 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "trades_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
+            foreignKeyName: "trades_competition_run_id_fkey"
+            columns: ["competition_run_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["competition_run_id"]
+          },
+          {
             foreignKeyName: "trades_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
@@ -750,6 +973,20 @@ export type Database = {
             foreignKeyName: "trades_team_id_fkey"
             columns: ["team_id"]
             isOneToOne: false
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "trades_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "trades_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
             referencedRelation: "teams"
             referencedColumns: ["id"]
           },
@@ -757,22 +994,65 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      leaderboard_view: {
+        Row: {
+          cash_balance_paise: number | null
+          competition_run_id: string | null
+          holdings_value_paise: number | null
+          initial_capital_paise: number | null
+          pnl_paise: number | null
+          portfolio_value_paise: number | null
+          rank: number | null
+          return_basis_points: number | null
+          team_id: string | null
+          team_name: string | null
+        }
+        Relationships: []
+      }
+      team_portfolio_view: {
+        Row: {
+          cash_balance_paise: number | null
+          competition_run_id: string | null
+          holdings_value_paise: number | null
+          initial_capital_paise: number | null
+          pnl_paise: number | null
+          portfolio_value_paise: number | null
+          return_basis_points: number | null
+          team_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      adjust_team_cash: {
-        Args: {
-          p_amount_paise: number
-          p_competition_run_id: string
-          p_reason: string
-          p_team_id: string
-        }
-        Returns: Json
-      }
+      _get_run_id_from_round: { Args: { p_round_id: string }; Returns: string }
+      adjust_team_cash:
+        | {
+            Args: {
+              p_amount_paise: number
+              p_competition_run_id: string
+              p_reason: string
+              p_team_id: string
+            }
+            Returns: Json
+          }
+        | {
+            Args: {
+              p_amount_paise: number
+              p_competition_run_id: string
+              p_idempotency_key?: string
+              p_reason: string
+              p_team_id: string
+            }
+            Returns: Json
+          }
       apply_dividend: { Args: { p_dividend_id: string }; Returns: Json }
       apply_price_changes: { Args: { p_batch_id: string }; Returns: Json }
       assert_admin: { Args: never; Returns: undefined }
       cancel_price_batch: { Args: { p_batch_id: string }; Returns: Json }
+      cleanup_old_notifications: {
+        Args: { p_max_age?: string }
+        Returns: number
+      }
       close_market: { Args: { p_round_id: string }; Returns: Json }
       create_dividend: {
         Args: {
@@ -783,6 +1063,10 @@ export type Database = {
         Returns: Json
       }
       end_round: { Args: { p_round_id: string }; Returns: Json }
+      ensure_profile: {
+        Args: { p_email: string; p_name: string }
+        Returns: undefined
+      }
       execute_trade: {
         Args: {
           p_competition_run_id: string
@@ -793,6 +1077,15 @@ export type Database = {
         }
         Returns: Json
       }
+      get_leaderboard: { Args: { p_competition_run_id: string }; Returns: Json }
+      get_team_holdings: {
+        Args: { p_competition_run_id: string; p_team_id?: string }
+        Returns: Json
+      }
+      get_team_portfolio: {
+        Args: { p_competition_run_id: string; p_team_id?: string }
+        Returns: Json
+      }
       initialize_team_cash: {
         Args: {
           p_amount_paise: number
@@ -800,6 +1093,16 @@ export type Database = {
           p_team_id: string
         }
         Returns: Json
+      }
+      is_admin: { Args: { uid: string }; Returns: boolean }
+      notify_realtime: {
+        Args: {
+          p_channel: string
+          p_event_type: string
+          p_payload?: Json
+          p_team_id?: string
+        }
+        Returns: undefined
       }
       open_market: { Args: { p_round_id: string }; Returns: Json }
       pause_trading: { Args: { p_round_id: string }; Returns: Json }
@@ -812,11 +1115,16 @@ export type Database = {
         Returns: string
       }
       resume_trading: { Args: { p_round_id: string }; Returns: Json }
+      set_profile_role: {
+        Args: { p_email: string; p_role: string }
+        Returns: undefined
+      }
       setup_initial_prices: {
         Args: { p_competition_run_id: string; p_prices: Json }
         Returns: Json
       }
       start_round: { Args: { p_round_id: string }; Returns: Json }
+      user_team_ids: { Args: { uid: string }; Returns: string[] }
     }
     Enums: {
       [_ in never]: never
