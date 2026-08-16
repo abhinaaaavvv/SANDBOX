@@ -170,6 +170,15 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     refetch: refetchMarketData,
   } = useMarketData();
 
+  // Build stock lookup map for trade history symbol resolution
+  const stockMap = useMemo(() => {
+    const map = new Map<string, { symbol: string; name: string }>();
+    for (const stock of marketStocks) {
+      map.set(stock.id, { symbol: stock.symbol, name: stock.name });
+    }
+    return map;
+  }, [marketStocks]);
+
   // Real holdings, transactions, and cash from Supabase
   const {
     holdings: realHoldings,
@@ -178,7 +187,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const {
     transactions: realTransactions,
     refetch: refetchTransactions,
-  } = useTradeHistory();
+  } = useTradeHistory(stockMap);
   const {
     cash: realCash,
     initialCapital,
