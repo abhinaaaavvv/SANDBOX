@@ -816,6 +816,98 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     ]
   );
 
+  // ── Change-detection toasts for participants ──────────────────────────
+  // Tracks previous values and fires a toast when polling/realtime delivers new data.
+  const prevStocksRef = useRef(marketStocks);
+  const prevCashRef = useRef(realCash);
+  const prevHoldingsRef = useRef(realHoldings);
+  const prevTxCountRef = useRef(realTransactions.length);
+  const prevLeaderboardRef = useRef(dbLeaderboard);
+  const mountedRef = useRef(false);
+
+  useEffect(() => {
+    // Skip the very first render — we only notify on CHANGES after mount
+    if (!mountedRef.current) {
+      mountedRef.current = true;
+      prevStocksRef.current = marketStocks;
+      prevCashRef.current = realCash;
+      prevHoldingsRef.current = realHoldings;
+      prevTxCountRef.current = realTransactions.length;
+      prevLeaderboardRef.current = dbLeaderboard;
+      return;
+    }
+
+    const prevStocks = prevStocksRef.current;
+    const prevCash = prevCashRef.current;
+    const prevHoldings = prevHoldingsRef.current;
+    const prevTxCount = prevTxCountRef.current;
+    const prevLb = prevLeaderboardRef.current;
+
+    // Stock prices changed
+    const priceChanged = marketStocks.some((s, i) => {
+      const p = prevStocks[i];
+      return !p || s.currentPricePaise !== p.currentPricePaise;
+    }) || marketStocks.length !== prevStocks.length;
+
+    if (priceChanged) {
+      toast.info("Prices updated", { description: "Market data has been refreshed" });
+    }
+
+    // Cash changed
+    if (realCash !== prevCash) {
+      const diff = realCash - prevCash;
+      if (diff > 0) {
+        toast.success("Cash credited", { description: `₹${diff.toFixed(2)} added to your balance` });
+      } else if (diff < 0) {
+        toast.info("Cash debited", { description: `₹${Math.abs(diff).toFixed(2)} deducted from your balance` });
+      }
+    }
+
+    // Holdings changed (new position, quantity change, or position closed)
+    if (realHoldings.length !== prevHoldings.length) {
+      toast.info("Holdings updated", { description: "Your portfolio positions have changed" });
+    } else {
+      const holdingChanged = realHoldings.some((h, i) => {
+        const p = prevHoldings[i];
+        return p && (h.quantity !== p.quantity || h.currentPrice !== p.currentPrice);
+      });
+      if (holdingChanged) {
+        toast.info("Holdings updated", { description: "Your portfolio values have changed" });
+      }
+    }
+
+    // New transaction or dividend
+    if (realTransactions.length > prevTxCount) {
+      const newTx = realTransactions[0]; // most recent
+      if (newTx.type === "DIVIDEND") {
+        toast.success("Dividend received", {
+          description: `${newTx.symbol}: ₹${newTx.total.toFixed(2)} (${newTx.quantity} shares × ₹${newTx.price.toFixed(2)})`,
+        });
+      } else {
+        toast.success(`${newTx.type === "BUY" ? "Buy" : "Sell"} executed`, {
+          description: `${newTx.quantity} × ${newTx.symbol} @ ₹${newTx.price.toFixed(2)}`,
+        });
+      }
+    }
+
+    // Leaderboard changed (rank movement)
+    const lbChanged = dbLeaderboard.some((e, i) => {
+      const p = prevLb[i];
+      return !p || e.rank !== p.rank || e.portfolioValuePaise !== p.portfolioValuePaise;
+    }) || dbLeaderboard.length !== prevLb.length;
+
+    if (lbChanged) {
+      toast.info("Leaderboard updated", { description: "Rankings have been refreshed" });
+    }
+
+    // Update refs
+    prevStocksRef.current = marketStocks;
+    prevCashRef.current = realCash;
+    prevHoldingsRef.current = realHoldings;
+    prevTxCountRef.current = realTransactions.length;
+    prevLeaderboardRef.current = dbLeaderboard;
+  }, [marketStocks, realCash, realHoldings, realTransactions, dbLeaderboard]);
+
   return <SandboxContext.Provider value={value}>{children}</SandboxContext.Provider>;
 };
 
