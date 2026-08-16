@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSandboxStore } from "@/context/SandboxContext";
 import { formatTime } from "@/lib/utils";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,33 @@ import { MarketStatusBadge } from "@/components/ui/status-badge";
 import { Badge } from "@/components/ui/badge";
 import { Clock, LogOut } from "lucide-react";
 
+function useIndiaTime() {
+  const [time, setTime] = useState(() =>
+    new Date().toLocaleTimeString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+  );
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTime(
+        new Date().toLocaleTimeString("en-IN", {
+          timeZone: "Asia/Kolkata",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        })
+      );
+    }, 10_000);
+    return () => clearInterval(id);
+  }, []);
+
+  return time;
+}
+
 interface AppHeaderProps {
   role: AuthRole;
 }
@@ -16,6 +43,7 @@ interface AppHeaderProps {
 export const AppHeader: React.FC<AppHeaderProps> = ({ role }) => {
   const { currentRound, marketStatus, roundStatus, serverEndTimestamp, timerSeconds, teamName, pendingPriceChanges } =
     useSandboxStore();
+  const indiaTime = useIndiaTime();
 
   // Timer shows whenever there's an active round with an authoritative end timestamp.
   // This covers: market open, market closed, trading paused — any state where the round is running.
@@ -63,6 +91,11 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ role }) => {
             >
               <Clock className="size-3.5 text-muted-foreground" />
               <span>{hasLiveTimer ? formatTime(timerSeconds) : "--:--"}</span>
+            </div>
+
+            <div className="hidden items-center gap-1.5 rounded-md border border-border bg-muted px-2.5 py-1 text-sm tabular-nums text-muted-foreground sm:flex">
+              <span>{indiaTime}</span>
+              <span className="text-[10px] font-medium">IST</span>
             </div>
           </div>
         </div>
