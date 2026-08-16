@@ -881,16 +881,6 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       }
     }
 
-    // Leaderboard changed (rank movement)
-    const lbChanged = dbLeaderboard.some((e, i) => {
-      const p = prevLb[i];
-      return !p || e.rank !== p.rank || e.portfolioValuePaise !== p.portfolioValuePaise;
-    }) || dbLeaderboard.length !== prevLb.length;
-
-    if (lbChanged) {
-      toast.info("Leaderboard updated", { description: "Rankings have been refreshed" });
-    }
-
     // Update refs
     prevStocksRef.current = marketStocks;
     prevCashRef.current = realCash;
