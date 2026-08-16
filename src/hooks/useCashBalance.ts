@@ -110,6 +110,13 @@ export function useCashBalance() {
 
   const hasData = Boolean(competitionRunId && teamId);
 
+  // Polling fallback: refetch every 10 seconds while a run is active
+  useEffect(() => {
+    if (!hasData || isLoading) return;
+    const id = setInterval(() => fetchCash(), 10_000);
+    return () => clearInterval(id);
+  }, [hasData, isLoading, fetchCash]);
+
   return {
     cash: hasData ? cash : 0,
     initialCapital: hasData ? initialCapital : 0,

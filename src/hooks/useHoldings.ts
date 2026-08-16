@@ -138,6 +138,13 @@ export function useHoldings() {
 
   const hasRun = Boolean(competitionRunId);
 
+  // Polling fallback: refetch every 10 seconds while a run is active
+  useEffect(() => {
+    if (!competitionRunId || isLoading) return;
+    const id = setInterval(() => fetchHoldings(), 10_000);
+    return () => clearInterval(id);
+  }, [competitionRunId, isLoading, fetchHoldings]);
+
   return {
     holdings: hasRun ? holdings : [],
     isLoading: hasRun ? isLoading : false,

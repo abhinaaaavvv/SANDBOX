@@ -138,6 +138,13 @@ export function useLeaderboard(): UseLeaderboardResult {
     return fetchLeaderboard();
   }, [fetchLeaderboard]);
 
+  // Polling fallback: refetch every 10 seconds while a run is active
+  useEffect(() => {
+    if (!competitionRunId) return;
+    const id = setInterval(() => fetchLeaderboard(), 10_000);
+    return () => clearInterval(id);
+  }, [competitionRunId, fetchLeaderboard]);
+
   return {
     leaderboard,
     isLoading,
