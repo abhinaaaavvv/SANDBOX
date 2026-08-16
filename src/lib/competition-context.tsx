@@ -238,6 +238,7 @@ async function resolveCurrentRound(
   supabase: SupabaseClient,
   competitionRunId: string
 ): Promise<Round | null> {
+  // 1. Prefer active round
   const { data: activeRound, error: activeError } = await supabase
     .from("rounds")
     .select(
@@ -251,21 +252,33 @@ async function resolveCurrentRound(
     return activeRound as Round;
   }
 
-  const { data: completedRounds, error: completedError } = await supabase
+  // 2. No active round — find the latest round that has been started (started_at IS NOT NULL),
+  //    ordered by round_number descending. This avoids jumping to an out-of-order completed round.
+  const { data: startedRounds, error: startedError } = await supabase
     .from("rounds")
     .select(
       "id, competition_run_id, round_number, round_type, status, started_at, ends_at, market_status, trading_status, paused_at, accumulated_pause_duration, created_at, updated_at"
     )
     .eq("competition_run_id", competitionRunId)
-    .eq("status", "completed")
+    .not("started_at", "is", null)
     .order("round_number", { ascending: false })
     .limit(1);
 
-  if (!completedError && completedRounds && completedRounds.length > 0) {
-    return completedRounds[0] as Round;
+  if (!startedError && startedRounds && startedRounds.length > 0) {
+    return startedRounds[0] as Round;
   }
 
-  return null;
+  // 3. No round started yet — default to round 1
+  const { data: firstRound } = await supabase
+    .from("rounds")
+    .select(
+      "id, competition_run_id, round_number, round_type, status, started_at, ends_at, market_status, trading_status, paused_at, accumulated_pause_duration, created_at, updated_at"
+    )
+    .eq("competition_run_id", competitionRunId)
+    .eq("round_number", 1)
+    .single();
+
+  return (firstRound as Round) ?? null;
 }
 
 // ---------------------------------------------------------------------------

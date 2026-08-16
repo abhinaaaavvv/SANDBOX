@@ -48,6 +48,7 @@ export const AdminPanel: React.FC = () => {
     stocks,
     pendingPriceChanges,
     teams,
+    rounds,
     startRound,
     endRound,
     setMarketStatus,
@@ -271,7 +272,10 @@ export const AdminPanel: React.FC = () => {
             <div className="flex flex-col gap-2 p-4">
               {[1, 2, 3].map((rNum) => {
                 const roundVal = rNum as 1 | 2 | 3;
-                const isActive = currentRound === roundVal;
+                const dbRound = rounds.find((r) => r.round_number === rNum);
+                const roundStatus = dbRound?.status ?? "pending";
+                const isActive = roundStatus === "active";
+                const isCompleted = roundStatus === "completed";
                 const desc =
                   rNum === 1
                     ? "Round 01 — Portfolio Building (15m)"
@@ -287,12 +291,24 @@ export const AdminPanel: React.FC = () => {
                       isActive ? "border-ring bg-muted" : "border-border bg-card"
                     )}
                   >
-                    <span className="text-sm font-medium text-foreground">{desc}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium text-foreground">{desc}</span>
+                      {isCompleted && (
+                        <span className="rounded bg-green-500/15 px-1.5 py-0.5 text-[10px] font-medium text-green-600 dark:text-green-400">
+                          Done
+                        </span>
+                      )}
+                      {isActive && (
+                        <span className="rounded bg-blue-500/15 px-1.5 py-0.5 text-[10px] font-medium text-blue-600 dark:text-blue-400">
+                          Active
+                        </span>
+                      )}
+                    </div>
                     <div className="flex items-center gap-1.5">
                       <Button
                         variant="buy"
                         size="sm"
-                        disabled={isActive && isRoundActive}
+                        disabled={isActive || isCompleted || isRoundActive}
                         onClick={() => startRound(roundVal)}
                       >
                         Start

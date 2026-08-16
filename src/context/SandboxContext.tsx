@@ -98,6 +98,7 @@ interface SandboxContextType {
   // Admin Context
   pendingPriceChanges: PendingPriceChange[];
   teams: TeamOverview[];
+  rounds: Array<{ id: string; round_number: number; status: string }>;
 
   // Notifications (rendered via Sonner)
   addToast: (type: ToastMessage["type"], title: string, message: string) => void;
@@ -734,6 +735,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       // Admin context
       pendingPriceChanges,
       teams,
+      rounds,
 
       addToast,
       isInitializing,
@@ -793,6 +795,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       refetchMarketData,
       pendingPriceChanges,
       teams,
+      rounds,
       addToast,
       isInitializing,
       adminActions,
