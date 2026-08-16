@@ -102,7 +102,21 @@ export type Database = {
             foreignKeyName: "cash_ledger_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "cash_ledger_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "cash_ledger_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "teams"
             referencedColumns: ["id"]
           },
           {
@@ -349,7 +363,21 @@ export type Database = {
             foreignKeyName: "dividends_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "dividends_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "dividends_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "teams"
             referencedColumns: ["id"]
           },
           {
@@ -669,34 +697,24 @@ export type Database = {
             foreignKeyName: "price_change_batches_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "price_change_batches_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "price_change_batches_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "teams"
             referencedColumns: ["id"]
           },
         ]
-      }
-      profiles: {
-        Row: {
-          created_at: string
-          display_name: string
-          id: string
-          role: string
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          display_name?: string
-          id: string
-          role?: string
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          display_name?: string
-          id?: string
-          role?: string
-          updated_at?: string
-        }
-        Relationships: []
       }
       realtime_notifications: {
         Row: {
@@ -727,11 +745,13 @@ export type Database = {
       }
       rounds: {
         Row: {
+          accumulated_pause_duration: string
           competition_run_id: string
           created_at: string
           ends_at: string | null
           id: string
           market_status: string
+          paused_at: string | null
           round_number: number
           round_type: string
           started_at: string | null
@@ -740,11 +760,13 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          accumulated_pause_duration?: string
           competition_run_id: string
           created_at?: string
           ends_at?: string | null
           id?: string
           market_status?: string
+          paused_at?: string | null
           round_number: number
           round_type: string
           started_at?: string | null
@@ -753,11 +775,13 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          accumulated_pause_duration?: string
           competition_run_id?: string
           created_at?: string
           ends_at?: string | null
           id?: string
           market_status?: string
+          paused_at?: string | null
           round_number?: number
           round_type?: string
           started_at?: string | null
@@ -819,76 +843,29 @@ export type Database = {
         }
         Relationships: []
       }
-      team_members: {
-        Row: {
-          id: string
-          joined_at: string
-          role: string
-          team_id: string
-          user_id: string
-        }
-        Insert: {
-          id?: string
-          joined_at?: string
-          role?: string
-          team_id: string
-          user_id: string
-        }
-        Update: {
-          id?: string
-          joined_at?: string
-          role?: string
-          team_id?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "team_members_team_id_fkey"
-            columns: ["team_id"]
-            isOneToOne: false
-            referencedRelation: "leaderboard_view"
-            referencedColumns: ["team_id"]
-          },
-          {
-            foreignKeyName: "team_members_team_id_fkey"
-            columns: ["team_id"]
-            isOneToOne: false
-            referencedRelation: "team_portfolio_view"
-            referencedColumns: ["team_id"]
-          },
-          {
-            foreignKeyName: "team_members_team_id_fkey"
-            columns: ["team_id"]
-            isOneToOne: false
-            referencedRelation: "teams"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "team_members_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       teams: {
         Row: {
           created_at: string
+          display_name: string
           id: string
           name: string
+          role: string
           updated_at: string
         }
         Insert: {
           created_at?: string
+          display_name?: string
           id?: string
           name: string
+          role?: string
           updated_at?: string
         }
         Update: {
           created_at?: string
+          display_name?: string
           id?: string
           name?: string
+          role?: string
           updated_at?: string
         }
         Relationships: []
@@ -959,7 +936,21 @@ export type Database = {
             foreignKeyName: "trades_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "leaderboard_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "trades_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "team_portfolio_view"
+            referencedColumns: ["team_id"]
+          },
+          {
+            foreignKeyName: "trades_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "teams"
             referencedColumns: ["id"]
           },
           {
@@ -1025,6 +1016,15 @@ export type Database = {
     }
     Functions: {
       _get_run_id_from_round: { Args: { p_round_id: string }; Returns: string }
+      add_stock: {
+        Args: {
+          p_description?: string
+          p_initial_price_paise?: number
+          p_name: string
+          p_symbol: string
+        }
+        Returns: Json
+      }
       adjust_team_cash:
         | {
             Args: {
@@ -1062,6 +1062,7 @@ export type Database = {
         }
         Returns: Json
       }
+      deactivate_stock: { Args: { p_stock_id: string }; Returns: Json }
       end_round: { Args: { p_round_id: string }; Returns: Json }
       ensure_profile: {
         Args: { p_email: string; p_name: string }
@@ -1094,7 +1095,9 @@ export type Database = {
         }
         Returns: Json
       }
-      is_admin: { Args: Record<string, never>; Returns: boolean }
+      is_admin:
+        | { Args: never; Returns: boolean }
+        | { Args: { uid: string }; Returns: boolean }
       notify_realtime: {
         Args: {
           p_channel: string
@@ -1110,6 +1113,16 @@ export type Database = {
         Args: { p_changes: Json; p_competition_run_id: string }
         Returns: Json
       }
+      provision_rounds: {
+        Args: { p_competition_run_id: string }
+        Returns: Json
+      }
+      reactivate_stock: { Args: { p_stock_id: string }; Returns: Json }
+      rename_stock: {
+        Args: { p_new_name: string; p_stock_id: string }
+        Returns: Json
+      }
+      reset_rounds: { Args: { p_competition_run_id: string }; Returns: Json }
       resolve_user_team: {
         Args: { p_competition_run_id: string; p_user_id: string }
         Returns: string
@@ -1124,7 +1137,9 @@ export type Database = {
         Returns: Json
       }
       start_round: { Args: { p_round_id: string }; Returns: Json }
-      user_team_ids: { Args: Record<string, never>; Returns: string[] }
+      user_team_ids:
+        | { Args: never; Returns: string[] }
+        | { Args: { uid: string }; Returns: string[] }
     }
     Enums: {
       [_ in never]: never

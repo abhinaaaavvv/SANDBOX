@@ -26,16 +26,10 @@ export interface UserProfile {
   role: string;
 }
 
-export interface TeamMembership {
-  team_id: string;
-  team_name: string;
-  role: string;
-}
-
 export interface AuthState {
   user: User | null;
   profile: UserProfile | null;
-  team: TeamMembership | null;
+  teamId: string | null;
   role: AuthRole | null;
   ready: boolean;
   loading: boolean;
@@ -44,7 +38,7 @@ export interface AuthState {
 const initial: AuthState = {
   user: null,
   profile: null,
-  team: null,
+  teamId: null,
   role: null,
   ready: false,
   loading: true,
@@ -64,35 +58,13 @@ let unsubscribeFn: (() => void) | null = null;
 async function resolveProfile(user: User): Promise<UserProfile | null> {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("profiles")
+    .from("teams")
     .select("id, display_name, role")
     .eq("id", user.id)
     .single();
 
   if (error || !data) return null;
   return data as UserProfile;
-}
-
-async function resolveTeam(user: User): Promise<TeamMembership | null> {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("team_members")
-    .select("team_id, role, teams!inner(name)")
-    .eq("user_id", user.id)
-    .limit(1)
-    .maybeSingle();
-
-  if (error || !data) return null;
-
-  // Handle the nested teams relation
-  const teams = data.teams as unknown as { name: string } | null;
-  if (!teams) return null;
-
-  return {
-    team_id: data.team_id,
-    team_name: teams.name,
-    role: data.role,
-  };
 }
 
 function deriveRole(profile: UserProfile | null): AuthRole | null {
@@ -107,7 +79,7 @@ async function handleAuthChange(user: User | null) {
     setState({
       user: null,
       profile: null,
-      team: null,
+      teamId: null,
       role: null,
       ready: true,
       loading: false,
@@ -118,16 +90,10 @@ async function handleAuthChange(user: User | null) {
   const profile = await resolveProfile(user);
   const role = deriveRole(profile);
 
-  // Only resolve team for participants
-  let team: TeamMembership | null = null;
-  if (role === "participant") {
-    team = await resolveTeam(user);
-  }
-
   setState({
     user,
     profile,
-    team,
+    teamId: user.id,
     role,
     ready: true,
     loading: false,
@@ -230,7 +196,7 @@ export async function signOut(): Promise<void> {
   setState({
     user: null,
     profile: null,
-    team: null,
+    teamId: null,
     role: null,
     ready: true,
     loading: false,

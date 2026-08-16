@@ -142,7 +142,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const ctx = competitionCtx.context;
   const competitionRunId = ctx?.competitionRun?.id ?? null;
   const teamId = ctx?.role === "participant"
-    ? ctx.teamMembership?.team_id ?? null
+    ? ctx.userId ?? null
     : null;
 
   // Derive competition state from the real database round
@@ -159,7 +159,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   // Team name from competition context
   const teamName = ctx?.role === "participant"
-    ? ctx.teamMembership?.team?.name ?? "Team"
+    ? (ctx as { teamName?: string }).teamName ?? "Team"
     : "Admin";
 
   // Real market data from Supabase

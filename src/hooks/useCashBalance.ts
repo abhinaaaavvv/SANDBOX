@@ -20,7 +20,7 @@ export function useCashBalance() {
 
   const supabase = useMemo(() => createClient(), []);
   const competitionRunId = context?.competitionRun?.id;
-  const teamId = context?.role === "participant" ? context.teamMembership.team_id : undefined;
+  const teamId = context?.role === "participant" ? context.userId : undefined;
   const prevRunIdRef = useRef<string | undefined>(competitionRunId);
 
   const fetchCash = useCallback(async () => {

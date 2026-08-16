@@ -71,8 +71,8 @@ export function useLeaderboard(): UseLeaderboardResult {
   const { context } = useCompetitionContext();
   const competitionRunId = (context?.competitionRun?.id ?? null);
   let userTeamId: string | null = null;
-  if (context?.role === "participant" && context?.teamMembership) {
-    userTeamId = context.teamMembership.team_id ?? null;
+  if (context?.role === "participant") {
+    userTeamId = context.userId ?? null;
   }
 
   const supabase = useMemo(() => createClient(), []);

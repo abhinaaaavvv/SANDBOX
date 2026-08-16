@@ -98,12 +98,8 @@ export interface TeamMembership {
 export interface ParticipantCompetitionContext {
   role: "participant";
   userId: string;
-  profile: {
-    id: string;
-    display_name: string;
-    role: "participant";
-  };
-  teamMembership: TeamMembership;
+  teamId: string;
+  teamName: string;
   competition: Competition;
   competitionRun: CompetitionRun;
   currentRound: Round | null;
@@ -115,11 +111,6 @@ export interface ParticipantCompetitionContext {
 export interface AdminCompetitionContext {
   role: "admin";
   userId: string;
-  profile: {
-    id: string;
-    display_name: string;
-    role: "admin";
-  };
   competition: Competition;
   competitionRun: CompetitionRun;
   currentRound: Round | null;
@@ -149,8 +140,6 @@ export type CompetitionContextErrorType =
   | "NO_PROFILE"
   | "NO_ACTIVE_COMPETITION"
   | "NO_ACTIVE_RUN"
-  | "NO_TEAM"
-  | "MULTIPLE_TEAMS"
   | "TEAM_NOT_IN_RUN"
   | "NO_ACTIVE_ROUND"
   | "AUTH_ERROR";
@@ -170,7 +159,7 @@ async function resolveProfile(
   userId: string
 ): Promise<{ id: string; display_name: string; role: "participant" | "admin" } | null> {
   const { data, error } = await supabase
-    .from("profiles")
+    .from("teams")
     .select("id, display_name, role")
     .eq("id", userId)
     .single();
@@ -183,55 +172,6 @@ async function resolveProfile(
     id: data.id,
     display_name: data.display_name,
     role: data.role as "participant" | "admin",
-  };
-}
-
-async function resolveTeamMembership(
-  supabase: SupabaseClient,
-  userId: string
-): Promise<
-  | { ok: true; membership: TeamMembership }
-  | { ok: false; error: "NO_TEAM" | "MULTIPLE_TEAMS" | "AUTH_ERROR" }
-> {
-  const { data, error } = await supabase
-    .from("team_members")
-    .select("team_id, role, teams!inner(id, name)")
-    .eq("user_id", userId);
-
-  if (error) {
-    return { ok: false, error: "AUTH_ERROR" };
-  }
-
-  if (!data || data.length === 0) {
-    return { ok: false, error: "NO_TEAM" };
-  }
-
-  if (data.length > 1) {
-    return { ok: false, error: "MULTIPLE_TEAMS" };
-  }
-
-  const row = data[0];
-  const teams = row.teams as { id: string; name: string }[] | { id: string; name: string } | null;
-  
-  // Handle both array and single object responses
-  let team: { id: string; name: string } | null = null;
-  if (Array.isArray(teams)) {
-    team = teams.length > 0 ? teams[0] : null;
-  } else {
-    team = teams;
-  }
-
-  if (!team) {
-    return { ok: false, error: "NO_TEAM" };
-  }
-
-  return {
-    ok: true,
-    membership: {
-      team_id: row.team_id,
-      role: row.role as "member" | "captain",
-      team: { id: team.id, name: team.name },
-    },
   };
 }
 
@@ -358,26 +298,8 @@ export async function resolveCompetitionContext(
     return {
       isLoading: false,
       error: "NO_PROFILE",
-      errorDetail: `No profile found for user ${user.id}`,
+      errorDetail: `No team found for user ${user.id}`,
     };
-  }
-
-  let teamMembership: TeamMembership | null = null;
-  if (profile.role === "participant") {
-    const teamResult = await resolveTeamMembership(supabase, user.id);
-    if (!teamResult.ok) {
-      return {
-        isLoading: false,
-        error: teamResult.error,
-        errorDetail:
-          teamResult.error === "NO_TEAM"
-            ? "User is not a member of any team"
-            : teamResult.error === "MULTIPLE_TEAMS"
-              ? "User is a member of multiple teams (ambiguous)"
-              : "Failed to resolve team membership",
-      };
-    }
-    teamMembership = teamResult.membership;
   }
 
   const competition = await resolveActiveCompetition(supabase);
@@ -398,10 +320,10 @@ export async function resolveCompetitionContext(
     };
   }
 
-  if (profile.role === "participant" && teamMembership) {
+  if (profile.role === "participant") {
     const isParticipating = await checkTeamParticipation(
       supabase,
-      teamMembership.team_id,
+      user.id,
       competitionRun.id
     );
 
@@ -409,7 +331,7 @@ export async function resolveCompetitionContext(
       return {
         isLoading: false,
         error: "TEAM_NOT_IN_RUN",
-        errorDetail: `Team ${teamMembership.team_id} is not participating in run ${competitionRun.id}`,
+        errorDetail: `Team ${user.id} is not participating in run ${competitionRun.id}`,
       };
     }
   }
@@ -420,11 +342,6 @@ export async function resolveCompetitionContext(
     return {
       role: "admin",
       userId: user.id,
-      profile: {
-        id: profile.id,
-        display_name: profile.display_name,
-        role: "admin",
-      },
       competition,
       competitionRun,
       currentRound,
@@ -436,12 +353,8 @@ export async function resolveCompetitionContext(
   return {
     role: "participant",
     userId: user.id,
-    profile: {
-      id: profile.id,
-      display_name: profile.display_name,
-      role: "participant",
-    },
-    teamMembership: teamMembership!,
+    teamId: user.id,
+    teamName: profile.display_name,
     competition,
     competitionRun,
     currentRound,
@@ -586,7 +499,7 @@ export function useTeamInfo() {
       return { team: null, isLoading, error };
     }
     return {
-      team: context.teamMembership.team,
+      team: { id: context.teamId, name: context.teamName },
       isLoading,
       error,
     };

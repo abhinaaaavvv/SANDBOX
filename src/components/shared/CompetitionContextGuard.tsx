@@ -82,8 +82,6 @@ export const CompetitionContextGuard: React.FC<CompetitionContextGuardProps> = (
 
 function CompetitionErrorIcon({ error }: { error: string }) {
   switch (error) {
-    case "NO_TEAM":
-    case "MULTIPLE_TEAMS":
     case "TEAM_NOT_IN_RUN":
       return <Users className="size-12 text-muted-foreground" />;
     case "NO_ACTIVE_COMPETITION":
@@ -98,10 +96,6 @@ function CompetitionErrorIcon({ error }: { error: string }) {
 
 function CompetitionErrorTitle({ error }: { error: string }) {
   switch (error) {
-    case "NO_TEAM":
-      return "No Team Assigned";
-    case "MULTIPLE_TEAMS":
-      return "Multiple Teams Detected";
     case "TEAM_NOT_IN_RUN":
       return "Team Not Participating";
     case "NO_ACTIVE_COMPETITION":
@@ -111,7 +105,7 @@ function CompetitionErrorTitle({ error }: { error: string }) {
     case "NO_ACTIVE_ROUND":
       return "No Active Round";
     case "NO_PROFILE":
-      return "Profile Not Found";
+      return "Team Not Found";
     case "AUTH_ERROR":
       return "Authentication Error";
     default:
@@ -127,12 +121,6 @@ function CompetitionErrorMessage({
   role: "participant" | "admin";
 }) {
   switch (error) {
-    case "NO_TEAM":
-      return role === "participant"
-        ? "You are not assigned to any team. Please contact the administrator to be added to a team."
-        : "This user is not assigned to any team.";
-    case "MULTIPLE_TEAMS":
-      return "You are assigned to multiple teams. Please contact the administrator to resolve this.";
     case "TEAM_NOT_IN_RUN":
       return role === "participant"
         ? "Your team is not participating in the current competition run. Please contact the administrator."
