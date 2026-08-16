@@ -210,21 +210,8 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     tradingStatusDb === "enabled" ? "ENABLED" : tradingStatusDb === "paused" ? "PAUSED" : "DISABLED"
   );
 
-  // Auto-end round when timer expires (timer hits 0 while round is active).
-  // The frontend does NOT authoritatively end the round — it calls the server RPC.
-  const autoEndedRoundRef = useRef<string | null>(null);
-  const endRoundRef = useRef<(round: RoundNumber) => Promise<void>>(() => Promise.resolve());
-  useEffect(() => {
-    if (
-      timerSeconds === 0 &&
-      roundStatus === "active" &&
-      roundEndsAt &&
-      autoEndedRoundRef.current !== dbRound?.id
-    ) {
-      autoEndedRoundRef.current = dbRound?.id ?? null;
-      endRoundRef.current(currentRound);
-    }
-  }, [timerSeconds, roundStatus, roundEndsAt, dbRound?.id, currentRound]);
+  // Auto-end round removed — admin must manually end rounds via the RPC.
+  // Timer expiry does NOT end the round automatically.
 
   // Simulates the initial authoritative-state sync so skeletons render once.
   const [isInitializing, setIsInitializing] = useState(true);
@@ -331,42 +318,53 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   // Targeted refetch based on event type (Phase 9.8 optimization)
   const onReconcile = useCallback(
-    (event?: string) => {
+    async (event?: string) => {
       switch (event) {
         case "ROUND_STATE_CHANGED":
           // Round state changed - refresh competition context and rounds
-          competitionCtx.refresh();
-          refetchDbRounds();
+          await competitionCtx.refresh();
+          await refetchDbRounds();
           break;
         case "MARKET_STATE_CHANGED":
           // Market state changed - refetch market data and refresh context
-          refetchMarketData();
-          competitionCtx.refresh();
+          await refetchMarketData();
+          await competitionCtx.refresh();
           break;
         case "PRICES_CHANGED":
           // Prices changed - refetch market data and holdings
-          refetchMarketData();
-          refetchHoldings();
-          refetchCash();
-          refetchTransactions();
+          await Promise.all([
+            refetchMarketData(),
+            refetchHoldings(),
+            refetchCash(),
+            refetchTransactions(),
+          ]);
           break;
         case "PORTFOLIO_CHANGED":
           // Portfolio changed - refetch holdings, cash, transactions
-          refetchHoldings();
-          refetchCash();
-          refetchTransactions();
+          await Promise.all([
+            refetchHoldings(),
+            refetchCash(),
+            refetchTransactions(),
+          ]);
           break;
         case "LEADERBOARD_CHANGED":
-          // Leaderboard changed - refetch leaderboard
-          refetchLeaderboard();
+          // Leaderboard changed - refetch leaderboard and holdings
+          await Promise.all([
+            refetchLeaderboard(),
+            refetchHoldings(),
+            refetchCash(),
+          ]);
           break;
         default:
-          // Unknown event - refetch all to be safe
-          refetchMarketData();
-          refetchHoldings();
-          refetchCash();
-          refetchTransactions();
-          refetchLeaderboard();
+          // Unknown event type - refetch everything for safety
+          await Promise.all([
+            refetchMarketData(),
+            refetchHoldings(),
+            refetchCash(),
+            refetchTransactions(),
+            refetchLeaderboard(),
+            competitionCtx.refresh(),
+          ]);
       }
     },
     [refetchMarketData, refetchHoldings, refetchCash, refetchTransactions, refetchLeaderboard, competitionCtx, refetchDbRounds]
@@ -413,7 +411,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
         }
         // Refresh rounds and competition context
         await refetchDbRounds();
-        competitionCtx.refresh();
+        await competitionCtx.refresh();
       },
 
       endRound: async (round: RoundNumber) => {
@@ -429,11 +427,9 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
           toast.error("Failed to end round", { description: error.message });
           return;
         }
-        // Reset auto-end guard for this round
-        autoEndedRoundRef.current = null;
-        // Refresh rounds and competition context
+        // Refresh rounds and competition context (await both)
         await refetchDbRounds();
-        competitionCtx.refresh();
+        await competitionCtx.refresh();
       },
 
       setMarketStatus: async (status: MarketStatus) => {
@@ -464,7 +460,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
           return;
         }
         await refetchDbRounds();
-        competitionCtx.refresh();
+        await competitionCtx.refresh();
       },
 
       resumeTrading: async () => {
@@ -481,7 +477,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
           return;
         }
         await refetchDbRounds();
-        competitionCtx.refresh();
+        await competitionCtx.refresh();
       },
 
       addStock: async (params: { symbol: string; name: string; description: string; currentPrice: number }) => {
@@ -617,11 +613,6 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       },
     };
   }, [rounds, competitionRunId, refetchMarketData, refetchDbRounds, competitionCtx, ctx, refetchCash, refetchHoldings, refetchLeaderboard]);
-
-  // Keep endRoundRef in sync for auto-end detection
-  useEffect(() => {
-    endRoundRef.current = adminActions.endRound;
-  }, [adminActions.endRound]);
 
   // Pending price changes — local state (admin-private, never persisted to DB)
   const [pendingPriceChanges, setPendingPriceChangesState] = useState<PendingPriceChange[]>([]);
