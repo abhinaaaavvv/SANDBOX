@@ -1,8 +1,8 @@
 /**
  * useTradeHistory Hook
  *
- * Fetches real trade history from Supabase trades table.
- * Returns data in the existing Transaction type format.
+ * Fetches real trade history + dividend payments from Supabase.
+ * Returns data in the existing Transaction type format, sorted by time descending.
  */
 
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
@@ -18,6 +18,15 @@ interface DbTrade {
   executed_price_paise: number;
   total_value_paise: number;
   executed_at: string;
+}
+
+interface DbDividendPayment {
+  id: string;
+  stock_id: string;
+  shares_held: number;
+  amount_per_share_paise: number;
+  total_amount_paise: number;
+  created_at: string;
 }
 
 interface StockInfo {
@@ -36,6 +45,22 @@ function transformTrade(trade: DbTrade, stockMap: Map<string, StockInfo>): Trans
     quantity: trade.quantity,
     price: trade.executed_price_paise / 100,
     total: trade.total_value_paise / 100,
+    _sortTime: new Date(trade.executed_at).getTime(),
+  };
+}
+
+function transformDividend(payment: DbDividendPayment, stockMap: Map<string, StockInfo>): Transaction {
+  const stock = stockMap.get(payment.stock_id);
+  return {
+    id: payment.id,
+    timestamp: new Date(payment.created_at).toLocaleTimeString(),
+    symbol: stock?.symbol ?? "???",
+    companyName: stock?.name ?? "Unknown",
+    type: "DIVIDEND",
+    quantity: payment.shares_held,
+    price: payment.amount_per_share_paise / 100,
+    total: payment.total_amount_paise / 100,
+    _sortTime: new Date(payment.created_at).getTime(),
   };
 }
 
@@ -48,29 +73,53 @@ export function useTradeHistory(stockMap?: Map<string, StockInfo>) {
 
   const supabase = useMemo(() => createClient(), []);
   const competitionRunId = context?.competitionRun?.id;
+  const teamId = context?.role === "participant" ? context.userId : null;
   const prevRunIdRef = useRef<string | undefined>(competitionRunId);
 
   const fetchTrades = useCallback(async () => {
     if (!competitionRunId) return;
     setIsRefetching(true);
     try {
-      const { data, error: queryError } = await supabase
-        .from("trades")
-        .select(`
-          id,
-          stock_id,
-          side,
-          quantity,
-          executed_price_paise,
-          total_value_paise,
-          executed_at
-        `)
-        .eq("competition_run_id", competitionRunId)
-        .order("executed_at", { ascending: false });
+      const [tradesResult, dividendsResult] = await Promise.all([
+        supabase
+          .from("trades")
+          .select(`
+            id,
+            stock_id,
+            side,
+            quantity,
+            executed_price_paise,
+            total_value_paise,
+            executed_at
+          `)
+          .eq("competition_run_id", competitionRunId)
+          .order("executed_at", { ascending: false }),
+        teamId
+          ? supabase
+              .from("dividend_payments")
+              .select(`
+                id,
+                stock_id,
+                shares_held,
+                amount_per_share_paise,
+                total_amount_paise,
+                created_at
+              `)
+              .eq("competition_run_id", competitionRunId)
+              .eq("team_id", teamId)
+              .order("created_at", { ascending: false })
+          : Promise.resolve({ data: [], error: null }),
+      ]);
 
-      if (queryError) throw new Error(queryError.message);
+      if (tradesResult.error) throw new Error(tradesResult.error.message);
+      if (dividendsResult.error) throw new Error(dividendsResult.error.message);
 
-      setTransactions((data as DbTrade[]).map((t) => transformTrade(t, stockMap ?? new Map())));
+      const sm = stockMap ?? new Map();
+      const tradeTxs = (tradesResult.data as DbTrade[]).map((t) => transformTrade(t, sm));
+      const dividendTxs = (dividendsResult.data as DbDividendPayment[]).map((d) => transformDividend(d, sm));
+
+      const merged = [...tradeTxs, ...dividendTxs].sort((a, b) => (b._sortTime ?? 0) - (a._sortTime ?? 0));
+      setTransactions(merged);
       setError(null);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Failed to fetch trade history";
@@ -78,7 +127,7 @@ export function useTradeHistory(stockMap?: Map<string, StockInfo>) {
     } finally {
       setIsRefetching(false);
     }
-  }, [supabase, competitionRunId, stockMap]);
+  }, [supabase, competitionRunId, teamId, stockMap]);
 
   useEffect(() => {
     if (!competitionRunId) {
@@ -95,24 +144,47 @@ export function useTradeHistory(stockMap?: Map<string, StockInfo>) {
     const load = async () => {
       try {
         setError(null);
-        const { data, error: queryError } = await supabase
-          .from("trades")
-          .select(`
-            id,
-            stock_id,
-            side,
-            quantity,
-            executed_price_paise,
-            total_value_paise,
-            executed_at
-          `)
-          .eq("competition_run_id", competitionRunId)
-          .order("executed_at", { ascending: false });
+        const [tradesResult, dividendsResult] = await Promise.all([
+          supabase
+            .from("trades")
+            .select(`
+              id,
+              stock_id,
+              side,
+              quantity,
+              executed_price_paise,
+              total_value_paise,
+              executed_at
+            `)
+            .eq("competition_run_id", competitionRunId)
+            .order("executed_at", { ascending: false }),
+          teamId
+            ? supabase
+                .from("dividend_payments")
+                .select(`
+                  id,
+                  stock_id,
+                  shares_held,
+                  amount_per_share_paise,
+                  total_amount_paise,
+                  created_at
+                `)
+                .eq("competition_run_id", competitionRunId)
+                .eq("team_id", teamId)
+                .order("created_at", { ascending: false })
+            : Promise.resolve({ data: [], error: null }),
+        ]);
 
-        if (queryError) throw new Error(queryError.message);
+        if (tradesResult.error) throw new Error(tradesResult.error.message);
+        if (dividendsResult.error) throw new Error(dividendsResult.error.message);
 
         if (!cancelled) {
-          setTransactions((data as DbTrade[]).map((t) => transformTrade(t, stockMap ?? new Map())));
+          const sm = stockMap ?? new Map();
+          const tradeTxs = (tradesResult.data as DbTrade[]).map((t) => transformTrade(t, sm));
+          const dividendTxs = (dividendsResult.data as DbDividendPayment[]).map((d) => transformDividend(d, sm));
+
+          const merged = [...tradeTxs, ...dividendTxs].sort((a, b) => (b._sortTime ?? 0) - (a._sortTime ?? 0));
+          setTransactions(merged);
         }
       } catch (err) {
         if (!cancelled) {
@@ -131,7 +203,7 @@ export function useTradeHistory(stockMap?: Map<string, StockInfo>) {
     return () => {
       cancelled = true;
     };
-  }, [supabase, competitionRunId, stockMap]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [supabase, competitionRunId, teamId, stockMap]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const hasRun = Boolean(competitionRunId);
 

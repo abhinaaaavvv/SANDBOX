@@ -62,6 +62,8 @@ export interface Transaction {
   quantity: number;
   price: number;
   total: number;
+  /** Internal sort key — milliseconds since epoch. Not displayed. */
+  _sortTime?: number;
 }
 
 export interface LeaderboardEntry {

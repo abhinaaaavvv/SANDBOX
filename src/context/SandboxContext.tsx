@@ -291,6 +291,17 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
         holdingsCountMap.set(h.team_id, (holdingsCountMap.get(h.team_id) ?? 0) + 1);
       }
 
+      // Fetch dividends received per team
+      const { data: dividendData } = await supabase
+        .from("dividend_payments")
+        .select("team_id, total_amount_paise")
+        .eq("competition_run_id", competitionRunId);
+
+      const dividendsMap = new Map<string, number>();
+      for (const d of dividendData ?? []) {
+        dividendsMap.set(d.team_id, (dividendsMap.get(d.team_id) ?? 0) + d.total_amount_paise);
+      }
+
       const teamOverviews: TeamOverview[] = cashData.map((row) => ({
         id: row.team_id,
         name: nameMap.get(row.team_id) ?? "Unknown Team",
@@ -298,7 +309,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
         portfolioValue: 0, // Will be updated by leaderboard
         profitLoss: 0,
         holdingsCount: holdingsCountMap.get(row.team_id) ?? 0,
-        dividendsReceived: 0,
+        dividendsReceived: (dividendsMap.get(row.team_id) ?? 0) / 100,
       }));
 
       setTeams(teamOverviews);
