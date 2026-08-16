@@ -190,6 +190,18 @@ export function useMarketData() {
     };
   }, [supabase, competitionRunId, isAdmin]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Polling fallback: refetch market data every 10 seconds while a run is active.
+  // This ensures prices stay fresh even if the Realtime subscription misses an event.
+  useEffect(() => {
+    if (!competitionRunId || isLoading) return;
+
+    const intervalId = setInterval(() => {
+      refetch();
+    }, 10_000);
+
+    return () => clearInterval(intervalId);
+  }, [competitionRunId, isLoading, refetch]);
+
   // Reset stocks when there's no competition run
   const hasRun = Boolean(competitionRunId);
   const effectiveStocks = hasRun ? stocks : [];
