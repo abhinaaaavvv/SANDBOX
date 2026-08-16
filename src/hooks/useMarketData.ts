@@ -197,7 +197,7 @@ export function useMarketData() {
 
     const intervalId = setInterval(() => {
       refetch();
-    }, 10_000);
+    }, 2_000);
 
     return () => clearInterval(intervalId);
   }, [competitionRunId, isLoading, refetch]);

@@ -210,7 +210,7 @@ export function useTradeHistory(stockMap?: Map<string, StockInfo>) {
   // Polling fallback: refetch every 10 seconds while a run is active
   useEffect(() => {
     if (!hasRun || isLoading) return;
-    const id = setInterval(() => fetchTrades(), 10_000);
+    const id = setInterval(() => fetchTrades(), 2_000);
     return () => clearInterval(id);
   }, [hasRun, isLoading, fetchTrades]);
 

@@ -113,7 +113,7 @@ export function useCashBalance() {
   // Polling fallback: refetch every 10 seconds while a run is active
   useEffect(() => {
     if (!hasData || isLoading) return;
-    const id = setInterval(() => fetchCash(), 10_000);
+    const id = setInterval(() => fetchCash(), 2_000);
     return () => clearInterval(id);
   }, [hasData, isLoading, fetchCash]);
 

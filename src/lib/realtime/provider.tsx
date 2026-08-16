@@ -145,7 +145,7 @@ export function RealtimeProvider({ children }: RealtimeProviderProps) {
   // Reconciliation handlers
   const reconcileHandlersRef = useRef<Set<ReconcileHandler>>(new Set());
 
-  const coalescedDispatch = useCoalescedDispatch(300);
+  const coalescedDispatch = useCoalescedDispatch(50);
 
   // Track previous connection state for reconnect detection
   const wasConnectedRef = useRef(false);

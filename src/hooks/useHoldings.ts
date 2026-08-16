@@ -141,7 +141,7 @@ export function useHoldings() {
   // Polling fallback: refetch every 10 seconds while a run is active
   useEffect(() => {
     if (!competitionRunId || isLoading) return;
-    const id = setInterval(() => fetchHoldings(), 10_000);
+    const id = setInterval(() => fetchHoldings(), 2_000);
     return () => clearInterval(id);
   }, [competitionRunId, isLoading, fetchHoldings]);
 

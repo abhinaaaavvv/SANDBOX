@@ -187,7 +187,7 @@ export function useRealtimeRefetch(
     if (existing) clearTimeout(existing);
     g[REFETCH_KEY] = setTimeout(() => {
       refetchRef.current(eventType);
-    }, 500);
+    }, 50);
   }, []);
 
   useRunRealtime(runId, runEvents, (eventType) => {
