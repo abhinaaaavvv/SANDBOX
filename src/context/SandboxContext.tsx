@@ -565,6 +565,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
           p_competition_run_id: competitionRunId,
           p_amount_paise: Math.round(amount * 100),
           p_reason: reason || "Admin credit",
+          p_idempotency_key: null,
         }).then(({ error }) => {
           if (error) {
             toast.error("Failed to credit cash", { description: error.message });
@@ -587,6 +588,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
           p_competition_run_id: competitionRunId,
           p_amount_paise: -Math.round(amount * 100),
           p_reason: reason || "Admin debit",
+          p_idempotency_key: null,
         }).then(({ error }) => {
           if (error) {
             toast.error("Failed to debit cash", { description: error.message });
