@@ -252,23 +252,23 @@ async function resolveCurrentRound(
     return activeRound as Round;
   }
 
-  // 2. No active round — find the latest round that has been started (started_at IS NOT NULL),
-  //    ordered by round_number descending. This avoids jumping to an out-of-order completed round.
-  const { data: startedRounds, error: startedError } = await supabase
+  // 2. No active round — find the first round that is NOT completed (i.e. pending),
+  //    ordered by round_number ascending. This is the "next" round the admin should start.
+  const { data: pendingRounds, error: pendingError } = await supabase
     .from("rounds")
     .select(
       "id, competition_run_id, round_number, round_type, status, started_at, ends_at, market_status, trading_status, paused_at, accumulated_pause_duration, created_at, updated_at"
     )
     .eq("competition_run_id", competitionRunId)
-    .not("started_at", "is", null)
-    .order("round_number", { ascending: false })
+    .neq("status", "completed")
+    .order("round_number", { ascending: true })
     .limit(1);
 
-  if (!startedError && startedRounds && startedRounds.length > 0) {
-    return startedRounds[0] as Round;
+  if (!pendingError && pendingRounds && pendingRounds.length > 0) {
+    return pendingRounds[0] as Round;
   }
 
-  // 3. No round started yet — default to round 1
+  // 3. All rounds completed — default to round 1 (admin can restart it)
   const { data: firstRound } = await supabase
     .from("rounds")
     .select(

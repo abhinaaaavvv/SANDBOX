@@ -308,10 +308,10 @@ export const AdminPanel: React.FC = () => {
                       <Button
                         variant="buy"
                         size="sm"
-                        disabled={isActive || isCompleted || isRoundActive}
+                        disabled={isActive || isRoundActive}
                         onClick={() => startRound(roundVal)}
                       >
-                        Start
+                        {isCompleted ? "Restart" : "Start"}
                       </Button>
                       <Button
                         variant="sell"
