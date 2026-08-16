@@ -9,6 +9,7 @@ import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useCompetitionContext } from "@/lib/competition-context";
 import { Holding } from "@/types/sandbox";
+import { mapRpcError } from "@/lib/errors";
 
 interface HoldingsRpcRow {
   stock_id: string;
@@ -70,17 +71,17 @@ export function useHoldings() {
         p_competition_run_id: competitionRunId,
       });
 
-      if (rpcError) throw new Error(rpcError.message);
+      if (rpcError) throw new Error(mapRpcError(rpcError.message, "your holdings"));
 
       const response = data as HoldingsRpcResponse;
       if (!response.ok) {
-        throw new Error(response.error || "Failed to fetch holdings");
+        throw new Error(mapRpcError(response.error || "Failed to fetch holdings", "your holdings"));
       }
 
       setHoldings(response.holdings.map(transformHolding));
       setError(null);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to fetch holdings";
+      const message = err instanceof Error ? err.message : "Unable to load your holdings. Please try again.";
       setError(message);
     } finally {
       setIsRefetching(false);
@@ -106,11 +107,11 @@ export function useHoldings() {
           p_competition_run_id: competitionRunId,
         });
 
-        if (rpcError) throw new Error(rpcError.message);
+        if (rpcError) throw new Error(mapRpcError(rpcError.message, "your holdings"));
 
         const response = data as HoldingsRpcResponse;
         if (!response.ok) {
-          throw new Error(response.error || "Failed to fetch holdings");
+          throw new Error(mapRpcError(response.error || "Failed to fetch holdings", "your holdings"));
         }
 
         if (!cancelled) {
@@ -118,7 +119,7 @@ export function useHoldings() {
         }
       } catch (err) {
         if (!cancelled) {
-          const message = err instanceof Error ? err.message : "Failed to fetch holdings";
+          const message = err instanceof Error ? err.message : "Unable to load your holdings. Please try again.";
           setError(message);
         }
       } finally {

@@ -165,13 +165,14 @@ const REFETCH_KEY = "__sandbox_realtime_refetch";
 /**
  * Realtime-aware refetch hook.
  * Coalesces rapid events to prevent refetch storms.
+ * Passes the event type to the refetch callback for targeted reconciliation.
  */
 export function useRealtimeRefetch(
   runId: string | null,
   teamId: string | null,
   runEvents: RealtimeEventType[],
   teamEvents: RealtimeEventType[],
-  refetch: () => void | Promise<void>
+  refetch: (eventType?: string) => void | Promise<void>
 ): void {
   const refetchRef = useRef(refetch);
 
@@ -179,22 +180,22 @@ export function useRealtimeRefetch(
     refetchRef.current = refetch;
   }, [refetch]);
 
-  const debouncedRefetch = useCallback(() => {
+  const debouncedRefetch = useCallback((eventType?: string) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const g = globalThis as any;
     const existing = g[REFETCH_KEY];
     if (existing) clearTimeout(existing);
     g[REFETCH_KEY] = setTimeout(() => {
-      refetchRef.current();
+      refetchRef.current(eventType);
     }, 500);
   }, []);
 
-  useRunRealtime(runId, runEvents, () => {
-    debouncedRefetch();
+  useRunRealtime(runId, runEvents, (eventType) => {
+    debouncedRefetch(eventType);
   });
 
-  useTeamRealtime(teamId, teamEvents, () => {
-    debouncedRefetch();
+  useTeamRealtime(teamId, teamEvents, (eventType) => {
+    debouncedRefetch(eventType);
   });
 }
 
@@ -236,6 +237,7 @@ export function useReconcile(handler: () => void | Promise<void>): void {
  *
  * Subscribes to run + team events AND registers a reconciliation handler.
  * The reconciliation fires on initial subscribe and reconnect.
+ * Event-triggered refetches pass the event type for targeted reconciliation.
  *
  * This is the recommended hook for most components that need Realtime.
  *
@@ -246,7 +248,7 @@ export function useReconcile(handler: () => void | Promise<void>): void {
  *   teamId,
  *   runEvents: ["PRICES_CHANGED", "LEADERBOARD_CHANGED"],
  *   teamEvents: ["PORTFOLIO_CHANGED"],
- *   onReconcile: () => refetchAll(),
+ *   onReconcile: (eventType?) => refetchAll(),
  * });
  * ```
  */
@@ -255,10 +257,10 @@ export function useRealtimeSync(options: {
   teamId: string | null;
   runEvents: RealtimeEventType[];
   teamEvents: RealtimeEventType[];
-  onReconcile: () => void | Promise<void>;
+  onReconcile: (eventType?: string) => void | Promise<void>;
 }): void {
   const { runId, teamId, runEvents, teamEvents, onReconcile } = options;
 
   useRealtimeRefetch(runId, teamId, runEvents, teamEvents, onReconcile);
-  useReconcile(onReconcile);
+  useReconcile(() => onReconcile());
 }

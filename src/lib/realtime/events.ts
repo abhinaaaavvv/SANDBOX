@@ -20,7 +20,10 @@ export type RealtimeEventType =
   | "PRICES_CHANGED"
   | "PORTFOLIO_CHANGED"
   | "LEADERBOARD_CHANGED"
-  | "DIVIDENDS_PAID";
+  | "DIVIDENDS_PAID"
+  | "STOCK_CREATED"
+  | "STOCK_UPDATED"
+  | "STOCK_DEACTIVATED";
 
 /** Payload for ROUND_STATE_CHANGED events. */
 export interface RoundStateChangedPayload {
@@ -78,6 +81,35 @@ export interface DividendsPaidPayload {
   occurred_at: string;
 }
 
+/** Payload for STOCK_CREATED events. */
+export interface StockCreatedPayload {
+  competition_run_id: string;
+  stock_id: string;
+  symbol: string;
+  name: string;
+  initial_price_paise: number;
+  occurred_at: string;
+}
+
+/** Payload for STOCK_UPDATED events (rename or reactivate). */
+export interface StockUpdatedPayload {
+  competition_run_id: string;
+  stock_id: string;
+  symbol: string;
+  name: string;
+  is_active?: boolean;
+  occurred_at: string;
+}
+
+/** Payload for STOCK_DEACTIVATED events. */
+export interface StockDeactivatedPayload {
+  competition_run_id: string;
+  stock_id: string;
+  symbol: string;
+  name: string;
+  occurred_at: string;
+}
+
 /** Union of all event payloads. */
 export type RealtimeEventPayload =
   | RoundStateChangedPayload
@@ -85,7 +117,10 @@ export type RealtimeEventPayload =
   | PricesChangedPayload
   | PortfolioChangedPayload
   | LeaderboardChangedPayload
-  | DividendsPaidPayload;
+  | DividendsPaidPayload
+  | StockCreatedPayload
+  | StockUpdatedPayload
+  | StockDeactivatedPayload;
 
 /** Typed event map for type-safe handlers. */
 export interface RealtimeEventMap {
@@ -95,6 +130,9 @@ export interface RealtimeEventMap {
   PORTFOLIO_CHANGED: PortfolioChangedPayload;
   LEADERBOARD_CHANGED: LeaderboardChangedPayload;
   DIVIDENDS_PAID: DividendsPaidPayload;
+  STOCK_CREATED: StockCreatedPayload;
+  STOCK_UPDATED: StockUpdatedPayload;
+  STOCK_DEACTIVATED: StockDeactivatedPayload;
 }
 
 /** Handler function type for a specific event. */

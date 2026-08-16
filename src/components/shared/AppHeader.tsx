@@ -14,13 +14,13 @@ interface AppHeaderProps {
 }
 
 export const AppHeader: React.FC<AppHeaderProps> = ({ role }) => {
-  const { currentRound, marketStatus, serverEndTimestamp, timerSeconds, teamName, pendingPriceChanges } =
+  const { currentRound, marketStatus, roundStatus, serverEndTimestamp, timerSeconds, teamName, pendingPriceChanges } =
     useSandboxStore();
 
-  // No round is active yet (or the round has ended) — show a placeholder instead
-  // of the stale default countdown.
+  // Timer shows whenever there's an active round with an authoritative end timestamp.
+  // This covers: market open, market closed, trading paused — any state where the round is running.
   const hasLiveTimer =
-    serverEndTimestamp != null && marketStatus !== "NOT_STARTED";
+    serverEndTimestamp != null && roundStatus === "active";
   const isTimerWarning = timerSeconds <= 120 && timerSeconds > 0;
   const isAdmin = role === "admin";
 

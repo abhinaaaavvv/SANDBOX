@@ -7,11 +7,18 @@ export type MarketStatus =
   | "MARKET_CLOSED"
   | "ROUND_ENDED";
 
+export type TradingStatus =
+  | "ENABLED"
+  | "PAUSED"
+  | "DISABLED";
+
 export interface Stock {
   id: string;
   symbol: string;
   name: string;
   description?: string;
+  /** Whether the stock is active in the competition. */
+  isActive: boolean;
   /** Authoritative price in paise (BIGINT from market_quotes.price_paise). Never rounded. */
   currentPricePaise: number;
   /** Derived from currentPricePaise / 100. Display-only — never use for calculations. */

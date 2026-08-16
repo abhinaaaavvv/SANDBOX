@@ -8,6 +8,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useCompetitionContext } from "@/lib/competition-context";
+import { mapQueryError } from "@/lib/errors";
 
 export function useCashBalance() {
   const { context } = useCompetitionContext();
@@ -32,7 +33,7 @@ export function useCashBalance() {
         .eq("competition_run_id", competitionRunId)
         .eq("team_id", teamId);
 
-      if (queryError) throw new Error(queryError.message);
+      if (queryError) throw new Error(mapQueryError(queryError.message, "your cash balance"));
 
       let totalPaise = 0;
       let initCapitalPaise = 0;
@@ -46,7 +47,7 @@ export function useCashBalance() {
       setInitialCapital(initCapitalPaise / 100);
       setError(null);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to fetch cash balance";
+      const message = err instanceof Error ? err.message : "Unable to load your cash balance. Please try again.";
       setError(message);
     } finally {
       setIsRefetching(false);
@@ -74,7 +75,7 @@ export function useCashBalance() {
           .eq("competition_run_id", competitionRunId)
           .eq("team_id", teamId);
 
-        if (queryError) throw new Error(queryError.message);
+        if (queryError) throw new Error(mapQueryError(queryError.message, "your cash balance"));
 
         if (!cancelled) {
           let totalPaise = 0;
@@ -90,7 +91,7 @@ export function useCashBalance() {
         }
       } catch (err) {
         if (!cancelled) {
-          const message = err instanceof Error ? err.message : "Failed to fetch cash balance";
+          const message = err instanceof Error ? err.message : "Unable to load your cash balance. Please try again.";
           setError(message);
         }
       } finally {

@@ -1094,7 +1094,7 @@ export type Database = {
         }
         Returns: Json
       }
-      is_admin: { Args: { uid: string }; Returns: boolean }
+      is_admin: { Args: Record<string, never>; Returns: boolean }
       notify_realtime: {
         Args: {
           p_channel: string
@@ -1124,7 +1124,7 @@ export type Database = {
         Returns: Json
       }
       start_round: { Args: { p_round_id: string }; Returns: Json }
-      user_team_ids: { Args: { uid: string }; Returns: string[] }
+      user_team_ids: { Args: Record<string, never>; Returns: string[] }
     }
     Enums: {
       [_ in never]: never

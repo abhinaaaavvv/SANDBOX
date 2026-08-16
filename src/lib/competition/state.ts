@@ -1,4 +1,4 @@
-import { Holding, LeaderboardEntry, Stock } from "@/types/sandbox";
+import { Holding, LeaderboardEntry, Stock, TradingStatus } from "@/types/sandbox";
 import { RealtimeEventPayload } from "@/types/realtime";
 import {
   DEFAULT_TEAM_ID,
@@ -238,9 +238,15 @@ export function buildSnapshot(
   const totalPortfolioValue = active.cash + holdingsValue;
   const totalProfitLoss = totalPortfolioValue - INITIAL_CASH;
 
+  // Derive trading status from market status for mock engine
+  const tradingStatus: TradingStatus = state.marketStatus === "MARKET_OPEN" ? "ENABLED"
+    : state.marketStatus === "TRADING_PAUSED" ? "PAUSED"
+    : "DISABLED";
+
   return {
     currentRound: state.currentRound,
     marketStatus: state.marketStatus,
+    tradingStatus,
     roundStartedAt: state.roundStartedAt,
     roundEndsAt: state.roundEndsAt,
     stocks: state.stocks,

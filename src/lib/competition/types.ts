@@ -1,6 +1,7 @@
 import {
   RoundNumber,
   MarketStatus,
+  TradingStatus,
   Stock,
   Holding,
   Transaction,
@@ -51,6 +52,7 @@ export interface TeamOverview {
 export interface CompetitionSnapshot {
   currentRound: RoundNumber;
   marketStatus: MarketStatus;
+  tradingStatus: TradingStatus;
   roundStartedAt: string | null;
   roundEndsAt: string | null;
   stocks: Stock[];

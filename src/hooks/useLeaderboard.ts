@@ -14,6 +14,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useCompetitionContext } from "@/lib/competition-context";
+import { mapRpcError } from "@/lib/errors";
 
 interface LeaderboardEntry {
   rank: number;
@@ -33,11 +34,25 @@ interface UseLeaderboardResult {
   refetch: () => Promise<void>;
 }
 
+interface LeaderboardRpcEntry {
+  rank: number;
+  team_id: string;
+  team_name: string;
+  portfolio_value_paise: number;
+  pnl_paise: number;
+  return_basis_points: number;
+}
+
+interface LeaderboardRpcResponse {
+  ok: boolean;
+  leaderboard: LeaderboardRpcEntry[];
+}
+
 function parseLeaderboardEntries(
-  jsonEntries: any[]
+  jsonEntries: LeaderboardRpcEntry[]
 ): LeaderboardEntry[] {
   if (!jsonEntries) return [];
-  return jsonEntries.map((e: any) => ({
+  return jsonEntries.map((e) => ({
     rank: e.rank != null ? Number(e.rank) : 0,
     teamId: e.team_id != null ? String(e.team_id) : "",
     teamName: e.team_name != null ? String(e.team_name) : "Unknown Team",
@@ -72,9 +87,13 @@ export function useLeaderboard(): UseLeaderboardResult {
       if (!competitionRunId) {
         setLeaderboard([]);
         setError(null);
+        setIsLoading(false);
         return;
       }
 
+      if (firstFetchRef.current) {
+        setIsLoading(true);
+      }
       setIsRefetching(true);
       setError(null);
 
@@ -83,11 +102,11 @@ export function useLeaderboard(): UseLeaderboardResult {
           p_competition_run_id: competitionRunId,
         });
 
-        if (rpcError) throw new Error(rpcError.message);
+        if (rpcError) throw new Error(mapRpcError(rpcError.message, "the leaderboard"));
 
-        const response = data as { ok: boolean; leaderboard: any[] };
+        const response = data as LeaderboardRpcResponse;
         if (!response || !response.ok) {
-          throw new Error("Failed to fetch leaderboard");
+          throw new Error("Unable to load the leaderboard. Please try again.");
         }
 
         const parsed = parseLeaderboardEntries(response.leaderboard);
@@ -96,10 +115,12 @@ export function useLeaderboard(): UseLeaderboardResult {
           isCurrentTeam: entry.teamId === userTeamId,
         }));
         setLeaderboard(marked);
-      } catch (err: any) {
-        setError(err?.message ?? "Failed to fetch leaderboard");
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : "Unable to load the leaderboard. Please try again.";
+        setError(message);
         setLeaderboard([]);
       } finally {
+        setIsLoading(false);
         setIsRefetching(false);
       }
     },

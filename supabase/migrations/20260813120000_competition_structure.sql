@@ -137,8 +137,8 @@ BEGIN
     RAISE EXCEPTION 'ROUND_NOT_FOUND: %', p_round_id;
   END IF;
 
-  IF v_round.status <> 'pending' THEN
-    RAISE EXCEPTION 'INVALID_STATE_TRANSITION: round status is %, expected pending', v_round.status;
+  IF v_round.status NOT IN ('pending', 'completed') THEN
+    RAISE EXCEPTION 'INVALID_STATE_TRANSITION: round status is %, expected pending or completed', v_round.status;
   END IF;
 
   -- Load parent run
@@ -180,8 +180,8 @@ BEGIN
   SET status        = 'active',
       started_at    = v_now,
       ends_at       = v_now + v_duration,
-      market_status = 'closed',
-      trading_status= 'paused'
+      market_status = 'open',
+      trading_status= 'enabled'
   WHERE id = p_round_id;
 
   RETURN jsonb_build_object(

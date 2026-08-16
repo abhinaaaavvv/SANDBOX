@@ -41,7 +41,9 @@ import { Panel, PanelHeader, PanelTitle } from "@/components/ui/panel";
 export const AdminPanel: React.FC = () => {
   const {
     currentRound,
-    marketStatus,
+    roundStatus,
+    marketStatusDb,
+    tradingStatusDb,
     roundEndsAt,
     stocks,
     pendingPriceChanges,
@@ -49,6 +51,7 @@ export const AdminPanel: React.FC = () => {
     startRound,
     endRound,
     setMarketStatus,
+    resumeTrading,
     setPendingPriceChange,
     clearPendingPriceChange,
     applyPriceChanges,
@@ -56,6 +59,9 @@ export const AdminPanel: React.FC = () => {
     creditCash,
     debitCash,
     resetCompetition,
+    addStock,
+    editStock,
+    toggleStockActive,
     addToast,
   } = useSandboxStore();
 
@@ -70,6 +76,72 @@ export const AdminPanel: React.FC = () => {
   const [cashTeamId, setCashTeamId] = useState<string>(teams[0]?.id ?? "");
   const [cashAmount, setCashAmount] = useState<string>("1000");
   const [cashReason, setCashReason] = useState<string>("");
+
+  // Stock Management state
+  const [showAddStockDialog, setShowAddStockDialog] = useState(false);
+  const [showEditStockDialog, setShowEditStockDialog] = useState(false);
+  const [showToggleStockDialog, setShowToggleStockDialog] = useState(false);
+  const [selectedStockForEdit, setSelectedStockForEdit] = useState<{ id: string; symbol: string; name: string; description: string; isActive: boolean } | null>(null);
+  const [newStockSymbol, setNewStockSymbol] = useState("");
+  const [newStockName, setNewStockName] = useState("");
+  const [newStockDescription, setNewStockDescription] = useState("");
+  const [newStockPrice, setNewStockPrice] = useState("1000");
+  const [editStockName, setEditStockName] = useState("");
+  const [editStockDescription, setEditStockDescription] = useState("");
+
+  // Stock Management handlers
+  const handleAddStock = async () => {
+    const price = parseFloat(newStockPrice);
+    if (!newStockSymbol.trim() || !newStockName.trim() || !Number.isFinite(price) || price <= 0) {
+      addToast("error", "Invalid Input", "Symbol, name, and a valid price are required.");
+      return;
+    }
+    await addStock({
+      symbol: newStockSymbol.trim().toUpperCase(),
+      name: newStockName.trim(),
+      description: newStockDescription.trim(),
+      currentPrice: price,
+    });
+    setNewStockSymbol("");
+    setNewStockName("");
+    setNewStockDescription("");
+    setNewStockPrice("1000");
+    setShowAddStockDialog(false);
+  };
+
+  const handleEditStock = async () => {
+    if (!selectedStockForEdit || !editStockName.trim()) {
+      addToast("error", "Invalid Input", "Stock name is required.");
+      return;
+    }
+    await editStock(selectedStockForEdit.id, {
+      name: editStockName.trim(),
+      description: editStockDescription.trim(),
+    });
+    setEditStockName("");
+    setEditStockDescription("");
+    setSelectedStockForEdit(null);
+    setShowEditStockDialog(false);
+  };
+
+  const handleToggleStock = async () => {
+    if (!selectedStockForEdit) return;
+    await toggleStockActive(selectedStockForEdit.id, !selectedStockForEdit.isActive);
+    setSelectedStockForEdit(null);
+    setShowToggleStockDialog(false);
+  };
+
+  const openEditStockDialog = (stock: { id: string; symbol: string; name: string; description: string; isActive: boolean }) => {
+    setSelectedStockForEdit(stock);
+    setEditStockName(stock.name);
+    setEditStockDescription(stock.description);
+    setShowEditStockDialog(true);
+  };
+
+  const openToggleStockDialog = (stock: { id: string; symbol: string; name: string; description: string; isActive: boolean }) => {
+    setSelectedStockForEdit(stock);
+    setShowToggleStockDialog(true);
+  };
 
   const handlePriceInput = (stockId: string, val: string) => {
     setEditedPrices((prev) => {
@@ -126,7 +198,7 @@ export const AdminPanel: React.FC = () => {
     setCashReason("");
   };
 
-  const isRoundActive = marketStatus === "MARKET_OPEN" || marketStatus === "TRADING_PAUSED";
+  const isRoundActive = roundStatus === "active";
   const roundEndsLabel = roundEndsAt
     ? new Date(roundEndsAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
     : null;
@@ -148,7 +220,7 @@ export const AdminPanel: React.FC = () => {
           <Button
             variant="buy"
             size="sm"
-            disabled={marketStatus === "MARKET_OPEN"}
+            disabled={!isRoundActive || marketStatusDb === "open"}
             onClick={() => setMarketStatus("MARKET_OPEN")}
           >
             Open Market
@@ -156,7 +228,7 @@ export const AdminPanel: React.FC = () => {
           <Button
             variant="warn"
             size="sm"
-            disabled={marketStatus === "TRADING_PAUSED"}
+            disabled={!isRoundActive || tradingStatusDb === "paused"}
             onClick={() => setMarketStatus("TRADING_PAUSED")}
           >
             Pause Trading
@@ -164,15 +236,15 @@ export const AdminPanel: React.FC = () => {
           <Button
             variant="buy"
             size="sm"
-            disabled={marketStatus !== "TRADING_PAUSED"}
-            onClick={() => setMarketStatus("MARKET_OPEN")}
+            disabled={!isRoundActive || tradingStatusDb !== "paused"}
+            onClick={() => resumeTrading()}
           >
             Resume Trading
           </Button>
           <Button
             variant="sell"
             size="sm"
-            disabled={marketStatus === "MARKET_CLOSED"}
+            disabled={!isRoundActive || marketStatusDb === "closed"}
             onClick={() => setMarketStatus("MARKET_CLOSED")}
           >
             Close Market
@@ -220,7 +292,7 @@ export const AdminPanel: React.FC = () => {
                       <Button
                         variant="buy"
                         size="sm"
-                        disabled={isActive && marketStatus === "MARKET_OPEN"}
+                        disabled={isActive && isRoundActive}
                         onClick={() => startRound(roundVal)}
                       >
                         Start
@@ -228,7 +300,7 @@ export const AdminPanel: React.FC = () => {
                       <Button
                         variant="sell"
                         size="sm"
-                        disabled={!isActive || marketStatus === "ROUND_ENDED"}
+                        disabled={!isActive || !isRoundActive}
                         onClick={() => endRound(roundVal)}
                       >
                         End
@@ -397,7 +469,9 @@ export const AdminPanel: React.FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {stocks.map((stock) => {
+              {stocks
+        .filter((stock) => stock.isActive)
+        .map((stock) => {
                 const pending = pendingPriceChanges.find((p) => p.stockId === stock.id);
                 const currentEditVal =
                   editedPrices[stock.id] ?? String(pending ? pending.newPrice : stock.currentPrice);
@@ -484,6 +558,65 @@ export const AdminPanel: React.FC = () => {
               Apply All Price Changes To Competition
             </Button>
           </div>
+
+          {/* Stock Management */}
+          <Panel className="flex flex-col">
+            <PanelHeader>
+              <PanelTitle>Stock Management</PanelTitle>
+              <span className="text-xs text-muted-foreground">
+                Add, rename, or toggle stock activation. Changes broadcast live.
+              </span>
+            </PanelHeader>
+            <div className="p-4 space-y-4">
+              {/* Add Stock */}
+              <div className="flex items-center gap-2">
+                <Button variant="buy" onClick={() => setShowAddStockDialog(true)}>
+                  Add Stock
+                </Button>
+              </div>
+
+              {/* Stocks Table */}
+              <Table>
+                <TableHeader>
+                  <TableRow className="hover:bg-transparent">
+                    <TableHead>Symbol</TableHead>
+                    <TableHead>Name</TableHead>
+                    <TableHead className="text-center">Status</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {stocks.map((stock) => (
+                    <TableRow key={stock.id}>
+                      <TableCell>
+                        <span className="text-sm font-semibold text-foreground">{stock.symbol}</span>
+                      </TableCell>
+                      <TableCell className="text-foreground">{stock.name}</TableCell>
+                      <TableCell className="text-center">
+                        <Badge variant={stock.isActive ? "buy" : "secondary"}>
+                          {stock.isActive ? "Active" : "Inactive"}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          <Button variant="secondary" size="xs" onClick={() => openEditStockDialog({ id: stock.id, symbol: stock.symbol, name: stock.name, description: stock.description ?? "", isActive: stock.isActive })}>
+                            Edit
+                          </Button>
+                          <Button
+                            variant={stock.isActive ? "warn" : "buy"}
+                            size="xs"
+                            onClick={() => openToggleStockDialog({ id: stock.id, symbol: stock.symbol, name: stock.name, description: stock.description ?? "", isActive: stock.isActive })}
+                          >
+                            {stock.isActive ? "Deactivate" : "Activate"}
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </Panel>
         </Panel>
       </div>
 

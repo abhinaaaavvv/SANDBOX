@@ -82,6 +82,7 @@ export function dbStockToStock(dbStock: DbStockWithQuote): Stock {
     symbol: dbStock.symbol,
     name: dbStock.name,
     description: dbStock.description,
+    isActive: dbStock.is_active,
     currentPricePaise,
     // Derived display value: paise / 100 as a number. Used by formatINR().
     // Never use this for authoritative calculations.

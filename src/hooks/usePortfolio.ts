@@ -16,6 +16,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useCompetitionContext } from "@/lib/competition-context";
+import { mapRpcError } from "@/lib/errors";
 
 export interface Portfolio {
   cashBalancePaise: number;
@@ -58,11 +59,11 @@ export function usePortfolio() {
         p_competition_run_id: competitionRunId,
       });
 
-      if (rpcError) throw new Error(rpcError.message);
+      if (rpcError) throw new Error(mapRpcError(rpcError.message, "your portfolio"));
 
       const response = data as PortfolioRpcResponse;
       if (!response.ok) {
-        throw new Error(response.error || "Failed to fetch portfolio");
+        throw new Error(mapRpcError(response.error || "Failed to fetch portfolio", "your portfolio"));
       }
 
       setPortfolio({
@@ -75,7 +76,7 @@ export function usePortfolio() {
       });
       setError(null);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to fetch portfolio";
+      const message = err instanceof Error ? err.message : "Unable to load your portfolio. Please try again.";
       setError(message);
     } finally {
       setIsRefetching(false);
@@ -101,11 +102,11 @@ export function usePortfolio() {
           p_competition_run_id: competitionRunId,
         });
 
-        if (rpcError) throw new Error(rpcError.message);
+        if (rpcError) throw new Error(mapRpcError(rpcError.message, "your portfolio"));
 
         const response = data as PortfolioRpcResponse;
         if (!response.ok) {
-          throw new Error(response.error || "Failed to fetch portfolio");
+          throw new Error(mapRpcError(response.error || "Failed to fetch portfolio", "your portfolio"));
         }
 
         if (!cancelled) {
@@ -120,7 +121,7 @@ export function usePortfolio() {
         }
       } catch (err) {
         if (!cancelled) {
-          const message = err instanceof Error ? err.message : "Failed to fetch portfolio";
+          const message = err instanceof Error ? err.message : "Unable to load your portfolio. Please try again.";
           setError(message);
         }
       } finally {

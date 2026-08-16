@@ -232,13 +232,11 @@ export function RealtimeProvider({ children }: RealtimeProviderProps) {
           if (wasConnected) {
             // RECONNECT: channel was previously connected, then lost, now re-established
             // Fire reconcile to refetch authoritative state
-            console.log("[Realtime] Reconnected — firing reconcile");
             fireReconcile();
           } else {
             // INITIAL SUBSCRIBE: first time connecting
             // Fire reconcile to ensure initial state is fetched after subscription is active
             // This prevents the race condition where events fire between initial fetch and subscribe
-            console.log("[Realtime] Initial subscribe — firing reconcile");
             fireReconcile();
           }
         } else if (status === "CLOSED" || status === "CHANNEL_ERROR") {

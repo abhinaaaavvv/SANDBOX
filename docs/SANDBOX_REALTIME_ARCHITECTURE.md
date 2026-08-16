@@ -29,11 +29,6 @@ The `MockCompetitionEngine` in `src/lib/competition/engine.ts` maintains an in-p
 | `TRADE_EXECUTED` | `{ side, stockId, quantity, transaction }` | `executeBuy()` / `executeSell()` |
 | `DIVIDEND_APPLIED` | `{ stockId, amountPerShare }` | `applyDividend()` |
 | `CASH_ADJUSTED` | `{ reason }` | `adjustTeamCash()` |
-| `VIDEO_SELECTED` | `{ videoId }` | admin video controls |
-| `VIDEO_STARTED` | `{ videoId, timestamp }` | admin playback controls |
-| `VIDEO_PAUSED` | `{}` | admin playback controls |
-| `VIDEO_STOPPED` | `{}` | admin video controls |
-| `VIDEO_SEEKED` | `{ position }` | admin seek controls |
 | `COMPETITION_RESET` | `{}` | `resetCompetition()` |
 
 **Current behavior**: Engine events flow through `engine.subscribe()` -> `SandboxContext` -> consumers via `useSandboxStore()`. These are **mock-only** and do not cross processes or tabs.
@@ -94,13 +89,6 @@ MockEngine event
 |---|---|---|---|---|
 | `CASH_UPDATED` | `cash_ledger` INSERT (any entry_type) | `team:<team_id>` | Owner team | `refetchPortfolio()` (cash_balance_paise changes) |
 
-### Video Events (future phase)
-
-| Event | DB Source | Realtime Channel | Audience | Refetch Trigger |
-|---|---|---|---|---|
-| `VIDEO_PLAYED` | `videos` metadata + playback state | `team:<team_id>` or direct | Owner team | None (UI update only) |
-| `VIDEO_STOPPED` | `videos` metadata | `team:<team_id>` or direct | Owner team | None |
-
 ---
 
 ## Database Sources
@@ -119,7 +107,6 @@ For every event, the authoritative source is always a PostgreSQL table or RPC re
 | `PRICE_CHANGES_APPLIED` | `market_quotes` row UPDATE |
 | `DIVIDEND_APPLIED` | `dividends` row, `dividend_payments` INSERT, `cash_ledger` INSERT |
 | `CASH_UPDATED` | `cash_ledger` INSERT |
-| `VIDEO_PLAYED/STOPPED/SEEKED` | `videos` row + playback metadata |
 
 ### Authoritative Row / State Changes
 
@@ -128,6 +115,37 @@ For every event, the authoritative source is always a PostgreSQL table or RPC re
 - ** dividend application **: One transaction creates `dividend_payments` rows (one per team), inserts `cash_ledger` entries (entry_type='dividend'), marks `dividends.status='applied'`.
 - ** cash adjustment **: Single `cash_ledger` INSERT (entry_type='admin_adjustment').
 - ** round start/end **: Single `rounds` row UPDATE with authoritative timestamps (server-side only).
+
+### Transactional Event Publication
+
+For every authoritative mutation that produces a Realtime event, the mutation and
+notification record must be committed atomically:
+
+```text
+BEGIN
+  validate request
+  acquire required row locks
+  mutate authoritative PostgreSQL state
+  INSERT realtime_notifications(...)
+COMMIT
+```
+
+Never:
+
+```text
+COMMIT authoritative state
+    ↓
+try to publish notification later
+```
+
+If the transaction rolls back, no notification exists.
+
+If Realtime delivery itself is temporarily unavailable after commit, the durable
+notification remains in PostgreSQL and reconnect/refetch still guarantees state
+convergence.
+
+The notification table therefore acts as a small transactional outbox for Realtime
+signals. It is not a source of financial truth.
 
 ### What Changes After Commit
 
@@ -176,12 +194,10 @@ Every participant-visible Realtime event payload must contain **identifiers and 
 | `DIVIDEND_APPLIED` (run-scoped) | `dividend_id`, `stock_id`, `competition_run_id`, `status` | `amountPerShare`, `payout`, `dividend_payment` details |
 | `DIVIDEND_APPLIED` (team-scoped) | `dividend_id`, `stock_id`, `team_id`, `competition_run_id` | `amountPerShare`, `total_payout`, `cash_ledger` entries |
 | `CASH_UPDATED` | — (empty payload; signal only) | `cash_balance_paise`, `ledger_entries` |
-| `VIDEO_PLAY/STOP/SEEK/PAUSED` | `videoId`, `timestamp`, `position` (for seek) | `current_time`, `duration`, `playback_stats` |
 
 **Core principle**: If the field is financial state (balance, quantity, price, value, P/L, dividend amount), it must **not** appear in the Realtime payload. The client must refetch via RPC for authoritative data.
 
 ---
-
 
 
 ## Participant vs Admin Events
@@ -220,7 +236,17 @@ Every participant-visible Realtime event payload must contain **identifiers and 
 
 ### Realtime Notifications RLS
 
-The `realtime_notifications` table has the following RLS policy:
+Realtime authorization is enforced by PostgreSQL RLS. Application-layer checks are not
+a substitute for database authorization.
+
+The policy must enforce all three cases:
+
+1. `run:<run_id>` — user must be authorized for that exact competition run.
+2. `team:<team_id>` — user must be a member of that exact team.
+3. `admin:<run_id>` — user must have `profiles.role = 'admin'` and be authorized to
+   access that run.
+
+Recommended policy shape:
 
 ```sql
 CREATE POLICY "realtime_notifications_select"
@@ -229,61 +255,65 @@ CREATE POLICY "realtime_notifications_select"
   USING (
     auth.uid() IS NOT NULL
     AND (
-      -- Run-scoped events: visible only to users authorized for that competition run.
-      -- Authorization is verified by the application layer (RPCs that publish events).
-      -- The baseline filter ensures only authenticated users can receive run-scoped events.
-      channel LIKE 'run:%'
+      (
+        channel LIKE 'run:%'
+        AND EXISTS (
+          SELECT 1
+          FROM public.team_members tm
+          JOIN public.competition_runs cr
+            ON cr.id = realtime_notifications.competition_run_id
+          WHERE tm.user_id = auth.uid()
+            AND tm.competition_id = cr.competition_id
+            AND cr.id = realtime_notifications.competition_run_id
+        )
+      )
       OR
-      -- Team-scoped events: visible only to team members
       (
         channel LIKE 'team:%'
         AND team_id IS NOT NULL
         AND EXISTS (
-          SELECT 1 FROM public.team_members tm
+          SELECT 1
+          FROM public.team_members tm
           WHERE tm.user_id = auth.uid()
             AND tm.team_id = realtime_notifications.team_id
+        )
+      )
+      OR
+      (
+        channel LIKE 'admin:%'
+        AND EXISTS (
+          SELECT 1
+          FROM public.profiles p
+          WHERE p.id = auth.uid()
+            AND p.role = 'admin'
         )
       )
     )
   );
 ```
 
-This ensures:
+The exact join columns must match the final schema, but the security rule is mandatory:
+**a generic authenticated-user check is never sufficient for a run-scoped channel.**
 
-- **Run-scoped events** (`run:<run_id>`): visible to **authenticated users who are participants in that competition run**. The application layer (RPCs that publish events) enforces run-specific authorization — e.g., only users with a team and holdings in that run may receive these events. The RLS policy provides the authenticated-user baseline filter.
-- **Team-scoped events** (`team:<team_id>`): visible **only** to members of that team (verified via `team_members` table).
-- **No cross-team leakage**: A participant in Team A cannot see team B's `team:<team_id>` events.
-- **Auth guard**: Unauthenticated connections are rejected (`auth.uid() IS NOT NULL`).
-```
+Required guarantees:
 
-This ensures:
+- A participant can receive only events for their own competition run.
+- A participant cannot receive another team's private events.
+- A participant cannot receive admin events.
+- An admin can receive admin events only for authorized runs.
+- Unauthenticated users receive nothing.
+- Pending price changes and other private admin state are never participant-visible.
 
-- **Run-scoped events** (`run:<run_id>`): visible to **all authenticated users** in the competition run (participants and admins).
-- **Team-scoped events** (`team:<team_id>`): visible **only** to members of that team (verified via `team_members` table).
-- **No cross-team leakage**: A participant in Team A cannot see team B's `team:<team_id>` events.
-- **Auth guard**: Unauthenticated connections are rejected (`auth.uid() IS NOT NULL`).
+Do not rely on the client choosing a legitimate channel name. The database policy must
+validate authorization from trusted identity and membership data.
 
 ### Channel Naming Convention
 
-- `run:<run_id>` — run-scoped, visible to authenticated users authorized for that competition run
-- `team:<team_id>` — team-scoped, visible only to that team's members (verified via `team_members`)
-- `admin:<run_id>` — admin-scoped, visible **only** to profiles with `role = 'admin'`
+- `run:<run_id>` — visible only to users authorized for that exact competition run
+- `team:<team_id>` — visible only to members of that exact team
+- `admin:<run_id>` — visible only to authorized admins for that exact run
 
 
-### Admin RLS Policy
-
-```sql
-CREATE POLICY "admin_realtime_notifications_select"
-  ON public.realtime_notifications
-  FOR SELECT
-  USING (
-    auth.uid() IS NOT NULL
-    AND EXISTS (
-      SELECT 1 FROM public.profiles
-      WHERE id = auth.uid() AND role = 'admin'
-    )
-  );
-```
 ### Tables That Must NOT Have Realtime Subscriptions
 
 | Table | Reason |
@@ -378,9 +408,11 @@ UI updates with authoritative data
 | | `refetchLeaderboard()` → `get_leaderboard()` | Leaderboard may shift |
 | `DIVIDEND_APPLIED` (other team) | `refetchLeaderboard()` → `get_leaderboard()` | Leaderboard may shift |
 | `CASH_UPDATED` (own team) | `refetchPortfolio()` → `get_team_portfolio()` | cash_balance_paise updated |
-| `VIDEO_PLAYED/STOPPED/SEEKED` | UI update only | No refetch of financial state |
 
 ### Stale / Missed Events
+
+Realtime events are best-effort wake-up signals. State correctness never depends on
+receiving a particular event.
 
 | Scenario | Behavior |
 |---|---|
@@ -426,7 +458,11 @@ Admin device (PostgreSQL)
 
 - **All devices eventually see the same authoritative state** after refetch.
 - **No device is ever authoritative** — PostgreSQL is the source of truth.
-- **Race conditions** are resolved by PostgreSQL transactions (e.g., `SELECT FOR UPDATE` on `initial_capital` row in `execute_trade()`).
+- **Race conditions** are resolved by PostgreSQL transactions. `execute_trade()` must
+  lock the authoritative mutable cash/balance row for the team, the relevant holding
+  row, and the authoritative market quote as required by the final schema. A starting
+  capital/configuration row must NOT be used as the concurrency lock unless it is also
+  the authoritative mutable balance row.
 - **Stale data** is always overwritten by newer RPC refetches.
 
 ### Example: Trade Executed on Admin Device
@@ -553,15 +589,40 @@ CREATE INDEX IF NOT EXISTS idx_market_quotes_run_id
 | **Subscription rejected** (RLS violation) | Client cannot subscribe to restricted channel. Silent failure (no events received). | Client subscribes to permitted channels only (`run:<run_id>`, `team:<team_id>`). |
 | **Malformed payload** | Corrupt `realtime_notifications` row. | Payload is identifiers only; no financial data to misinterpret. Event is discarded; next event triggers refetch. |
 | **Unauthorized subscription** | Client tries to subscribe to `team:<other_team_id>`. RLS blocks events. | Client only subscribes to authorized channels. No data leakage. |
-| **Duplicate event** | Same event inserted twice (race condition). | Idempotency keys in RPCs prevent double-processing. Refetch is idempotent. |
+| **Duplicate event** | Same notification is delivered twice. | Client may coalesce duplicate refetches; no financial mutation is performed by the event handler. RPC reads are idempotent. |
 | **Stale event** | Event received after newer event already processed. | Refetch is idempotent — RPC returns current state. Older event is effectively a no-op. |
 | **Database mutation succeeds but event missed** | Trade committed, `notify_realtime()` not called (e.g., crash before INSERT). | On reconnect: `refetch authoritative state via RPC`. The RPC result is authoritative regardless of event receipt. |
 | **Event arrives after timeout** | Event received after UI already updated from newer event. | Refetch is idempotent; no harm. |
-| **Concurrent trades for same team** | `SELECT FOR UPDATE` on `initial_capital` row serializes execution. | One trade waits; other proceeds. Both see consistent state after refetch. |
+| **Concurrent trades for same team** | Transaction locks the authoritative mutable cash/balance row plus relevant holding/quote rows. | One transaction waits; both commit consistent state. |
 
 **Correctness survives every case**: Realtime is a **signal**, not the source of truth. Financial correctness is always derived from PostgreSQL RPCs.
 
 ---
+
+## Event Ordering and Notification Retention
+
+Each `realtime_notifications` row should contain:
+
+```text
+id
+competition_run_id
+team_id NULL
+channel
+event_type
+payload
+created_at
+sequence
+```
+
+`sequence` must be monotonically increasing within the relevant competition run (or
+within the selected event scope).
+
+Clients do not reconstruct financial state from sequence numbers. Sequence numbers are
+used for diagnostics, observability, and detecting unusual gaps.
+
+Notification retention is an operational concern. Cleanup must never delete the
+authoritative competition state. The client must remain correct even when an old
+notification is gone because reconnect always refetches the authoritative snapshot.
 
 ## Reconnection
 
@@ -597,45 +658,6 @@ CREATE INDEX IF NOT EXISTS idx_market_quotes_run_id
 - No special "reconnect logic" needed beyond resubscribe + refetch.
 
 ---
-
-## Video Synchronization Architecture
-
-Video synchronization is a **future phase** (Round 3). The architecture design:
-
-### Authoritative State
-
-- **PostgreSQL** owns video metadata and playback state.
-- `videos` table stores: `id`, `competition_run_id`, `title`, `storage_path`, `duration`, `created_at`.
-- Playback position may be stored in a separate table or session state.
-
-### Realtime Control Events (future)
-
-| Event | Channel | Payload | Purpose |
-|---|---|---|---|
-| `VIDEO_PLAY` | `team:<team_id>` or `run:<run_id>` | `{ video_id, server_timestamp, action }` | Request playback start |
-| `VIDEO_PAUSE` | `team:<team_id>` or `run:<run_id>` | `{ video_id, server_timestamp, action }` | Request playback pause |
-| `SEEK` | `team:<team_id>` or `run:<run_id>` | `{ video_id, server_timestamp, position }` | Request seek to position |
-| `VIDEO_STOP` | `team:<team_id>` or `run:<run_id>` | `{ video_id }` | Stop playback |
-
-### Synchronization Mechanism
-
-1. **Admin sends** video control event with `server_timestamp` (PostgreSQL `now()`).
-2. **Client receives** event and uses `server_timestamp` to start playback approximately together.
-3. **Client-side clock correction** adjusts for network latency.
-4. **Recoverability**: If a device joins late or disconnects, the `server_timestamp` allows rejoining from the authoritative point.
-
-### What Realtime Does NOT Do for Video
-
-- ❌ Does **not** stream video data (Supabase Storage is used for that).
-- ❌ Does **not** treat a single websocket event as durable state.
-- ❌ Does **not** guarantee perfect sync — network latency varies.
-- ❌ Does **not** replace the need for admin-controlled authoritative playback.
-
-### Video State Convergence
-
-- On reconnect: resubscribe + use `server_timestamp` from last known control event to re-sync.
-- If position data is stored in PostgreSQL (future), `SELECT` retrieves last known position.
-- Admins can always force state from the UI (authoritative control).
 
 ---
 
@@ -683,37 +705,43 @@ Video synchronization is a **future phase** (Round 3). The architecture design:
 
 **Output**: Robust reconnect/reconciliation behavior.
 
-### Phase 7.5: Video Synchronization (future)
+### Phase 7.5: Production Verification
 
-1. Implement video metadata Realtime events (`VIDEO_PLAY`, `VIDEO_PAUSE`, `SEEK`, `VIDEO_STOP`).
-2. Design server_timestamp-based synchronization.
-3. Test across devices and network conditions.
+1. Test exact run-scoped RLS isolation.
+2. Test team-scoped RLS isolation.
+3. Test admin-only channel isolation.
+4. Test transaction rollback with no notification.
+5. Test duplicate notifications.
+6. Test missed notifications followed by reconnect.
+7. Test concurrent trades and concurrent admin transitions.
+8. Test multiple tabs/devices converging on the same authoritative state.
+9. Test fallback RPC refresh when Realtime is unavailable.
 
-**Output**: Video sync architecture (Round 3).
+**Output**: Realtime system verified for production competition use.
 
 ---
 
-## Open Questions
+## Production Decisions
 
-1. **Video Realtime Channel Scope**: Should video events be `team:<team_id>` (per-team playback) or `run:<run_id>` (all participants watch same video)? The design may differ per competition round.
+The following decisions are fixed for the current SANDBOX architecture:
 
-2. **Heartbeat / Keep-Alive**: Should Realtime maintain a keep-alive channel, or is detection of disconnect sufficient via the SDK's built-in mechanisms?
-
-3. **Notification Retention Period**: The `cleanup_old_notifications()` default is 1 hour. What retention period is appropriate for the competition lifecycle? Should old notifications be archived vs deleted?
-
-4. **Priority Propagation**: Should Realtime events carry a priority field to allow clients to throttle/optimize refetches (e.g., price changes vs. video events)?
-
-5. **Server-Side Event Filtering**: Should there be a server-side middleware that filters/transforms events before Realtime distribution (e.g., ensuring `pending_price_changes` never leak)?
-
-6. **Browser/SDK Compatibility**: Are there any Supabase Realtime limitations or quirks that need workarounds for the supported browsers/Devices?
-
-7. **Testing Strategy**: What's the minimum test matrix for Realtime (browser versions, disconnect/reconnect scenarios, multi-device, concurrent events)?
-
-8. **Gradual Rollout**: Should Realtime be feature-gated (e.g., `REALTIME_ENABLED` env variable) for phased adoption, or is it an all-or-nothing switch?
-
-9. **Fallback Mechanism**: If Realtime connection fails permanently, should the client fall back to periodic polling of authoritative state via RPC, or is manual refresh expected?
-
-10. **Leaderboard Realtime vs RPC**: Should leaderboard updates come via Realtime events + refetch, or solely via RPC refetches on event? The current design uses RPC, but there may be arguments for Realtime + lighter refetch.
+1. **Video:** No video functionality exists in SANDBOX. Round 3 remains a 15-minute
+   trading round; any external video/content is outside the website and backend.
+2. **Channel authorization:** PostgreSQL RLS enforces exact run/team/admin authorization.
+3. **Event durability:** Mutation and notification row are committed in one transaction.
+4. **Realtime payloads:** identifiers/metadata only; never authoritative financial data.
+5. **Recovery:** reconnect always performs authoritative RPC refetch.
+6. **Polling fallback:** if Realtime is unavailable for an extended period, the frontend
+   may use a low-frequency authoritative RPC refresh as an availability fallback. It
+   must not become the primary synchronization mechanism.
+7. **Leaderboard:** leaderboard remains RPC-derived; Realtime only signals that it may
+   have changed.
+8. **Retention:** notification cleanup may remove old signals without affecting
+   authoritative state.
+9. **Testing:** test authorization, cross-team isolation, concurrent trades, missed
+   notifications, reconnect, duplicate delivery, and multi-device convergence.
+10. **No frontend authority:** the browser never becomes authoritative for financial,
+    timing, or competition state.
 
 ---
 
@@ -816,7 +844,6 @@ create_dividend() → apply_dividend() RPC
 
 1. **Event publishing from RPCs**: Database triggers/functions that insert into `realtime_notifications` after authoritative mutations
 2. **Client-side event handlers**: Processing specific event types and triggering targeted refetches
-3. **Video synchronization events**: VIDEO_PLAY, VIDEO_STOP, VIDEO_SEEK
 4. **Connection status UI**: Showing Realtime connection status to users
 
 ### Security Verification

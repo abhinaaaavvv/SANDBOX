@@ -18,6 +18,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useCompetitionContext } from "@/lib/competition-context";
 import { Stock } from "@/types/sandbox";
 import { dbStocksToStocks } from "@/lib/market-adapter";
+import { mapQueryError } from "@/lib/errors";
 
 // ---------------------------------------------------------------------------
 // Query functions
@@ -55,7 +56,41 @@ async function fetchMarketStocks(
     .eq("market_quotes.competition_run_id", competitionRunId);
 
   if (error) {
-    throw new Error(`Failed to fetch market data: ${error.message}`);
+    throw new Error(mapQueryError(error.message, "market data"));
+  }
+
+  if (!data) {
+    return [];
+  }
+
+  return dbStocksToStocks(data);
+}
+
+/**
+ * Fetch ALL stocks (including inactive) with market quotes for admin management.
+ */
+async function fetchAllStocks(
+  supabase: ReturnType<typeof createClient>,
+  competitionRunId: string
+): Promise<Stock[]> {
+  const { data, error } = await supabase
+    .from("stocks")
+    .select(`
+      id,
+      symbol,
+      name,
+      description,
+      is_active,
+      market_quotes(
+        price_paise,
+        updated_at,
+        competition_run_id
+      )
+    `)
+    .eq("market_quotes.competition_run_id", competitionRunId);
+
+  if (error) {
+    throw new Error(mapQueryError(error.message, "market data"));
   }
 
   if (!data) {
@@ -92,22 +127,25 @@ export function useMarketData() {
   const supabase = useMemo(() => createClient(), []);
   const competitionRunId = context?.competitionRun?.id;
   const prevRunIdRef = useRef<string | undefined>(competitionRunId);
+  const isAdmin = context?.role === "admin";
 
   // Refetch function (exposed to components)
   const refetch = useCallback(async () => {
     if (!competitionRunId) return;
     setIsRefetching(true);
     try {
-      const data = await fetchMarketStocks(supabase, competitionRunId);
+      const data = isAdmin
+        ? await fetchAllStocks(supabase, competitionRunId)
+        : await fetchMarketStocks(supabase, competitionRunId);
       setStocks(data);
       setError(null);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to fetch market data";
+      const message = err instanceof Error ? err.message : "Unable to load market data. Please try again.";
       setError(message);
     } finally {
       setIsRefetching(false);
     }
-  }, [supabase, competitionRunId]);
+  }, [supabase, competitionRunId, isAdmin]);
 
   // Fetch when competition run changes
   useEffect(() => {
@@ -127,13 +165,15 @@ export function useMarketData() {
     const load = async () => {
       try {
         setError(null);
-        const data = await fetchMarketStocks(supabase, competitionRunId);
+        const data = isAdmin
+          ? await fetchAllStocks(supabase, competitionRunId)
+          : await fetchMarketStocks(supabase, competitionRunId);
         if (!cancelled) {
           setStocks(data);
         }
       } catch (err) {
         if (!cancelled) {
-          const message = err instanceof Error ? err.message : "Failed to fetch market data";
+          const message = err instanceof Error ? err.message : "Unable to load market data. Please try again.";
           setError(message);
         }
       } finally {
@@ -148,7 +188,7 @@ export function useMarketData() {
     return () => {
       cancelled = true;
     };
-  }, [supabase, competitionRunId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [supabase, competitionRunId, isAdmin]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Reset stocks when there's no competition run
   const hasRun = Boolean(competitionRunId);

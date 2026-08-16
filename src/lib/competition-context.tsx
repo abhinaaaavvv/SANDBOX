@@ -78,6 +78,8 @@ export interface Round {
   ends_at: string | null;
   market_status: "closed" | "open";
   trading_status: "paused" | "enabled";
+  paused_at: string | null;
+  accumulated_pause_duration: string;
   created_at: string;
   updated_at: string;
 }
@@ -299,7 +301,7 @@ async function resolveCurrentRound(
   const { data: activeRound, error: activeError } = await supabase
     .from("rounds")
     .select(
-      "id, competition_run_id, round_number, round_type, status, started_at, ends_at, market_status, trading_status, created_at, updated_at"
+      "id, competition_run_id, round_number, round_type, status, started_at, ends_at, market_status, trading_status, paused_at, accumulated_pause_duration, created_at, updated_at"
     )
     .eq("competition_run_id", competitionRunId)
     .eq("status", "active")
@@ -312,7 +314,7 @@ async function resolveCurrentRound(
   const { data: completedRounds, error: completedError } = await supabase
     .from("rounds")
     .select(
-      "id, competition_run_id, round_number, round_type, status, started_at, ends_at, market_status, trading_status, created_at, updated_at"
+      "id, competition_run_id, round_number, round_type, status, started_at, ends_at, market_status, trading_status, paused_at, accumulated_pause_duration, created_at, updated_at"
     )
     .eq("competition_run_id", competitionRunId)
     .eq("status", "completed")
@@ -575,18 +577,6 @@ export function useCompetitionContext(): CompetitionContextProviderValue {
     );
   }
   return context;
-}
-
-export function useCurrentRound() {
-  const { context, isLoading, error } = useCompetitionContext();
-  return useMemo(
-    () => ({
-      currentRound: context?.currentRound ?? null,
-      isLoading,
-      error,
-    }),
-    [context?.currentRound, isLoading, error]
-  );
 }
 
 export function useTeamInfo() {
