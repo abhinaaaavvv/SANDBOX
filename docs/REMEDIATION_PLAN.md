@@ -128,3 +128,29 @@ Execute phases in order. Each phase ends with build + manual verification before
 - Migrations for every schema change; no dashboard-only edits.
 - Realtime payloads are identifiers-only signals; clients refetch via RPC.
 - Do not weaken RLS; do not expose service-role key outside server routes.
+
+---
+
+## UI Redesign (2026-08-24 — sidebar shell)
+
+Both dashboards were restructured around a shared app shell. Logic untouched;
+homepage/login untouched.
+
+- **Typography**: Google Sans (self-hosted) → **Geist Sans** via `next/font/google`,
+  exactly as DESIGN.md §2 prescribes. EB Garamond retained for wordmark/editorial.
+  `--font-sans`/`--font-mono` remapped in globals.css; `src/app/fonts/` removed.
+- **New `DashboardShell`** (`src/components/shared/DashboardShell.tsx`): fixed sidebar
+  (EB Garamond wordmark + "SB" monogram on the collapsed rail → section nav with
+  active rail indicator + count badges → identity + sign-out pinned bottom) and a
+  sticky topbar (view title · pending-changes badge · team chip · round pill ·
+  market status badge · authoritative timer with critical-state pulse). Collapses
+  to a 68px icon rail below `lg`.
+- **Participant**: former tabs are now sidebar sections (Market Desk / Holdings /
+  Leaderboard / Transactions); financial stat strip persists across sections.
+- **Admin**: 926-line `AdminPanel` split into focused sections under
+  `components/admin/sections/` — Competition (rounds + market controls + danger
+  zone), PriceEditor, Stocks, Dividends, Ledger — plus the existing TeamManager,
+  composed by `AdminConsole.tsx`. Price Editor nav item carries the live pending-
+  changes count. `AdminPanel.tsx` and `AppHeader.tsx` deleted.
+- Verified in-browser (participant + admin, all sections, narrow rail): zero
+  page/console errors; tsc · eslint · production build clean.

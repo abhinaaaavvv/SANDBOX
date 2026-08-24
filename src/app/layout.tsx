@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { EB_Garamond } from "next/font/google";
-import localFont from "next/font/local";
+import { Geist, EB_Garamond } from "next/font/google";
 import { SandboxProvider } from "@/context/SandboxContext";
 import { RealtimeProvider } from "@/lib/realtime";
 import { AuthProvider } from "@/lib/auth-context";
@@ -10,20 +9,18 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+
 /**
- * Google Sans is a restricted-license family served by the Google Fonts API
- * but not exposed through next/font/google. We self-host the Latin-subset
- * woff2 files (400/500/600/700) via next/font/local — the proper Google Sans
- * setup — so the app never falls back to a substituted family.
+ * Type system (docs/DESIGN.md §2):
+ *   Primary   — Geist Sans: the entire application UI.
+ *   Secondary — EB Garamond: wordmark and editorial statements only.
+ *
+ * Geist's tabular numerals keep financial columns scannable without a
+ * monospace face.
  */
-const googleSans = localFont({
-  src: [
-    { path: "./fonts/google-sans-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/google-sans-500.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/google-sans-600.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/google-sans-700.woff2", weight: "700", style: "normal" },
-  ],
-  variable: "--font-google-sans",
+const geistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
   display: "swap",
 });
 
@@ -46,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${googleSans.variable} ${ebGaramond.variable}`}
+      className={`dark ${geistSans.variable} ${ebGaramond.variable}`}
       suppressHydrationWarning
     >
       {/* suppressHydrationWarning: browser extensions inject attributes

@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { AdminPanel } from "@/components/admin/AdminPanel";
+import { AdminConsole } from "@/components/admin/AdminConsole";
 
 export default function AdminPage() {
-  return <AdminPanel />;
+  return <AdminConsole />;
 }

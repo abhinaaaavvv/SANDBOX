@@ -5,7 +5,7 @@ import type { User } from "@supabase/supabase-js";
  * Real Supabase Auth boundary.
  *
  * Maintains the same public API as the mock auth module so AuthGuard,
- * LoginForm, and AppHeader continue working with minimal changes.
+ * and LoginForm continue working with minimal changes.
  *
  * Session state is managed via Supabase Auth's onAuthStateChange listener.
  * Profile and team membership are resolved from the database after auth.
