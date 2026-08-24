@@ -89,13 +89,21 @@ export async function POST(request: NextRequest) {
   }
   const userId = created.user.id;
 
-  const { error: insertError } = await admin.from("teams").insert({
-    id: userId,
-    name,
-    display_name: name,
-    role: "participant",
-    blocked: false,
-  });
+  // NOTE: a trigger on auth.users (handle_new_user) already inserts a
+  // placeholder team row when the auth user is created. Adopt that row
+  // instead of inserting a conflicting one.
+  const { error: insertError } = await admin
+    .from("teams")
+    .upsert(
+      {
+        id: userId,
+        name,
+        display_name: name,
+        role: "participant",
+        blocked: false,
+      },
+      { onConflict: "id" }
+    );
   if (insertError) {
     // Roll back the orphaned auth user so retries start clean.
     await admin.auth.admin.deleteUser(userId);
@@ -113,10 +121,15 @@ export async function POST(request: NextRequest) {
     .maybeSingle();
 
   if (activeRun.data) {
-    const { error: fundError } = await admin.rpc("initialize_team_cash", {
-      p_team_id: userId,
-      p_competition_run_id: activeRun.data.id,
-      p_amount_paise: Math.round(startingCashRupees * 100),
+    // Insert the opening ledger entry directly — initialize_team_cash()
+    // enforces an admin JWT context, which a service-role call does not have.
+    const { error: fundError } = await admin.from("cash_ledger").insert({
+      team_id: userId,
+      competition_run_id: activeRun.data.id,
+      entry_type: "initial_capital",
+      amount_paise: Math.round(startingCashRupees * 100),
+      description: "Initial capital",
+      created_by: userId,
     });
     if (fundError) {
       return NextResponse.json(

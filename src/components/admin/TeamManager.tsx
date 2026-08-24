@@ -69,19 +69,22 @@ export const TeamManager: React.FC = () => {
     const amount = parseFloat(newCash);
     if (!Number.isFinite(amount) || amount <= 0) return;
     setIsAdding(true);
-    const res = await createTeam({
-      name: newName.trim(),
-      email: newEmail.trim(),
-      password: newPassword,
-      startingCashRupees: amount,
-    });
-    setIsAdding(false);
-    if (!res.ok) return;
-    setShowAddDialog(false);
-    setNewName("");
-    setNewEmail("");
-    setNewPassword("");
-    setNewCash(DEFAULT_STARTING_CASH);
+    try {
+      const res = await createTeam({
+        name: newName.trim(),
+        email: newEmail.trim(),
+        password: newPassword,
+        startingCashRupees: amount,
+      });
+      if (!res.ok) return; // Failure toast is raised by the context layer.
+      setShowAddDialog(false);
+      setNewName("");
+      setNewEmail("");
+      setNewPassword("");
+      setNewCash(DEFAULT_STARTING_CASH);
+    } finally {
+      setIsAdding(false);
+    }
   };
 
   return (

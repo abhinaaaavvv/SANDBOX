@@ -164,8 +164,12 @@ const REFETCH_KEY = "__sandbox_realtime_refetch";
 
 /**
  * Realtime-aware refetch hook.
- * Coalesces rapid events to prevent refetch storms.
- * Passes the event type to the refetch callback for targeted reconciliation.
+ *
+ * Coalesces rapid events across BOTH channels into a single flush, but
+ * keeps every distinct event type seen during the window so targeted
+ * reconciliations are never swallowed (e.g. a team-scoped
+ * PORTFOLIO_CHANGED arriving alongside a run-scoped LEADERBOARD_CHANGED
+ * must still refetch transactions).
  */
 export function useRealtimeRefetch(
   runId: string | null,
@@ -180,22 +184,36 @@ export function useRealtimeRefetch(
     refetchRef.current = refetch;
   }, [refetch]);
 
-  const debouncedRefetch = useCallback((eventType?: string) => {
+  const schedule = useCallback((eventType?: string) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const g = globalThis as any;
-    const existing = g[REFETCH_KEY];
-    if (existing) clearTimeout(existing);
-    g[REFETCH_KEY] = setTimeout(() => {
-      refetchRef.current(eventType);
+    if (!g[REFETCH_KEY]) {
+      g[REFETCH_KEY] = { timer: null, types: new Set<string>() };
+    }
+    const slot = g[REFETCH_KEY];
+    if (eventType) slot.types.add(eventType);
+    if (slot.timer) clearTimeout(slot.timer);
+    slot.timer = setTimeout(() => {
+      const types = Array.from(slot.types) as string[];
+      slot.types.clear();
+      slot.timer = null;
+      if (types.length === 0) {
+        void refetchRef.current();
+        return;
+      }
+      // One targeted reconciliation per distinct event type, in arrival order.
+      for (const t of types) {
+        void refetchRef.current(t);
+      }
     }, 50);
   }, []);
 
   useRunRealtime(runId, runEvents, (eventType) => {
-    debouncedRefetch(eventType);
+    schedule(eventType);
   });
 
   useTeamRealtime(teamId, teamEvents, (eventType) => {
-    debouncedRefetch(eventType);
+    schedule(eventType);
   });
 }
 

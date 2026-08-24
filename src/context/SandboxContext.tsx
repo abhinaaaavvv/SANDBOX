@@ -756,7 +756,9 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
           });
           const json = (await res.json()) as { ok: boolean; message?: string; warning?: string };
           if (!res.ok || !json.ok) {
-            return { ok: false, message: json.message ?? "Unable to create team." };
+            const message = json.message ?? "Unable to create team.";
+            toast.error("Team creation failed", { description: message });
+            return { ok: false, message };
           }
           await refreshTeams();
           toast.success("Team created", {

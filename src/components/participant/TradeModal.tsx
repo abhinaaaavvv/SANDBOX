@@ -74,7 +74,7 @@ export const TradeModal: React.FC<TradeModalProps> = ({ stock, mode, onClose }) 
 
   return (
     <Dialog open onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[420px]">
+      <DialogContent className="sm:max-w-105">
         <DialogHeader className="border-b border-border pb-4">
           <div className="flex items-center gap-2 pr-8">
             <Badge variant={mode === "BUY" ? "buy" : "sell"}>
@@ -83,8 +83,8 @@ export const TradeModal: React.FC<TradeModalProps> = ({ stock, mode, onClose }) 
             <DialogTitle className="text-base">{liveStock.symbol}</DialogTitle>
             <span className="text-xs text-muted-foreground">{liveStock.name}</span>
           </div>            <DialogDescription className="sr-only">
-              {mode} order for {liveStock.symbol}
-            </DialogDescription>
+            {mode} order for {liveStock.symbol}
+          </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleTrade} className="flex flex-col gap-4 pt-1">
