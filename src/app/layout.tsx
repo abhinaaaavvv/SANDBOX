@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, EB_Garamond } from "next/font/google";
+import { EB_Garamond } from "next/font/google";
+import localFont from "next/font/local";
 import { SandboxProvider } from "@/context/SandboxContext";
 import { RealtimeProvider } from "@/lib/realtime";
 import { AuthProvider } from "@/lib/auth-context";
@@ -11,16 +12,19 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 /**
- * Type system (docs/DESIGN.md §2):
- *   Primary   — Geist Sans: the entire application UI.
- *   Secondary — EB Garamond: wordmark and editorial statements only.
- *
- * Geist's tabular numerals keep financial columns scannable without a
- * monospace face.
+ * Type system:
+ *   Primary   — Google Sans: the entire application UI.
+ *   Editorial — EB Garamond: wordmark, view titles, panel headings and
+ *               major statements. The serif voice of the brand.
  */
-const geistSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
+const googleSans = localFont({
+  src: [
+    { path: "./fonts/google-sans-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/google-sans-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/google-sans-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/google-sans-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-google-sans",
   display: "swap",
 });
 
@@ -43,7 +47,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${geistSans.variable} ${ebGaramond.variable}`}
+      className={`dark ${googleSans.variable} ${ebGaramond.variable}`}
       suppressHydrationWarning
     >
       {/* suppressHydrationWarning: browser extensions inject attributes

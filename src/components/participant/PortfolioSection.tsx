@@ -80,7 +80,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) =
                 <TableRow key={h.stockId}>
                   <TableCell>
                     <div className="font-semibold text-foreground">{h.symbol}</div>
-                    <div className="max-w-[160px] truncate text-xs text-muted-foreground">
+                    <div className="max-w-40 truncate text-xs text-muted-foreground">
                       {h.name}
                     </div>
                   </TableCell>

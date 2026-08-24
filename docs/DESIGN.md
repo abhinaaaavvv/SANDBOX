@@ -35,9 +35,9 @@ Avoid decorative effects as a substitute for hierarchy.
 
 Use exactly **two font families**.
 
-### Primary — Geist Sans
+### Primary — Google Sans
 
-Use Geist Sans for almost the entire application:
+Use Google Sans for almost the entire application:
 - navigation
 - buttons
 - tables
@@ -62,7 +62,8 @@ Use EB Garamond sparingly for:
 - major editorial statements
 - occasional large section titles
 
-Do not use EB Garamond for tables, buttons, navigation, or dense application UI.
+Do not use EB Garamond for tables, buttons, navigation, dashboard view
+titles, panel headings, or dense application UI.
 
 The visual identity should feel contemporary rather than like an old financial terminal.
 
@@ -672,7 +673,7 @@ The final SANDBOX interface should feel like:
 Key ingredients:
 
 ```text
-Geist Sans
+Google Sans
 +
 EB Garamond
 +

@@ -38,7 +38,7 @@ export const DividendsSection: React.FC = () => {
   };
 
   return (
-    <Panel className="max-w-xl">
+    <Panel>
       <PanelHeader>
         <PanelTitle>Dividend Dispatcher</PanelTitle>
         <span className="text-xs text-muted-foreground">
