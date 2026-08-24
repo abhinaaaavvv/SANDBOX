@@ -397,12 +397,13 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
           await competitionCtx.refresh();
           break;
         case "PRICES_CHANGED":
-          // Prices changed - refetch market data and holdings
+          // Prices changed - refetch market data, holdings and admin team overviews
           await Promise.all([
             refetchMarketData(),
             refetchHoldings(),
             refetchCash(),
             refetchTransactions(),
+            refreshTeams(),
           ]);
           break;
         case "STOCK_CREATED":
@@ -731,6 +732,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
           refetchCash(),
           refetchTransactions(),
           refetchLeaderboard(),
+          refreshTeams(),
         ]);
         await competitionCtx.refresh();
         toast.success("Competition reset", {
