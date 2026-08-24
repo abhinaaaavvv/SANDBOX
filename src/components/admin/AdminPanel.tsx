@@ -72,6 +72,7 @@ export const AdminPanel: React.FC = () => {
     addStock,
     editStock,
     toggleStockActive,
+    removeStock,
     addToast,
   } = useSandboxStore();
 
@@ -99,6 +100,7 @@ export const AdminPanel: React.FC = () => {
   const [showAddStockDialog, setShowAddStockDialog] = useState(false);
   const [showEditStockDialog, setShowEditStockDialog] = useState(false);
   const [showToggleStockDialog, setShowToggleStockDialog] = useState(false);
+  const [showRemoveStockDialog, setShowRemoveStockDialog] = useState(false);
   const [selectedStockForEdit, setSelectedStockForEdit] = useState<{ id: string; symbol: string; name: string; description: string; isActive: boolean } | null>(null);
   const [newStockSymbol, setNewStockSymbol] = useState("");
   const [newStockName, setNewStockName] = useState("");
@@ -163,6 +165,20 @@ export const AdminPanel: React.FC = () => {
   const openToggleStockDialog = (stock: { id: string; symbol: string; name: string; description: string; isActive: boolean }) => {
     setSelectedStockForEdit(stock);
     setShowToggleStockDialog(true);
+  };
+
+  const openRemoveStockDialog = (stock: { id: string; symbol: string }) => {
+    setSelectedStockForEdit({ ...stock, name: "", description: "", isActive: true });
+    setShowRemoveStockDialog(true);
+  };
+
+  const handleRemoveStock = async () => {
+    if (!selectedStockForEdit) return;
+    const ok = await removeStock(selectedStockForEdit.id);
+    if (ok) {
+      setSelectedStockForEdit(null);
+      setShowRemoveStockDialog(false);
+    }
   };
 
   const handlePriceInput = (stockId: string, val: string) => {
@@ -646,6 +662,13 @@ export const AdminPanel: React.FC = () => {
                           >
                             {stock.isActive ? "Deactivate" : "Activate"}
                           </Button>
+                          <Button
+                            variant="destructive"
+                            size="xs"
+                            onClick={() => openRemoveStockDialog({ id: stock.id, symbol: stock.symbol })}
+                          >
+                            Remove
+                          </Button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -724,8 +747,9 @@ export const AdminPanel: React.FC = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>Reset the entire competition?</AlertDialogTitle>
             <AlertDialogDescription>
-              This restores all teams to ₹1,00,000 cash, clears holdings, transactions, pending
-              price changes, and stops any video broadcast. This cannot be undone.
+              This restores all teams to ₹1,00,000 cash, clears holdings and transactions,
+              resets all rounds to pending, resets every stock back to its opening price, and
+              reactivates deactivated stocks. This cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <Separator />
@@ -878,6 +902,26 @@ export const AdminPanel: React.FC = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      {/* Remove stock (hard delete) confirmation */}
+      <AlertDialog open={showRemoveStockDialog} onOpenChange={setShowRemoveStockDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Permanently remove {selectedStockForEdit?.symbol}?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This deletes the stock from the database along with every quote, holding, trade,
+              ledger entry and dividend record for it. Team cash balances are adjusted to stay
+              consistent. This cannot be undone — use Deactivate instead for a reversible hide.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <Separator />
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction variant="destructive" onClick={handleRemoveStock}>
+              Delete Permanently
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

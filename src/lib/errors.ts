@@ -58,6 +58,10 @@ export function mapRpcError(rawMessage: string, context?: string): string {
     return "This competition run is no longer active.";
 
   // Trading errors
+  if (lower.includes("round_expired"))
+    return "Time is up — the round has ended and your order could not be placed.";
+  if (lower.includes("team_blocked"))
+    return "Your team has been blocked by the administrator.";
   if (lower.includes("trading_not_allowed"))
     return "Trading is not currently allowed.";
   if (lower.includes("market_closed") || lower.includes("market_status"))

@@ -131,6 +131,7 @@ interface SandboxContextType {
   addStock: (params: { symbol: string; name: string; description: string; currentPrice: number }) => Promise<void>;
   editStock: (stockId: string, params: { name: string; description: string; symbol?: string }) => Promise<void>;
   toggleStockActive: (stockId: string, isActive: boolean) => Promise<void>;
+  removeStock: (stockId: string) => Promise<boolean>;
   resetCompetition: () => Promise<void>;
 
   // Local state operations (not database-backed)
@@ -355,6 +356,35 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     if (data) setRounds(data);
   }, [competitionRunId]);
 
+  // Auto-end: when the authoritative countdown reaches zero on an active
+  // round, any signed-in client instantly finalizes it via RPC (pg_cron
+  // every 30s is the backstop when no browser is open). Latched per round
+  // so it fires exactly once per expiry.
+  const autoEndLatchRef = useRef<string | null>(null);
+  const roundId = dbRound?.id ?? null;
+  useEffect(() => {
+    if (
+      roundStatus !== "active" ||
+      !roundEndsAt ||
+      timerSeconds > 0 ||
+      Date.parse(roundEndsAt) > Date.now()
+    ) {
+      return;
+    }
+    const latchKey = roundId ?? roundEndsAt;
+    if (autoEndLatchRef.current === latchKey) return;
+    autoEndLatchRef.current = latchKey;
+
+    void (async () => {
+      await createClient().rpc("auto_end_expired_rounds");
+      await competitionCtx.refresh();
+      await refetchDbRounds();
+      toast.info(`Round ${currentRound} ended`, {
+        description: "Time expired — trading closed automatically.",
+      });
+    })();
+  }, [roundStatus, timerSeconds, roundEndsAt, roundId, currentRound, competitionCtx, refetchDbRounds]);
+
   // Targeted refetch based on event type (Phase 9.8 optimization)
   const onReconcile = useCallback(
     async (event?: string) => {
@@ -377,6 +407,12 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
             refetchCash(),
             refetchTransactions(),
           ]);
+          break;
+        case "STOCK_CREATED":
+        case "STOCK_UPDATED":
+        case "STOCK_DEACTIVATED":
+          // Stock list changed - refresh market table everywhere
+          await refetchMarketData();
           break;
         case "PORTFOLIO_CHANGED":
           // Portfolio changed - refetch holdings, cash, transactions + admin team overviews
@@ -422,6 +458,9 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       "MARKET_STATE_CHANGED",
       "PRICES_CHANGED",
       "LEADERBOARD_CHANGED",
+      "STOCK_CREATED",
+      "STOCK_UPDATED",
+      "STOCK_DEACTIVATED",
     ],
     teamEvents: ["PORTFOLIO_CHANGED"],
     onReconcile,
@@ -570,6 +609,21 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
         toast.success(isActive ? "Stock activated" : "Stock deactivated", {
           description: `Stock is now ${isActive ? "active" : "inactive"}`,
         });
+      },
+
+      removeStock: async (stockId: string) => {
+        const { error } = await supabase.rpc("remove_stock", {
+          p_stock_id: stockId,
+        });
+        if (error) {
+          toast.error("Failed to remove stock", { description: error.message });
+          return false;
+        }
+        refetchMarketData();
+        toast.success("Stock removed", {
+          description: "Deleted permanently with all its trades and history.",
+        });
+        return true;
       },
 
       payDividends: async (stockId: string, amountPerShare: number) => {
