@@ -268,17 +268,20 @@ async function resolveCurrentRound(
     return pendingRounds[0] as Round;
   }
 
-  // 3. All rounds completed — default to round 1 (admin can restart it)
-  const { data: firstRound } = await supabase
+  // 3. All rounds completed — surface the LAST completed round so the UI can
+  //    correctly display "Round N Complete" (N = final round, not round 1).
+  const { data: lastCompleted } = await supabase
     .from("rounds")
     .select(
       "id, competition_run_id, round_number, round_type, status, started_at, ends_at, market_status, trading_status, paused_at, accumulated_pause_duration, created_at, updated_at"
     )
     .eq("competition_run_id", competitionRunId)
-    .eq("round_number", 1)
+    .eq("status", "completed")
+    .order("round_number", { ascending: false })
+    .limit(1)
     .single();
 
-  return (firstRound as Round) ?? null;
+  return (lastCompleted as Round) ?? null;
 }
 
 // ---------------------------------------------------------------------------

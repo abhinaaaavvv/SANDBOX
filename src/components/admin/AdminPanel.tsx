@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSandboxStore } from "@/context/SandboxContext";
 import { formatPaise, formatINR, formatPercent, cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -35,7 +35,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { LeaderboardTable } from "@/components/shared/LeaderboardTable";
+import { TeamManager } from "@/components/admin/TeamManager";
 import { Panel, PanelHeader, PanelTitle } from "@/components/ui/panel";
 
 export const AdminPanel: React.FC = () => {
@@ -78,6 +87,14 @@ export const AdminPanel: React.FC = () => {
   const [cashAmount, setCashAmount] = useState<string>("1000");
   const [cashReason, setCashReason] = useState<string>("");
 
+  // Derived selections stay valid once async data arrives.
+  const activeCashTeamId = teams.some((t) => t.id === cashTeamId)
+    ? cashTeamId
+    : teams[0]?.id ?? "";
+  const activeDividendStockId = stocks.some((s) => s.id === dividendStockId)
+    ? dividendStockId
+    : stocks[0]?.id ?? "";
+
   // Stock Management state
   const [showAddStockDialog, setShowAddStockDialog] = useState(false);
   const [showEditStockDialog, setShowEditStockDialog] = useState(false);
@@ -87,6 +104,7 @@ export const AdminPanel: React.FC = () => {
   const [newStockName, setNewStockName] = useState("");
   const [newStockDescription, setNewStockDescription] = useState("");
   const [newStockPrice, setNewStockPrice] = useState("1000");
+  const [editStockSymbol, setEditStockSymbol] = useState("");
   const [editStockName, setEditStockName] = useState("");
   const [editStockDescription, setEditStockDescription] = useState("");
 
@@ -111,14 +129,16 @@ export const AdminPanel: React.FC = () => {
   };
 
   const handleEditStock = async () => {
-    if (!selectedStockForEdit || !editStockName.trim()) {
-      addToast("error", "Invalid Input", "Stock name is required.");
+    if (!selectedStockForEdit || !editStockName.trim() || !editStockSymbol.trim()) {
+      addToast("error", "Invalid Input", "Symbol and stock name are required.");
       return;
     }
     await editStock(selectedStockForEdit.id, {
+      symbol: editStockSymbol.trim().toUpperCase(),
       name: editStockName.trim(),
       description: editStockDescription.trim(),
     });
+    setEditStockSymbol("");
     setEditStockName("");
     setEditStockDescription("");
     setSelectedStockForEdit(null);
@@ -134,6 +154,7 @@ export const AdminPanel: React.FC = () => {
 
   const openEditStockDialog = (stock: { id: string; symbol: string; name: string; description: string; isActive: boolean }) => {
     setSelectedStockForEdit(stock);
+    setEditStockSymbol(stock.symbol);
     setEditStockName(stock.name);
     setEditStockDescription(stock.description);
     setShowEditStockDialog(true);
@@ -180,7 +201,7 @@ export const AdminPanel: React.FC = () => {
   const dispatchDividend = () => {
     const amt = parseFloat(dividendAmount);
     if (Number.isFinite(amt) && amt > 0) {
-      payDividends(dividendStockId, amt);
+      payDividends(activeDividendStockId, amt);
     }
   };
 
@@ -189,8 +210,8 @@ export const AdminPanel: React.FC = () => {
     if (!Number.isFinite(amt) || amt <= 0) return;
     const res =
       kind === "credit"
-        ? creditCash(cashTeamId, amt, cashReason.trim() || undefined)
-        : debitCash(cashTeamId, amt, cashReason.trim() || undefined);
+        ? creditCash(activeCashTeamId, amt, cashReason.trim() || undefined)
+        : debitCash(activeCashTeamId, amt, cashReason.trim() || undefined);
     if (!res.ok) {
       addToast("error", "Cash Adjustment Failed", res.message ?? "Unable to adjust cash.");
       return;
@@ -337,7 +358,7 @@ export const AdminPanel: React.FC = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
                   <Label htmlFor="dividend-stock">Security</Label>
-                  <Select value={dividendStockId} onValueChange={setDividendStockId}>
+                  <Select value={activeDividendStockId} onValueChange={setDividendStockId}>
                     <SelectTrigger id="dividend-stock">
                       <SelectValue placeholder="Select security" />
                     </SelectTrigger>
@@ -410,7 +431,7 @@ export const AdminPanel: React.FC = () => {
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <div className="flex flex-col gap-1.5">
                   <Label htmlFor="cash-team">Team</Label>
-                  <Select value={cashTeamId} onValueChange={setCashTeamId}>
+                  <Select value={activeCashTeamId} onValueChange={setCashTeamId}>
                     <SelectTrigger id="cash-team">
                       <SelectValue placeholder="Select team" />
                     </SelectTrigger>
@@ -636,6 +657,9 @@ export const AdminPanel: React.FC = () => {
         </Panel>
       </div>
 
+      {/* Team Manager */}
+      <TeamManager />
+
       {/* Apply price changes confirmation */}
       <AlertDialog open={showApplyConfirmation} onOpenChange={setShowApplyConfirmation}>
         <AlertDialogContent>
@@ -720,6 +744,140 @@ export const AdminPanel: React.FC = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Add stock dialog */}
+      <Dialog open={showAddStockDialog} onOpenChange={setShowAddStockDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Add Stock</DialogTitle>
+            <DialogDescription>
+              Lists a new security on the market at its opening price and broadcasts it live.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="new-stock-symbol">Symbol</Label>
+                <Input
+                  id="new-stock-symbol"
+                  placeholder="RELIANCE"
+                  value={newStockSymbol}
+                  onChange={(e) => setNewStockSymbol(e.target.value.toUpperCase())}
+                />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="new-stock-price">Opening price (₹)</Label>
+                <NumberInput
+                  id="new-stock-price"
+                  min={1}
+                  value={newStockPrice}
+                  onChange={(e) => setNewStockPrice(e.target.value)}
+                  className="tabular-nums"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="new-stock-name">Company name</Label>
+              <Input
+                id="new-stock-name"
+                placeholder="Reliance Industries Ltd"
+                value={newStockName}
+                onChange={(e) => setNewStockName(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="new-stock-description">Description (optional)</Label>
+              <Input
+                id="new-stock-description"
+                value={newStockDescription}
+                onChange={(e) => setNewStockDescription(e.target.value)}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="secondary" onClick={() => setShowAddStockDialog(false)}>
+              Cancel
+            </Button>
+            <Button variant="buy" onClick={handleAddStock}>
+              Add Stock
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit stock dialog */}
+      <Dialog open={showEditStockDialog} onOpenChange={setShowEditStockDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Edit {selectedStockForEdit?.symbol}</DialogTitle>
+            <DialogDescription>
+              Rename the company, change its ticker symbol, or update the description.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="edit-stock-symbol">Symbol</Label>
+              <Input
+                id="edit-stock-symbol"
+                value={editStockSymbol}
+                onChange={(e) => setEditStockSymbol(e.target.value.toUpperCase())}
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="edit-stock-name">Company name</Label>
+              <Input
+                id="edit-stock-name"
+                value={editStockName}
+                onChange={(e) => setEditStockName(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="edit-stock-description">Description</Label>
+              <Input
+                id="edit-stock-description"
+                value={editStockDescription}
+                onChange={(e) => setEditStockDescription(e.target.value)}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="secondary" onClick={() => setShowEditStockDialog(false)}>
+              Cancel
+            </Button>
+            <Button variant="buy" onClick={handleEditStock}>
+              Save Changes
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Deactivate / reactivate stock confirmation */}
+      <Dialog open={showToggleStockDialog} onOpenChange={setShowToggleStockDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>
+              {selectedStockForEdit?.isActive ? "Deactivate" : "Reactivate"}{" "}
+              {selectedStockForEdit?.symbol}?
+            </DialogTitle>
+            <DialogDescription>
+              {selectedStockForEdit?.isActive
+                ? "The stock disappears from the participant market immediately. Trade history is preserved and it can be reactivated later."
+                : "The stock reappears on the participant market at its current stored price."}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="secondary" onClick={() => setShowToggleStockDialog(false)}>
+              Cancel
+            </Button>
+            <Button
+              variant={selectedStockForEdit?.isActive ? "destructive" : "buy"}
+              onClick={handleToggleStock}
+            >
+              {selectedStockForEdit?.isActive ? "Deactivate" : "Reactivate"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

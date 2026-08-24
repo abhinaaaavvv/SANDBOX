@@ -113,10 +113,23 @@ interface SandboxContextType {
   resumeTrading: () => Promise<void>;
   applyPriceChanges: () => Promise<void>;
   payDividends: (stockId: string, amountPerShare: number) => Promise<void>;
+  // Team Manager (admin)
+  createTeam: (
+    params: { name: string; email: string; password: string; startingCashRupees: number }
+  ) => Promise<{ ok: boolean; message?: string }>;
+  renameTeam: (teamId: string, name: string) => Promise<boolean>;
+  setTeamBlocked: (teamId: string, blocked: boolean) => Promise<void>;
+  removeTeam: (
+    teamId: string,
+    force?: boolean
+  ) => Promise<{ ok: boolean; needsForce?: boolean; message?: string }>;
+  setTeamStartingCash: (teamId: string, amountRupees: number) => Promise<boolean>;
+
+  // Stock Management handlers used by the admin UI
   creditCash: (teamId: string, amount: number, reason?: string) => { ok: boolean; message?: string };
   debitCash: (teamId: string, amount: number, reason?: string) => { ok: boolean; message?: string };
   addStock: (params: { symbol: string; name: string; description: string; currentPrice: number }) => Promise<void>;
-  editStock: (stockId: string, params: { name: string; description: string }) => Promise<void>;
+  editStock: (stockId: string, params: { name: string; description: string; symbol?: string }) => Promise<void>;
   toggleStockActive: (stockId: string, isActive: boolean) => Promise<void>;
   resetCompetition: () => Promise<void>;
 
@@ -243,67 +256,92 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       });
   }, [competitionRunId]);
 
-  // Teams state for admin panel - fetches team overviews
-  const [teams, setTeams] = useState<TeamOverview[]>([]);
-  useEffect(() => {
-    if (!competitionRunId || ctx?.role !== "admin") return;
+  // Teams state for admin panel — live team overviews.
+  // Cash = SUM of ALL cash_ledger entries (authoritative), enriched with
+  // holdings count + dividends received. Portfolio value / P/L are merged
+  // from the server-derived leaderboard below.
+  const [teamBase, setTeamBase] = useState<TeamOverview[]>([]);
+  const buildTeamOverviews = useCallback(async (): Promise<TeamOverview[] | null> => {
+    if (!competitionRunId || ctx?.role !== "admin") return null;
     const supabase = createClient();
-    const fetchTeams = async () => {
-      const { data: cashData } = await supabase
-        .from("cash_ledger")
-        .select("team_id, amount_paise")
-        .eq("competition_run_id", competitionRunId)
-        .eq("entry_type", "initial_capital");
 
-      if (!cashData) return;
+    const { data: ledgerRows, error: ledgerError } = await supabase
+      .from("cash_ledger")
+      .select("team_id, amount_paise")
+      .eq("competition_run_id", competitionRunId);
+    if (ledgerError || !ledgerRows) return null;
 
-      const teamIds = cashData.map((r) => r.team_id);
-      if (teamIds.length === 0) return;
+    const cashByTeam = new Map<string, number>();
+    for (const row of ledgerRows) {
+      cashByTeam.set(row.team_id, (cashByTeam.get(row.team_id) ?? 0) + (row.amount_paise ?? 0));
+    }
+    const teamIds = [...cashByTeam.keys()];
+    if (teamIds.length === 0) return [];
 
-      const { data: teamNames } = await supabase
-        .from("teams")
-        .select("id, name")
-        .in("id", teamIds);
-
-      const nameMap = new Map((teamNames ?? []).map((t) => [t.id, t.name]));
-
-      // Fetch holdings count per team
-      const { data: holdingsData } = await supabase
+    const [{ data: teamNames }, { data: holdingsData }, { data: dividendData }] = await Promise.all([
+      supabase.from("teams").select("id, name, blocked").in("id", teamIds),
+      supabase
         .from("holdings")
         .select("team_id, stock_id")
         .eq("competition_run_id", competitionRunId)
-        .gt("quantity", 0);
-
-      const holdingsCountMap = new Map<string, number>();
-      for (const h of holdingsData ?? []) {
-        holdingsCountMap.set(h.team_id, (holdingsCountMap.get(h.team_id) ?? 0) + 1);
-      }
-
-      // Fetch dividends received per team
-      const { data: dividendData } = await supabase
+        .gt("quantity", 0),
+      supabase
         .from("dividend_payments")
         .select("team_id, total_amount_paise")
-        .eq("competition_run_id", competitionRunId);
+        .eq("competition_run_id", competitionRunId),
+    ]);
 
-      const dividendsMap = new Map<string, number>();
-      for (const d of dividendData ?? []) {
-        dividendsMap.set(d.team_id, (dividendsMap.get(d.team_id) ?? 0) + d.total_amount_paise);
-      }
+    const nameMap = new Map((teamNames ?? []).map((t) => [t.id, t.name]));
 
-      const teamOverviews: TeamOverview[] = cashData.map((row) => ({
-        id: row.team_id,
-        name: nameMap.get(row.team_id) ?? "Unknown Team",
-        cash: row.amount_paise / 100,
-        portfolioValue: 0, // Will be updated by leaderboard
-        profitLoss: 0,
-        holdingsCount: holdingsCountMap.get(row.team_id) ?? 0,
-        dividendsReceived: (dividendsMap.get(row.team_id) ?? 0) / 100,
-      }));
+    const holdingsCountMap = new Map<string, number>();
+    for (const h of holdingsData ?? []) {
+      holdingsCountMap.set(h.team_id, (holdingsCountMap.get(h.team_id) ?? 0) + 1);
+    }
 
-      setTeams(teamOverviews);
-    };
-    fetchTeams();
+    const dividendsMap = new Map<string, number>();
+    for (const d of dividendData ?? []) {
+      dividendsMap.set(d.team_id, (dividendsMap.get(d.team_id) ?? 0) + d.total_amount_paise);
+    }
+
+    return teamIds.map((id) => ({
+      id,
+      name: nameMap.get(id) ?? "Unknown Team",
+      cash: (cashByTeam.get(id) ?? 0) / 100,
+      portfolioValue: 0, // Merged from leaderboard below
+      profitLoss: 0, // Merged from leaderboard below
+      holdingsCount: holdingsCountMap.get(id) ?? 0,
+      dividendsReceived: (dividendsMap.get(id) ?? 0) / 100,
+      blocked: (teamNames ?? []).find((t) => t.id === id)?.blocked ?? false,
+    }));
   }, [competitionRunId, ctx?.role]);
+
+  const refreshTeams = useCallback(async () => {
+    const rows = await buildTeamOverviews();
+    if (rows) setTeamBase(rows);
+  }, [buildTeamOverviews]);
+
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      const rows = await buildTeamOverviews();
+      if (!cancelled && rows) setTeamBase(rows);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [buildTeamOverviews]);
+
+  // Merge authoritative leaderboard-derived portfolio value & P/L into team overviews.
+  const teams = useMemo<TeamOverview[]>(() => {
+    if (teamBase.length === 0) return [];
+    const lbById = new Map(dbLeaderboard.map((e) => [e.teamId, e]));
+    return teamBase.map((t) => {
+      const lb = lbById.get(t.id);
+      return lb
+        ? { ...t, portfolioValue: lb.portfolioValuePaise / 100, profitLoss: lb.pnlPaise / 100 }
+        : t;
+    });
+  }, [teamBase, dbLeaderboard]);
 
   // Refetch rounds helper
   const refetchDbRounds = useCallback(async () => {
@@ -341,11 +379,12 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
           ]);
           break;
         case "PORTFOLIO_CHANGED":
-          // Portfolio changed - refetch holdings, cash, transactions
+          // Portfolio changed - refetch holdings, cash, transactions + admin team overviews
           await Promise.all([
             refetchHoldings(),
             refetchCash(),
             refetchTransactions(),
+            refreshTeams(),
           ]);
           break;
         case "LEADERBOARD_CHANGED":
@@ -354,6 +393,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
             refetchLeaderboard(),
             refetchHoldings(),
             refetchCash(),
+            refreshTeams(),
           ]);
           break;
         default:
@@ -364,11 +404,12 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
             refetchCash(),
             refetchTransactions(),
             refetchLeaderboard(),
+            refreshTeams(),
             competitionCtx.refresh(),
           ]);
       }
     },
-    [refetchMarketData, refetchHoldings, refetchCash, refetchTransactions, refetchLeaderboard, competitionCtx, refetchDbRounds]
+    [refetchMarketData, refetchHoldings, refetchCash, refetchTransactions, refetchLeaderboard, competitionCtx, refetchDbRounds, refreshTeams]
   );
 
   // Realtime event subscriptions via Supabase (Phase 9.8).
@@ -385,6 +426,10 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     teamEvents: ["PORTFOLIO_CHANGED"],
     onReconcile,
   });
+
+  // Pending price changes — local admin-private UI state. Declared before
+  // adminActions because resetCompetition clears it.
+  const [pendingPriceChanges, setPendingPriceChangesState] = useState<PendingPriceChange[]>([]);
 
   // Admin operations via Supabase RPCs (authoritative database mutations)
   const adminActions = useMemo(() => {
@@ -496,16 +541,21 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
         toast.success("Stock added", { description: `${(data as { symbol: string }).symbol} added to market` });
       },
 
-      editStock: async (stockId: string, params: { name: string; description: string }) => {
+      editStock: async (
+        stockId: string,
+        params: { name: string; description: string; symbol?: string }
+      ) => {
         const { error } = await supabase.rpc("rename_stock", {
           p_stock_id: stockId,
           p_new_name: params.name,
+          p_new_symbol: params.symbol?.trim() ? params.symbol.trim().toUpperCase() : null,
         });
         if (error) {
           toast.error("Failed to update stock", { description: error.message });
           return;
         }
-        toast.success("Stock updated", { description: "Stock name saved" });
+        refetchMarketData();
+        toast.success("Stock updated", { description: "Changes saved and broadcast" });
       },
 
       toggleStockActive: async (stockId: string, isActive: boolean) => {
@@ -610,13 +660,136 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       },
 
       resetCompetition: async () => {
-        toast.info("Reset competition", { description: "Competition reset is not yet implemented" });
+        if (!competitionRunId) {
+          toast.error("Reset failed", { description: "No active competition run" });
+          return;
+        }
+        const { error } = await supabase.rpc("reset_competition_run", {
+          p_competition_run_id: competitionRunId,
+        });
+        if (error) {
+          toast.error("Reset failed", { description: error.message });
+          return;
+        }
+        // Clear local admin drafts (pending price changes are admin-private UI state).
+        setPendingPriceChangesState([]);
+        await Promise.all([
+          refetchDbRounds(),
+          refetchMarketData(),
+          refetchHoldings(),
+          refetchCash(),
+          refetchTransactions(),
+          refetchLeaderboard(),
+        ]);
+        await competitionCtx.refresh();
+        toast.success("Competition reset", {
+          description: "All rounds pending · teams re-funded ₹1,00,000",
+        });
+      },
+
+      // ---- Team Manager (admin) ----
+      createTeam: async (params: {
+        name: string;
+        email: string;
+        password: string;
+        startingCashRupees: number;
+      }) => {
+        const { name, email, password, startingCashRupees } = params;
+        try {
+          const res = await fetch("/api/admin/teams", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password, startingCashRupees }),
+          });
+          const json = (await res.json()) as { ok: boolean; message?: string; warning?: string };
+          if (!res.ok || !json.ok) {
+            return { ok: false, message: json.message ?? "Unable to create team." };
+          }
+          await refreshTeams();
+          toast.success("Team created", {
+            description: json.warning ?? `${name} can sign in with the credentials you set.`,
+          });
+          return { ok: true };
+        } catch {
+          return { ok: false, message: "Network error while creating team." };
+        }
+      },
+
+      renameTeam: async (teamId: string, name: string) => {
+        const { error } = await supabase.rpc("rename_team", {
+          p_team_id: teamId,
+          p_new_name: name,
+        });
+        if (error) {
+          toast.error("Rename failed", { description: error.message });
+          return false;
+        }
+        await refreshTeams();
+        toast.success("Team renamed");
+        return true;
+      },
+
+      setTeamBlocked: async (teamId: string, blocked: boolean) => {
+        const { error } = await supabase.rpc("set_team_blocked", {
+          p_team_id: teamId,
+          p_blocked: blocked,
+        });
+        if (error) {
+          toast.error(blocked ? "Block failed" : "Unblock failed", { description: error.message });
+          return;
+        }
+        await refreshTeams();
+        toast.success(blocked ? "Team blocked" : "Team unblocked", {
+          description: blocked
+            ? "They can no longer trade until unblocked."
+            : "Trading re-enabled for this team.",
+        });
+      },
+
+      removeTeam: async (teamId: string, force = false) => {
+        let res: Response;
+        try {
+          res = await fetch("/api/admin/teams", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ teamId, force }),
+          });
+        } catch {
+          return { ok: false, message: "Network error while removing team." };
+        }
+        const json = (await res.json()) as { ok: boolean; message?: string; code?: string };
+        if (!res.ok || !json.ok) {
+          const needsForce = json.code === "TEAM_HAS_HISTORY";
+          return {
+            ok: false,
+            needsForce,
+            message: json.message ?? "Unable to remove team.",
+          };
+        }
+        await refreshTeams();
+        toast.success("Team removed");
+        return { ok: true };
+      },
+
+      setTeamStartingCash: async (teamId: string, amountRupees: number) => {
+        const { error } = await supabase.rpc("set_team_starting_cash", {
+          p_team_id: teamId,
+          p_amount_paise: Math.round(amountRupees * 100),
+        });
+        if (error) {
+          toast.error("Update failed", { description: error.message });
+          return false;
+        }
+        await refreshTeams();
+        toast.success("Starting cash updated", {
+          description: `Baseline set to ₹${amountRupees.toLocaleString("en-IN")}`,
+        });
+        return true;
       },
     };
-  }, [rounds, competitionRunId, refetchMarketData, refetchDbRounds, competitionCtx, ctx, refetchCash, refetchHoldings, refetchLeaderboard]);
+  }, [rounds, competitionRunId, refetchMarketData, refetchDbRounds, competitionCtx, ctx, refetchCash, refetchHoldings, refetchLeaderboard, refreshTeams]);
 
   // Pending price changes — local state (admin-private, never persisted to DB)
-  const [pendingPriceChanges, setPendingPriceChangesState] = useState<PendingPriceChange[]>([]);
 
   const setPendingPriceChange = useCallback((stockId: string, newPrice: number) => {
     const stock = marketStocks.find((s) => s.id === stockId);

@@ -46,7 +46,7 @@ export const ParticipantDashboard: React.FC = () => {
               Competition Not Started
             </span>
             <span className="text-xs text-muted-foreground">
-              Awaiting the administrator to begin Round 1. Prepare your strategy.
+              Awaiting the administrator to begin Round {currentRound}. Prepare your strategy.
             </span>
           </div>
         </div>

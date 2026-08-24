@@ -47,6 +47,8 @@ export interface TeamOverview {
   profitLoss: number;
   holdingsCount: number;
   dividendsReceived: number;
+  /** Blocked teams cannot trade; still visible with a badge. */
+  blocked?: boolean;
 }
 
 export interface CompetitionSnapshot {
