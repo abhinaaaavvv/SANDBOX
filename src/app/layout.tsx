@@ -47,8 +47,17 @@ export default function RootLayout({
     <html
       lang="en"
       className={`dark ${googleSans.variable} ${ebGaramond.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen bg-background text-foreground antialiased">
+      {/* suppressHydrationWarning: browser extensions inject attributes
+          (e.g. __processed_<uuid>__) into <body> before hydration; without
+          this flag every extension user gets a hydration mismatch error.
+          Only affects attributes/children one level deep — real component
+          mismatches still surface normally. */}
+      <body
+        className="min-h-screen bg-background text-foreground antialiased"
+        suppressHydrationWarning
+      >
         <RealtimeProvider>
           <AuthProvider>
             <CompetitionContextProvider>
