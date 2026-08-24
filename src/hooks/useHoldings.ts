@@ -52,6 +52,9 @@ function transformHolding(row: HoldingsRpcRow): Holding {
   };
 }
 
+/** Fallback poll cadence while Realtime is unavailable. */
+const FALLBACK_POLL_MS = 15_000;
+
 export function useHoldings() {
   const { context } = useCompetitionContext();
   const [holdings, setHoldings] = useState<Holding[]>([]);
@@ -138,10 +141,11 @@ export function useHoldings() {
 
   const hasRun = Boolean(competitionRunId);
 
-  // Polling fallback: refetch every 10 seconds while a run is active
+  // Low-frequency fallback poll — never the primary sync mechanism
+    // (Supabase Realtime events drive targeted refetches).
   useEffect(() => {
     if (!competitionRunId || isLoading) return;
-    const id = setInterval(() => fetchHoldings(), 2_000);
+    const id = setInterval(() => fetchHoldings(), FALLBACK_POLL_MS);
     return () => clearInterval(id);
   }, [competitionRunId, isLoading, fetchHoldings]);
 

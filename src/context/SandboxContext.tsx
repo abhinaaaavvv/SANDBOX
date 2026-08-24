@@ -20,7 +20,7 @@ import {
   PendingPriceChange,
   ToastMessage,
 } from "@/types/sandbox";
-import { RealtimeEventPayload, TradeResponseDto } from "@/types/realtime";
+import { TradeResponseDto } from "@/types/realtime";
 import { useAuthoritativeTimer } from "@/hooks/useAuthoritativeTimer";
 import { useMarketData } from "@/hooks/useMarketData";
 import { useHoldings } from "@/hooks/useHoldings";
@@ -142,11 +142,8 @@ interface SandboxContextType {
   executeBuy: (stockId: string, quantity: number) => Promise<TradeResponseDto>;
   executeSell: (stockId: string, quantity: number) => Promise<TradeResponseDto>;
 
-  // View scope (controls pending-price visibility per console)
+  // View scope (kept for AuthGuard API compatibility; role is derived from auth)
   setViewRole: (role: "participant" | "admin" | null) => void;
-
-  // Direct backend sync boundary method
-  syncStateFromBackend: (payload: Partial<RealtimeEventPayload>) => void;
 }
 
 const SandboxContext = createContext<SandboxContextType | undefined>(undefined);
@@ -841,7 +838,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return true;
       },
     };
-  }, [rounds, competitionRunId, refetchMarketData, refetchDbRounds, competitionCtx, ctx, refetchCash, refetchHoldings, refetchLeaderboard, refreshTeams]);
+  }, [rounds, competitionRunId, refetchMarketData, refetchDbRounds, competitionCtx, refetchCash, refetchHoldings, refetchTransactions, refetchLeaderboard, refreshTeams]);
 
   // Pending price changes — local state (admin-private, never persisted to DB)
 
@@ -916,8 +913,9 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
     refetchMarketData();
   }, [competitionRunId, pendingPriceChanges, refetchMarketData]);
 
-  // View role state (kept for API compatibility, not used internally)
-  const [, setViewRoleState] = useState<"participant" | "admin" | null>(null);
+  // View role — role is derived from auth; this is a compatibility no-op
+  // for AuthGuard.
+  const setViewRole = useCallback(() => {}, []);
 
   const value = useMemo<SandboxContextType>(
     () => ({
@@ -975,11 +973,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       // Admin actions — Supabase RPCs (authoritative)
       ...adminActions,
 
-      // View role — local UI state
-      setViewRole: setViewRoleState,
-      syncStateFromBackend: () => {
-        // No-op: realtime events trigger refetches via useRealtimeSync
-      },
+      setViewRole,
 
       // Participant trade actions — real execute_trade() RPC with refetch
       executeBuy: async (stockId: string, quantity: number) => {
@@ -1034,6 +1028,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       refetchHoldings,
       refetchCash,
       refetchTransactions,
+      setViewRole,
     ]
   );
 
@@ -1107,6 +1102,22 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       } else {
         toast.success(`${newTx.type === "BUY" ? "Buy" : "Sell"} executed`, {
           description: `${newTx.quantity} × ${newTx.symbol} @ ₹${newTx.price.toFixed(2)}`,
+        });
+      }
+    }
+
+    // Leaderboard rank change for the viewing team
+    const currentEntry = dbLeaderboard.find((e) => e.isCurrentTeam);
+    const prevCurrent = prevLb.find((e) => e.isCurrentTeam);
+    if (currentEntry && prevCurrent && currentEntry.rank !== prevCurrent.rank) {
+      const delta = prevCurrent.rank - currentEntry.rank;
+      if (delta > 0) {
+        toast.success(`Climbed to rank ${currentEntry.rank}`, {
+          description: `You moved up ${delta} position${delta === 1 ? "" : "s"}`,
+        });
+      } else {
+        toast.info(`Dropped to rank ${currentEntry.rank}`, {
+          description: `You moved down ${Math.abs(delta)} position${delta === -1 ? "" : "s"}`,
         });
       }
     }

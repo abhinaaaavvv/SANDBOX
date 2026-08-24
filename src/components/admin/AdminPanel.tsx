@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSandboxStore } from "@/context/SandboxContext";
 import { formatPaise, formatINR, formatPercent, cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -49,7 +49,6 @@ import { Panel, PanelHeader, PanelTitle } from "@/components/ui/panel";
 
 export const AdminPanel: React.FC = () => {
   const {
-    currentRound,
     roundStatus,
     marketStatusDb,
     tradingStatusDb,

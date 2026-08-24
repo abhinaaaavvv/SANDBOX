@@ -65,6 +65,9 @@ function parseLeaderboardEntries(
   }));
 }
 
+/** Fallback poll cadence while Realtime is unavailable. */
+const FALLBACK_POLL_MS = 15_000;
+
 export function useLeaderboard(): UseLeaderboardResult {
   // Extract competition run ID and user's team ID from the competition context.
   // Must be called from a React component (hook rule).
@@ -138,10 +141,11 @@ export function useLeaderboard(): UseLeaderboardResult {
     return fetchLeaderboard();
   }, [fetchLeaderboard]);
 
-  // Polling fallback: refetch every 10 seconds while a run is active
+  // Low-frequency fallback poll — never the primary sync mechanism
+    // (Supabase Realtime events drive targeted refetches).
   useEffect(() => {
     if (!competitionRunId) return;
-    const id = setInterval(() => fetchLeaderboard(), 2_000);
+    const id = setInterval(() => fetchLeaderboard(), FALLBACK_POLL_MS);
     return () => clearInterval(id);
   }, [competitionRunId, fetchLeaderboard]);
 

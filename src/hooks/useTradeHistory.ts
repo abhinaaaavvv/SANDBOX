@@ -64,6 +64,9 @@ function transformDividend(payment: DbDividendPayment, stockMap: Map<string, Sto
   };
 }
 
+/** Fallback poll cadence while Realtime is unavailable. */
+const FALLBACK_POLL_MS = 15_000;
+
 export function useTradeHistory(stockMap?: Map<string, StockInfo>) {
   const { context } = useCompetitionContext();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -207,10 +210,11 @@ export function useTradeHistory(stockMap?: Map<string, StockInfo>) {
 
   const hasRun = Boolean(competitionRunId);
 
-  // Polling fallback: refetch every 10 seconds while a run is active
+  // Low-frequency fallback poll — never the primary sync mechanism
+    // (Supabase Realtime events drive targeted refetches).
   useEffect(() => {
     if (!hasRun || isLoading) return;
-    const id = setInterval(() => fetchTrades(), 2_000);
+    const id = setInterval(() => fetchTrades(), FALLBACK_POLL_MS);
     return () => clearInterval(id);
   }, [hasRun, isLoading, fetchTrades]);
 

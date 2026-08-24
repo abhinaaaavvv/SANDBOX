@@ -117,6 +117,9 @@ async function fetchAllStocks(
  * // stocks is Stock[] compatible with existing components
  * ```
  */
+/** Fallback poll cadence while Realtime is unavailable. */
+const FALLBACK_POLL_MS = 15_000;
+
 export function useMarketData() {
   const { context } = useCompetitionContext();
   const [stocks, setStocks] = useState<Stock[]>([]);
@@ -190,14 +193,14 @@ export function useMarketData() {
     };
   }, [supabase, competitionRunId, isAdmin]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Polling fallback: refetch market data every 10 seconds while a run is active.
-  // This ensures prices stay fresh even if the Realtime subscription misses an event.
+  // Low-frequency fallback poll — never the primary sync mechanism
+  // (Supabase Realtime events drive targeted refetches).
   useEffect(() => {
     if (!competitionRunId || isLoading) return;
 
     const intervalId = setInterval(() => {
       refetch();
-    }, 2_000);
+    }, FALLBACK_POLL_MS);
 
     return () => clearInterval(intervalId);
   }, [competitionRunId, isLoading, refetch]);
