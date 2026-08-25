@@ -135,6 +135,17 @@ export function getSession(role: AuthRole): boolean {
   return state.ready && !state.loading && state.user !== null && state.role === role;
 }
 
+/**
+ * True once the initial session check has finished (success or failure).
+ * Route guards must wait for this before redirecting, otherwise a
+ * hard load of a console route bounces to login before the session
+ * stored in cookies has been hydrated.
+ */
+export function hasSessionResolved(): boolean {
+  ensureInitialized();
+  return state.ready;
+}
+
 /** Get the full auth state. */
 export function getAuthState(): AuthState {
   ensureInitialized();

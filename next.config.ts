@@ -30,6 +30,12 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  poweredByHeader: false,
+  turbopack: {
+    // Pin module resolution to this project (a stray package-lock.json in
+    // the parent directory otherwise becomes the detected workspace root).
+    root: __dirname,
+  },
   async headers() {
     return [
       {

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Stock } from "@/types/sandbox";
 import { usePriceFlash } from "@/hooks/usePriceFlash";
 import { TrendingUp, TrendingDown } from "lucide-react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import dynamic from "next/dynamic";
 import {
   Table,
   TableBody,
@@ -18,13 +18,23 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Panel, PanelHeader, PanelMeta, PanelTitle } from "@/components/ui/panel";
+import { CHARCOAL_COLORS } from "@/components/participant/AllocationChart";
 
 interface PortfolioSectionProps {
   onTrade: (stock: Stock, mode: "BUY" | "SELL") => void;
 }
 
-// Neutral palette for the allocation pie.
-const CHARCOAL_COLORS = ["#a1a1aa", "#71717a", "#52525b", "#3f3f46", "#d4d4d8", "#27272a"];
+// Chart library is heavy (~100 KB gz) — fetch it only when this panel renders.
+// The slot keeps a fixed h-44 height so loading causes no layout shift.
+const AllocationChart = dynamic(
+  () => import("@/components/participant/AllocationChart"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="skeleton-shimmer size-40 rounded-full self-center" />
+    ),
+  }
+);
 
 const HoldingPrice: React.FC<{ price: number }> = ({ price }) => {
   const flash = usePriceFlash(price);
@@ -162,40 +172,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) =
 
         <div className="my-2 h-44 w-full">
           {holdings.length > 0 ? (
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={40}
-                  outerRadius={65}
-                  paddingAngle={2}
-                  dataKey="value"
-                  stroke="var(--card)"
-                  strokeWidth={1}
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${entry.name}`}
-                      fill={CHARCOAL_COLORS[index % CHARCOAL_COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-                <Tooltip
-                  formatter={(val) => formatINR(Number(val) || 0)}
-                  contentStyle={{
-                    backgroundColor: "#0a0a0b",
-                    border: "1px solid #1c1c1f",
-                    borderRadius: "6px",
-                    color: "#fafafa",
-                    fontSize: "12px",
-                    fontFamily: "var(--font-sans)",
-                  }}
-                  itemStyle={{ color: "#e4e4e7" }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
+            <AllocationChart chartData={chartData} />
           ) : (
             <div className="font-bodoni flex h-full items-center justify-center text-sm italic text-muted-foreground">
               No allocation data

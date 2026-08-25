@@ -10,6 +10,24 @@ import { NextResponse, type NextRequest } from "next/server";
  * - Protected routes can be validated server-side
  */
 export async function updateSession(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
+  // Protected routes that require authentication
+  const isProtectedRoute =
+    pathname.startsWith("/participant") || pathname.startsWith("/admin");
+
+  // Login routes (not protected)
+  const isLoginRoute =
+    pathname === "/participant/login" || pathname === "/admin/login";
+
+  // Public routes never make an auth decision here, so skip the Supabase
+  // client entirely — getUser() is a network round-trip to Supabase Auth
+  // that would otherwise sit on the TTFB of every public page.
+  // (Client-side sign-in/refresh still runs through supabase-js directly.)
+  if (!isProtectedRoute || isLoginRoute) {
+    return NextResponse.next();
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   });
@@ -42,19 +60,8 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Protected routes that require authentication
-  const pathname = request.nextUrl.pathname;
-  const isProtectedRoute =
-    pathname.startsWith("/participant") ||
-    pathname.startsWith("/admin");
-
-  // Login routes (not protected)
-  const isLoginRoute =
-    pathname === "/participant/login" ||
-    pathname === "/admin/login";
-
   // If accessing a protected route without auth, redirect to the appropriate login
-  if (isProtectedRoute && !isLoginRoute && !user) {
+  if (!user) {
     const url = request.nextUrl.clone();
     if (pathname.startsWith("/admin")) {
       url.pathname = "/admin/login";

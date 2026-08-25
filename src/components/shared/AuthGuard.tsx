@@ -4,6 +4,7 @@ import React, { useEffect, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import {
   getSession,
+  hasSessionResolved,
   subscribeToSession,
   isIntentionalSignOut,
   type AuthRole,
@@ -41,14 +42,23 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ role, children }) => {
     () => getSession(role),
     () => false
   );
+  // The initial session check is async (cookie hydration + profile lookup).
+  // Redirect only once it has resolved — otherwise a hard load of a console
+  // route bounces to login before the session is known, and the old
+  // "recover if the session lands in time" race decides the outcome.
+  const sessionResolved = useSyncExternalStore(
+    subscribeToSession,
+    hasSessionResolved,
+    () => false
+  );
 
   useEffect(() => {
     // A user-initiated sign-out routes to the landing page via the shell;
     // only an *unexpected* session loss bounces to the role's login page.
-    if (!authed && !isIntentionalSignOut()) {
+    if (sessionResolved && !authed && !isIntentionalSignOut()) {
       router.replace(LOGIN_PATHS[role]);
     }
-  }, [authed, role, router]);
+  }, [sessionResolved, authed, role, router]);
 
   // Tell the mock engine which console is viewing state so admin-private data
   // (pending price changes) is filtered out of participant snapshots.

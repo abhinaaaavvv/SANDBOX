@@ -1498,3 +1498,13 @@ Fast Refresh requires at least one parent function component in your React tree.
 [10595361ms] [LOG] [Fast Refresh] done in 269ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
 [10597551ms] [LOG] [Fast Refresh] done in 269ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
 [10600939ms] [LOG] [Fast Refresh] done in 269ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10781331ms] [LOG] [Fast Refresh] done in 269ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10786220ms] [LOG] [Fast Refresh] done in 269ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10915525ms] [LOG] [Fast Refresh] done in 269ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[11111641ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AEMjOnLWqI1zDeJzM0fd9' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[11112647ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AEMjOnLWqI1zDeJzM0fd9' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[11113650ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AEMjOnLWqI1zDeJzM0fd9' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[11114653ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AEMjOnLWqI1zDeJzM0fd9' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[11115654ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AEMjOnLWqI1zDeJzM0fd9' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[11120661ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AEMjOnLWqI1zDeJzM0fd9' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[11125669ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=AEMjOnLWqI1zDeJzM0fd9' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256

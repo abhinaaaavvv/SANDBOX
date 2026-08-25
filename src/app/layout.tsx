@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda } from "next/font/google";
 import localFont from "next/font/local";
-import { SandboxProvider } from "@/context/SandboxContext";
-import { RealtimeProvider } from "@/lib/realtime";
-import { AuthProvider } from "@/lib/auth-context";
-import { CompetitionContextProvider } from "@/lib/competition-context";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -16,13 +10,16 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
  *   Primary   — Google Sans: the entire application UI.
  *   Editorial — Bodoni Moda: wordmark, view titles, panel headings and
  *               major statements. The serif voice of the brand.
+ *
+ * Note: console providers (Supabase auth/realtime/sandbox stores) live in
+ * components/shared/ConsoleProviders.tsx, mounted only by the participant
+ * and admin (console) layouts — public routes stay JS-light.
  */
 const googleSans = localFont({
   src: [
     { path: "./fonts/google-sans-400.woff2", weight: "400", style: "normal" },
     { path: "./fonts/google-sans-500.woff2", weight: "500", style: "normal" },
     { path: "./fonts/google-sans-600.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/google-sans-700.woff2", weight: "700", style: "normal" },
   ],
   variable: "--font-google-sans",
   display: "swap",
@@ -59,18 +56,7 @@ export default function RootLayout({
         className="min-h-screen bg-background text-foreground antialiased"
         suppressHydrationWarning
       >
-        <RealtimeProvider>
-          <AuthProvider>
-            <CompetitionContextProvider>
-              <SandboxProvider>
-                <TooltipProvider>
-                  {children}
-                  <Toaster />
-                </TooltipProvider>
-              </SandboxProvider>
-            </CompetitionContextProvider>
-          </AuthProvider>
-        </RealtimeProvider>
+        {children}
         <Analytics />
         <SpeedInsights />
       </body>
