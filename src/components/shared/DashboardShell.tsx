@@ -209,9 +209,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
           </div>
           <div className="relative h-full overflow-y-auto scroll-smooth">
             <div className="mx-auto max-w-[1700px] p-4 md:p-6 lg:p-8">
-              <div key={activeId} className="animate-page-enter">
-                {children}
-              </div>
+              {children}
             </div>
           </div>
         </main>

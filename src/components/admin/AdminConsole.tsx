@@ -53,16 +53,19 @@ export const AdminConsole: React.FC = () => {
       activeId={section}
       onNavigate={(id) => setSection(id as SectionId)}
     >
-      {section === "competition" && <CompetitionSection />}
-      {section === "prices" && <PriceEditorSection />}
-      {section === "stocks" && <StocksSection />}
-      {section === "ledger" && (
-        <div className="space-y-5">
-          <LedgerSection />
-          <DividendsSection />
-        </div>
-      )}
-      {section === "teams" && <TeamManager />}
+      {/* Active section — only this region transitions on switch */}
+      <div key={section} className="animate-page-enter">
+        {section === "competition" && <CompetitionSection />}
+        {section === "prices" && <PriceEditorSection />}
+        {section === "stocks" && <StocksSection />}
+        {section === "ledger" && (
+          <div className="space-y-5">
+            <LedgerSection />
+            <DividendsSection />
+          </div>
+        )}
+        {section === "teams" && <TeamManager />}
+      </div>
     </DashboardShell>
   );
 };

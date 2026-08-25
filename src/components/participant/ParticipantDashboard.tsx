@@ -140,8 +140,9 @@ export const ParticipantDashboard: React.FC = () => {
           </div>
         )}
 
-        {/* Active section */}
-        {section === "market" && (
+        {/* Active section — only this region transitions on switch */}
+        <div key={section} className="animate-page-enter">
+          {section === "market" && (
           <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
             <div className="min-w-0 xl:col-span-8">
               <MarketTable onTrade={openTrade} />
@@ -171,6 +172,7 @@ export const ParticipantDashboard: React.FC = () => {
         )}
 
         {section === "transactions" && <TransactionHistory />}
+        </div>
       </div>
 
       {/* Trade modal */}

@@ -30,8 +30,16 @@ export const CompetitionContextGuard: React.FC<CompetitionContextGuardProps> = (
   const { isLoading, error, errorDetail, refresh, isRefreshing } =
     useCompetitionContext();
 
+  // Hold the branded interstitial on screen for a beat — context often
+  // resolves faster than the eye can register the loading state.
+  const [minLoaderElapsed, setMinLoaderElapsed] = React.useState(false);
+  React.useEffect(() => {
+    const t = window.setTimeout(() => setMinLoaderElapsed(true), 1200);
+    return () => window.clearTimeout(t);
+  }, []);
+
   // Loading state
-  if (isLoading) {
+  if (isLoading || !minLoaderElapsed) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-7 px-6">
         <span className="font-bodoni animate-page-enter text-4xl font-semibold tracking-tight text-foreground select-none">
