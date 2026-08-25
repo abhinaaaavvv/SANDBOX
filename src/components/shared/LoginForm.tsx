@@ -71,10 +71,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
 
       <main className="flex flex-1 items-center justify-center px-6">
         <div className="w-full max-w-sm">
-          <p className="mb-2 text-xs font-medium tracking-wide text-muted-foreground">
+          <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
             {mode === "admin" ? "Administrator Access" : "Team Access"}
           </p>
-          <h1 className="font-bodoni mb-8 text-3xl font-semibold tracking-tight text-foreground">
+          <h1 className="font-bodoni mb-8 text-4xl font-medium tracking-tight text-foreground">
             {title}
           </h1>
 
@@ -120,8 +120,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
             </Button>
           </form>
 
-          <div className="mt-6 text-center text-xs text-muted-foreground">
-            <p>Access is provisioned by the competition administrator.</p>
+          <div className="mt-6 text-center">
+            <p className="font-bodoni text-xs italic text-muted-foreground">
+              Access is provisioned by the competition administrator.
+            </p>
           </div>
         </div>
       </main>

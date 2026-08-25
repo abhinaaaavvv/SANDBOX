@@ -145,7 +145,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) =
 
             {holdings.length === 0 && (
               <TableRow className="hover:bg-transparent">
-                <TableCell colSpan={7} className="py-8 text-center text-muted-foreground">
+                <TableCell colSpan={7} className="font-bodoni py-8 text-center text-sm italic text-muted-foreground">
                   No active holdings in portfolio
                 </TableCell>
               </TableRow>
@@ -197,7 +197,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) =
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+            <div className="font-bodoni flex h-full items-center justify-center text-sm italic text-muted-foreground">
               No allocation data
             </div>
           )}

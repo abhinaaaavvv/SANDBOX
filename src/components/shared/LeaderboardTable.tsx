@@ -45,7 +45,7 @@ export const LeaderboardTable: React.FC = () => {
     <Panel>
       <PanelHeader>
         <PanelTitle>Live Leaderboard</PanelTitle>
-        <PanelMeta>Ranked by portfolio value</PanelMeta>
+        <PanelMeta>By portfolio value</PanelMeta>
       </PanelHeader>
 
       <Table>
@@ -69,7 +69,7 @@ export const LeaderboardTable: React.FC = () => {
               >
                 <TableCell
                   className={cn(
-                    "text-center font-semibold tabular-nums",
+                    "font-bodoni text-center text-base font-semibold",
                     isUser ? "text-foreground" : "text-muted-foreground"
                   )}
                 >

@@ -116,7 +116,7 @@ export const TeamManager: React.FC = () => {
           <TableBody>
             {teams.length === 0 && (
               <TableRow>
-                <TableCell colSpan={6} className="py-6 text-center text-sm text-muted-foreground">
+                <TableCell colSpan={6} className="font-bodoni py-6 text-center text-sm italic text-muted-foreground">
                   No funded teams yet.
                 </TableCell>
               </TableRow>

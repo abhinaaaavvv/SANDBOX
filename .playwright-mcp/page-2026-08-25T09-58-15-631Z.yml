@@ -1,0 +1,175 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e31]:
+    - complementary [ref=f2e32]:
+      - generic [ref=f2e34]:
+        - generic [ref=f2e35]: SANDBOX
+        - generic [ref=f2e36]: Live Market
+      - navigation [ref=f2e37]:
+        - generic [ref=f2e38]: Workspace
+        - button "Market Desk" [ref=f2e39]
+        - button "Holdings" [ref=f2e45]
+        - button "Leaderboard" [ref=f2e51]
+        - button "Transactions" [ref=f2e60]
+      - generic [ref=f2e65]:
+        - generic [ref=f2e66]:
+          - generic [ref=f2e67]: Team
+          - generic [ref=f2e68]: Test Alpha 1
+        - button "Sign Out" [ref=f2e69]
+    - generic [ref=f2e74]:
+      - banner [ref=f2e75]:
+        - generic [ref=f2e76]: Market Desk
+        - generic [ref=f2e78]:
+          - generic [ref=f2e79]:
+            - generic [ref=f2e80]: Team
+            - generic [ref=f2e81]: Test Alpha 1
+          - generic [ref=f2e82]: Round 01
+          - generic [ref=f2e83]: Not Started
+          - generic [ref=f2e84]: "--:--"
+      - main [ref=f2e89]:
+        - generic [ref=f2e91]:
+          - generic [ref=f2e96]:
+            - generic [ref=f2e97]: Competition Not Started
+            - text: Awaiting the administrator to begin Round 1. Prepare your strategy.
+          - generic [ref=f2e98]:
+            - generic [ref=f2e99]:
+              - generic [ref=f2e100]: Cash Available
+              - generic [ref=f2e101]: ₹1,00,000
+              - generic [ref=f2e102]: Liquid capital for order execution
+            - generic [ref=f2e103]:
+              - generic [ref=f2e104]: Portfolio Value
+              - generic [ref=f2e105]: ₹1,00,000
+              - generic [ref=f2e106]: Cash + active market positions
+            - generic [ref=f2e107]:
+              - generic [ref=f2e108]: Total Profit / Loss
+              - generic [ref=f2e109]: +₹0
+              - generic [ref=f2e113]: 0.00% vs ₹1,00,000 base
+          - generic [ref=f2e114]:
+            - generic [ref=f2e116]:
+              - generic [ref=f2e117]:
+                - generic [ref=f2e118]:
+                  - generic [ref=f2e119]: Market Securities
+                  - generic [ref=f2e120]: (6 securities)
+                - textbox "Search securities" [ref=f2e125]:
+                  - /placeholder: Search ticker or name…
+              - table [ref=f2e127]:
+                - rowgroup [ref=f2e128]:
+                  - row [ref=f2e129]:
+                    - columnheader [ref=f2e130] [cursor=pointer]:
+                      - button "Security" [ref=f2e131]
+                    - columnheader [ref=f2e135] [cursor=pointer]:
+                      - button "Price" [ref=f2e136]
+                    - columnheader [ref=f2e140] [cursor=pointer]:
+                      - button "Change" [ref=f2e141]
+                    - columnheader "Owned" [ref=f2e145]
+                    - columnheader "Action" [ref=f2e146]
+                - rowgroup [ref=f2e147]:
+                  - row [ref=f2e148]:
+                    - cell "HDFCBANK HDFC Bank Ltd" [ref=f2e149]:
+                      - generic [ref=f2e150]:
+                        - generic [ref=f2e151]: HDFCBANK
+                        - generic [ref=f2e152]: HDFC Bank Ltd
+                    - cell "₹1,463.00" [ref=f2e153]
+                    - cell "N/A" [ref=f2e154]
+                    - cell "—" [ref=f2e155]
+                    - cell [ref=f2e156]:
+                      - generic [ref=f2e157]:
+                        - button "Buy" [disabled]
+                        - button "Sell" [disabled]
+                  - row [ref=f2e158]:
+                    - cell "ICICIBANK ICICI Bank Ltd" [ref=f2e159]:
+                      - generic [ref=f2e160]:
+                        - generic [ref=f2e161]: ICICIBANK
+                        - generic [ref=f2e162]: ICICI Bank Ltd
+                    - cell "₹1,225.00" [ref=f2e163]
+                    - cell "N/A" [ref=f2e164]
+                    - cell "—" [ref=f2e165]
+                    - cell [ref=f2e166]:
+                      - generic [ref=f2e167]:
+                        - button "Buy" [disabled]
+                        - button "Sell" [disabled]
+                  - row [ref=f2e168]:
+                    - cell "INFY Infosys Ltd" [ref=f2e169]:
+                      - generic [ref=f2e170]:
+                        - generic [ref=f2e171]: INFY
+                        - generic [ref=f2e172]: Infosys Ltd
+                    - cell "₹1,597.00" [ref=f2e173]
+                    - cell "N/A" [ref=f2e174]
+                    - cell "—" [ref=f2e175]
+                    - cell [ref=f2e176]:
+                      - generic [ref=f2e177]:
+                        - button "Buy" [disabled]
+                        - button "Sell" [disabled]
+                  - row [ref=f2e178]:
+                    - cell "RELIANCE Reliance Industries Ltd" [ref=f2e179]:
+                      - generic [ref=f2e180]:
+                        - generic [ref=f2e181]: RELIANCE
+                        - generic [ref=f2e182]: Reliance Industries Ltd
+                    - cell "₹2,492.00" [ref=f2e183]
+                    - cell "N/A" [ref=f2e184]
+                    - cell "—" [ref=f2e185]
+                    - cell [ref=f2e186]:
+                      - generic [ref=f2e187]:
+                        - button "Buy" [disabled]
+                        - button "Sell" [disabled]
+                  - row [ref=f2e188]:
+                    - cell "SBIN State Bank of India" [ref=f2e189]:
+                      - generic [ref=f2e190]:
+                        - generic [ref=f2e191]: SBIN
+                        - generic [ref=f2e192]: State Bank of India
+                    - cell "₹1,036.00" [ref=f2e193]
+                    - cell "N/A" [ref=f2e194]
+                    - cell "—" [ref=f2e195]
+                    - cell [ref=f2e196]:
+                      - generic [ref=f2e197]:
+                        - button "Buy" [disabled]
+                        - button "Sell" [disabled]
+                  - row [ref=f2e198]:
+                    - cell "TCS Tata Consultancy Services Ltd" [ref=f2e199]:
+                      - generic [ref=f2e200]:
+                        - generic [ref=f2e201]: TCS
+                        - generic [ref=f2e202]: Tata Consultancy Services Ltd
+                    - cell "₹1,423.00" [ref=f2e203]
+                    - cell "N/A" [ref=f2e204]
+                    - cell "—" [ref=f2e205]
+                    - cell [ref=f2e206]:
+                      - generic [ref=f2e207]:
+                        - button "Buy" [disabled]
+                        - button "Sell" [disabled]
+            - generic [ref=f2e209]:
+              - generic [ref=f2e210]:
+                - generic [ref=f2e211]: Live Leaderboard
+                - generic [ref=f2e212]: Ranked by portfolio value
+              - table [ref=f2e214]:
+                - rowgroup [ref=f2e215]:
+                  - row [ref=f2e216]:
+                    - columnheader "Rank" [ref=f2e217]
+                    - columnheader "Team" [ref=f2e218]
+                    - columnheader "Portfolio Value" [ref=f2e219]
+                    - columnheader "Total P/L" [ref=f2e220]
+                - rowgroup [ref=f2e221]:
+                  - row [ref=f2e222]:
+                    - cell "1" [ref=f2e223]
+                    - cell "Test Alpha 2" [ref=f2e224]
+                    - cell "₹1,00,000" [ref=f2e227]
+                    - cell "+₹0 (0.00%)" [ref=f2e228]
+                  - row [ref=f2e230]:
+                    - cell "2" [ref=f2e231]
+                    - cell "Test Alpha 1 You" [ref=f2e232]:
+                      - generic [ref=f2e233]:
+                        - generic [ref=f2e234]: Test Alpha 1
+                        - generic [ref=f2e235]: You
+                    - cell "₹1,00,000" [ref=f2e236]
+                    - cell "+₹0 (0.00%)" [ref=f2e237]
+                  - row [ref=f2e239]:
+                    - cell "3" [ref=f2e240]
+                    - cell "Test Beta 1" [ref=f2e241]
+                    - cell "₹1,00,000" [ref=f2e244]
+                    - cell "+₹0 (0.00%)" [ref=f2e245]
+                  - row [ref=f2e247]:
+                    - cell "4" [ref=f2e248]
+                    - cell "Test Beta 2" [ref=f2e249]
+                    - cell "₹1,00,000" [ref=f2e252]
+                    - cell "+₹0 (0.00%)" [ref=f2e253]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f2e27] [cursor=pointer]
+  - alert [ref=f2e255]: SANDBOX

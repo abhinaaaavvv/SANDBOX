@@ -80,7 +80,9 @@ export const TradeModal: React.FC<TradeModalProps> = ({ stock, mode, onClose }) 
             <Badge variant={mode === "BUY" ? "buy" : "sell"}>
               {mode === "BUY" ? "Buy" : "Sell"} order
             </Badge>
-            <DialogTitle className="text-base">{liveStock.symbol}</DialogTitle>
+            <DialogTitle className="font-bodoni text-lg font-semibold tracking-wide">
+              {liveStock.symbol}
+            </DialogTitle>
             <span className="text-xs text-muted-foreground">{liveStock.name}</span>
           </div>            <DialogDescription className="sr-only">
             {mode} order for {liveStock.symbol}

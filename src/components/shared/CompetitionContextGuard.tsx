@@ -50,10 +50,10 @@ export const CompetitionContextGuard: React.FC<CompetitionContextGuardProps> = (
       <div className="flex min-h-screen items-center justify-center px-6">
         <div className="w-full max-w-md space-y-4 text-center">
           <CompetitionErrorIcon error={error} />
-          <h2 className="text-lg font-semibold text-foreground">
+          <h2 className="font-bodoni text-2xl font-semibold tracking-wide text-foreground">
             <CompetitionErrorTitle error={error} />
           </h2>
-          <p className="text-sm text-muted-foreground">
+          <p className="font-bodoni text-sm italic text-muted-foreground">
             <CompetitionErrorMessage error={error} role={role} />
           </p>
           {errorDetail && (

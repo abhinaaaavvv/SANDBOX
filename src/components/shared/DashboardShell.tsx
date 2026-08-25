@@ -70,7 +70,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
         {/* Wordmark */}
         <div className="flex h-[60px] items-center justify-center border-b border-sidebar-border px-4 lg:justify-start">
           {/* Compact monogram on the icon rail */}
-          <span className="font-bodoni text-lg font-semibold tracking-wide text-foreground select-none lg:hidden">
+          <span className="font-bodoni text-lg font-semibold italic tracking-wide text-foreground select-none lg:hidden">
             SB
           </span>
           <div className="hidden flex-col items-center lg:flex lg:flex-row lg:items-baseline lg:gap-2.5">
@@ -159,7 +159,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
         {/* Topbar — competition-critical strip */}
         <header className="flex h-[60px] shrink-0 items-center justify-between gap-4 border-b border-border bg-background px-4 lg:px-8">
           <div className="flex min-w-0 items-center gap-3">
-            <span className="truncate text-sm font-medium text-muted-foreground">
+            <span className="truncate font-bodoni text-lg font-semibold italic tracking-wide text-foreground">
               {activeLabel}
             </span>
             {isAdmin && pendingPriceChanges.length > 0 && (
@@ -178,7 +178,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
             )}
 
             <span className="hidden rounded-md border border-border bg-card px-2.5 py-1.5 text-xs font-medium tabular-nums text-muted-foreground sm:block">
-              {roundLabel}
+              <span className="font-bodoni italic">{roundLabel}</span>
             </span>
 
             <MarketStatusBadge status={marketStatus} />

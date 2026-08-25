@@ -23,12 +23,12 @@ export const Stat: React.FC<StatProps> = ({
 }) => {
   return (
     <div className={cn("p-5 md:p-6", className)}>
-      <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
+      <span className="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
         {label}
       </span>
       <div
         className={cn(
-          "flex items-center gap-2 text-2xl font-semibold tracking-tight tabular-nums lg:text-3xl",
+          "flex items-baseline gap-2 font-bodoni text-[1.65rem] font-medium leading-none tracking-normal lg:text-4xl",
           positive === true ? "text-up" : positive === false ? "text-down" : "text-foreground"
         )}
       >

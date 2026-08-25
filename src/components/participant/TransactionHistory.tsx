@@ -70,7 +70,7 @@ export const TransactionHistory: React.FC = () => {
 
           {transactions.length === 0 && (
             <TableRow className="hover:bg-transparent">
-              <TableCell colSpan={6} className="py-8 text-center text-muted-foreground">
+              <TableCell colSpan={6} className="font-bodoni py-8 text-center text-sm italic text-muted-foreground">
                 No transactions logged
               </TableCell>
             </TableRow>

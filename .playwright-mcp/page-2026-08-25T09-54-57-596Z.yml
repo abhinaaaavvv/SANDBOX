@@ -1,0 +1,24 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e2]:
+    - banner [ref=f2e3]:
+      - link "SANDBOX" [ref=f2e4] [cursor=pointer]:
+        - /url: /
+      - link "Back" [ref=f2e5] [cursor=pointer]:
+        - /url: /
+    - main [ref=f2e8]:
+      - generic [ref=f2e9]:
+        - paragraph [ref=f2e10]: Team Access
+        - heading "Participant Login" [level=1] [ref=f2e11]
+        - generic [ref=f2e12]:
+          - generic [ref=f2e13]:
+            - generic [ref=f2e14]: Email
+            - textbox "Email" [ref=f2e15]:
+              - /placeholder: you@college.edu
+          - generic [ref=f2e16]:
+            - generic [ref=f2e17]: Password
+            - textbox "Password" [ref=f2e18]:
+              - /placeholder: ••••••••
+          - button "Sign In" [ref=f2e19]
+        - paragraph [ref=f2e21]: Access is provisioned by the competition administrator.
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f2e27] [cursor=pointer]

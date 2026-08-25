@@ -32,7 +32,7 @@ function PanelTitle({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       data-slot="panel-title"
-      className={cn("text-sm font-semibold text-foreground", className)}
+      className={cn("font-bodoni text-lg font-semibold whitespace-nowrap text-foreground", className)}
       {...props}
     />
   );

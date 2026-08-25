@@ -210,7 +210,9 @@ function StateBanner({
     >
       {icon}
       <div>
-        <span className={`block font-medium ${titleClass}`}>{title}</span>
+        <span className={`font-bodoni block text-base font-semibold tracking-wide ${titleClass}`}>
+          {title}
+        </span>
         <span className="text-xs text-muted-foreground">{description}</span>
       </div>
     </div>
