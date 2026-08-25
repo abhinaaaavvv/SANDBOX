@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EB_Garamond } from "next/font/google";
+import { Bodoni_Moda } from "next/font/google";
 import localFont from "next/font/local";
 import { SandboxProvider } from "@/context/SandboxContext";
 import { RealtimeProvider } from "@/lib/realtime";
@@ -14,7 +14,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 /**
  * Type system:
  *   Primary   — Google Sans: the entire application UI.
- *   Editorial — EB Garamond: wordmark, view titles, panel headings and
+ *   Editorial — Bodoni Moda: wordmark, view titles, panel headings and
  *               major statements. The serif voice of the brand.
  */
 const googleSans = localFont({
@@ -28,9 +28,9 @@ const googleSans = localFont({
   display: "swap",
 });
 
-const ebGaramond = EB_Garamond({
+const bodoniModa = Bodoni_Moda({
   subsets: ["latin"],
-  variable: "--font-eb-garamond",
+  variable: "--font-bodoni",
   display: "swap",
 });
 
@@ -47,7 +47,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${googleSans.variable} ${ebGaramond.variable}`}
+      className={`dark ${googleSans.variable} ${bodoniModa.variable}`}
       suppressHydrationWarning
     >
       {/* suppressHydrationWarning: browser extensions inject attributes

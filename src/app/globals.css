@@ -9,7 +9,7 @@
     --font-sans: var(--font-google-sans), ui-sans-serif, system-ui, sans-serif;
     /* No intentional monospace family — mono aliases the primary sans stack. */
     --font-mono: var(--font-google-sans), ui-sans-serif, system-ui, sans-serif;
-    --font-serif: var(--font-eb-garamond), Georgia, serif;
+    --font-serif: var(--font-bodoni), Georgia, serif;
   }
   * {
     @apply border-border outline-ring/50;
@@ -134,9 +134,9 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* EB Garamond editorial utility (brand, homepage hero, major statements only) */
-@utility font-garamond {
-  font-family: var(--font-eb-garamond), Georgia, serif;
+/* Bodoni Moda editorial utility (brand, homepage hero, major statements only) */
+@utility font-bodoni {
+  font-family: var(--font-bodoni), Georgia, serif;
 }
 
 /* ---- SANDBOX theme tokens ---- */

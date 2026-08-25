@@ -919,7 +919,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   // View role — role is derived from auth; this is a compatibility no-op
   // for AuthGuard.
-  const setViewRole = useCallback(() => {}, []);
+  const setViewRole = useCallback(() => { }, []);
 
   const value = useMemo<SandboxContextType>(
     () => ({

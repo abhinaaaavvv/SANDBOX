@@ -56,7 +56,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
       <header className="flex items-center justify-between border-b border-border px-6 py-4 lg:px-10">
         <Link
           href="/"
-          className="font-garamond text-xl font-semibold tracking-tight text-foreground select-none"
+          className="font-bodoni text-xl font-semibold tracking-tight text-foreground select-none"
         >
           SANDBOX
         </Link>
@@ -74,7 +74,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
           <p className="mb-2 text-xs font-medium tracking-wide text-muted-foreground">
             {mode === "admin" ? "Administrator Access" : "Team Access"}
           </p>
-          <h1 className="font-garamond mb-8 text-3xl font-semibold tracking-tight text-foreground">
+          <h1 className="font-bodoni mb-8 text-3xl font-semibold tracking-tight text-foreground">
             {title}
           </h1>
 

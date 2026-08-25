@@ -1,0 +1,114 @@
+[     566ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     782ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1218ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19307
+[    1315ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19569
+[    1436ms] [LOG] [Vercel Web Analytics] Failed to load script from https://va.vercel-scripts.com/v1/script.debug.js. Please check if any ad blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1437ms] [LOG] [Vercel Speed Insights] Failed to load script from https://va.vercel-scripts.com/v1/speed-insights/script.debug.js. Please check if any content blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    5516ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[    6329ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[   59317ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   61046ms] [LOG] [Fast Refresh] done in 1637ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   61061ms] [LOG] [Fast Refresh] done in 1637ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   62868ms] [LOG] [Fast Refresh] done in 1637ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  117121ms] [LOG] [Fast Refresh] done in 1637ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  117439ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  117501ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  117836ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19307
+[  117860ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19569
+[  117929ms] [LOG] [Vercel Web Analytics] Failed to load script from https://va.vercel-scripts.com/v1/script.debug.js. Please check if any ad blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  117931ms] [LOG] [Vercel Speed Insights] Failed to load script from https://va.vercel-scripts.com/v1/speed-insights/script.debug.js. Please check if any content blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  118039ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[  118706ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[  293726ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=TcHiIKQ3pGPNUub9oYNHT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[  294729ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=TcHiIKQ3pGPNUub9oYNHT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[  295734ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=TcHiIKQ3pGPNUub9oYNHT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[  297257ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  299767ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  299818ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  300409ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19307
+[  300419ms] [LOG] [Vercel Web Analytics] Failed to load script from https://va.vercel-scripts.com/v1/script.debug.js. Please check if any ad blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  300444ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19569
+[  300449ms] [LOG] [Vercel Speed Insights] Failed to load script from https://va.vercel-scripts.com/v1/speed-insights/script.debug.js. Please check if any content blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  300834ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[  301606ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[ 1164062ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1165040ms] [LOG] [Fast Refresh] done in 1019ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1165084ms] [LOG] [Fast Refresh] done in 1019ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1166948ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1168337ms] [LOG] [Fast Refresh] done in 1490ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1168712ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1169223ms] [LOG] [Fast Refresh] done in 611ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1169528ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/admin?_rsc=ufW3TLmERVKPyyJ1:0
+[ 1169732ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/admin:0
+[ 1170171ms] [ERROR] Refused to execute script from 'http://localhost:3000/_next/static/development/_clientMiddlewareManifest.js' because its MIME type ('application/json') is not executable, and strict MIME type checking is enabled. @ http://localhost:3000/admin:0
+[ 1170380ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1170529ms] ReferenceError: EB_Garamond is not defined
+    at Module.eval (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/_1af5gvr._.js?id=%5Bproject%5D/src/app/layout.tsx+%5Bapp-rsc%5D+(ecmascript):32:20)
+    at <unknown> (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:1330:27)
+    at runWithHooks (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:1592:9)
+    at instantiateModuleShared (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:1328:9)
+    at instantiateModule (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:1595:23)
+    at getOrInstantiateModuleFromParent (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:1631:23)
+    at Context.esmImport [as i] (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:352:20)
+    at module evaluation (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[root-of-the-server]__0rhwt07._.js:243:47)
+    at <unknown> (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:1330:27)
+    at runWithHooks (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:1592:9)
+    at instantiateModuleShared (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:1328:9)
+    at instantiateModule (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:1595:23)
+    at getOrInstantiateModuleFromParent (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:1631:23)
+    at Context.commonJsRequire [as r] (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/[turbopack]_runtime.js:373:12)
+    at Array.<anonymous> (file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/node_modules_next_dist_1e0lv37._.js:1591:302)
+    at createFlightRouterStateFromLoaderTreeImpl (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/compiled/next-server/app-page-turbo.runtime.dev.js:166:9816)
+    at createFlightRouterStateFromLoaderTree (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/compiled/next-server/app-page-turbo.runtime.dev.js:166:12066)
+    at walkTreeWithFlightRouterState (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/compiled/next-server/app-page-turbo.runtime.dev.js:168:51150)
+    at generateDynamicRSCPayload (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/compiled/next-server/app-page-turbo.runtime.dev.js:172:25051)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at generateDynamicFlightRenderResult (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/compiled/next-server/app-page-turbo.runtime.dev.js:172:28118)
+    at renderToHTMLOrFlightImpl (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/compiled/next-server/app-page-turbo.runtime.dev.js:173:2730)
+[ 1170519ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1186381ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1186844ms] [LOG] [Fast Refresh] done in 466ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1186926ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/admin:0
+[ 1187130ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1187307ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1187525ms] ReferenceError: ebGaramond is not defined
+    at RootLayout (about://React/Server/file:///home/abhinav/dev/SANDBOX/.next/dev/server/chunks/ssr/%255Broot-of-the-server%255D__08x8884._.js?id=%255Bproject%255D/src/app/layout.tsx+%255Bapp-rsc%255D+(ecmascript)?0:41:181)
+    at resolveErrorDev (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:1937:105)
+    at processFullStringRow (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2456:29)
+    at processFullBinaryRow (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2415:9)
+    at processBinaryChunk (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2524:221)
+    at progress (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2711:13)
+[ 1187570ms] TypeError: Failed to execute 'measure' on 'Performance': '​RootLayout' cannot have a negative time stamp.
+    at flushComponentPerformance (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2206:45)
+    at flushComponentPerformance (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2178:31)
+    at flushInitialRenderPerformance (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2368:74)
+[ 1194560ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1194680ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1195035ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1195113ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1195915ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19307
+[ 1195920ms] [LOG] [Vercel Web Analytics] Failed to load script from https://va.vercel-scripts.com/v1/script.debug.js. Please check if any ad blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1195965ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19569
+[ 1195969ms] [LOG] [Vercel Speed Insights] Failed to load script from https://va.vercel-scripts.com/v1/speed-insights/script.debug.js. Please check if any content blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1196394ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[ 1197159ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[ 1204072ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1204510ms] [LOG] [Fast Refresh] done in 495ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1207175ms] [LOG] [Fast Refresh] done in 495ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1209974ms] [LOG] [Fast Refresh] done in 495ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1214160ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1214230ms] [LOG] [Fast Refresh] done in 113ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1226638ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1229361ms] [LOG] [Fast Refresh] done in 2794ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1229464ms] [LOG] [Fast Refresh] done in 2794ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1231128ms] [LOG] [Fast Refresh] done in 2794ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1259796ms] [LOG] [Fast Refresh] done in 2794ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1259861ms] [LOG] [Fast Refresh] done in 2794ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1262521ms] [LOG] [Fast Refresh] done in 2794ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1377768ms] [LOG] [Fast Refresh] done in 2794ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1379739ms] [LOG] [Fast Refresh] done in 2794ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1395032ms] [LOG] [Fast Refresh] done in 2794ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1396963ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1396989ms] [LOG] [Fast Refresh] done in 127ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1431804ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1432145ms] [LOG] [Fast Refresh] done in 442ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

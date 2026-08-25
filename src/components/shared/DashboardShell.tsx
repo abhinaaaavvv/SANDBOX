@@ -70,11 +70,11 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
         {/* Wordmark */}
         <div className="flex h-[60px] items-center justify-center border-b border-sidebar-border px-4 lg:justify-start">
           {/* Compact monogram on the icon rail */}
-          <span className="font-garamond text-lg font-semibold tracking-wide text-foreground select-none lg:hidden">
+          <span className="font-bodoni text-lg font-semibold tracking-wide text-foreground select-none lg:hidden">
             SB
           </span>
           <div className="hidden flex-col items-center lg:flex lg:flex-row lg:items-baseline lg:gap-2.5">
-            <span className="font-garamond text-xl font-semibold tracking-wide text-foreground select-none">
+            <span className="font-bodoni text-xl font-semibold tracking-wide text-foreground select-none">
               SANDBOX
             </span>
             <span className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">

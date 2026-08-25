@@ -9,7 +9,7 @@ export const LandingPage: React.FC = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="flex items-center justify-between border-b border-border px-6 py-4 lg:px-10">
-        <span className="font-garamond text-xl font-semibold tracking-tight text-foreground select-none">
+        <span className="font-bodoni text-xl font-semibold tracking-tight text-foreground select-none">
           SANDBOX
         </span>
         <span className="text-xs text-muted-foreground">Live Market Simulation</span>
@@ -27,7 +27,7 @@ export const LandingPage: React.FC = () => {
           <p className="mb-4 text-xs font-medium tracking-wide text-muted-foreground">
             Business Club Competition
           </p>
-          <h1 className="font-garamond mb-6 text-6xl font-medium tracking-tight text-foreground md:text-7xl lg:text-8xl">
+          <h1 className="font-bodoni mb-6 text-6xl font-medium tracking-tight text-foreground md:text-7xl lg:text-8xl">
             SANDBOX
           </h1>
           <Separator className="mb-6 max-w-[15rem] md:max-w-[18rem] lg:max-w-sm" />

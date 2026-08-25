@@ -56,6 +56,13 @@ export const PriceEditorSection: React.FC = () => {
       }
       return { ...prev, [stockId]: val };
     });
+
+    // Typing or stepping a price queues it immediately — same behaviour as
+    // the shock buttons, so the Pending badge and ✕ always appear together.
+    const parsed = parseFloat(val);
+    if (Number.isFinite(parsed) && parsed > 0) {
+      setPendingPriceChange(stockId, parsed);
+    }
   };
 
   const savePendingPrice = (stockId: string) => {
@@ -92,15 +99,15 @@ export const PriceEditorSection: React.FC = () => {
           )}
         </PanelHeader>
 
-        <Table>
+        <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead>Security</TableHead>
-              <TableHead className="text-right">Current</TableHead>
-              <TableHead className="text-center">Shocks</TableHead>
-              <TableHead className="text-right">New Price</TableHead>
-              <TableHead className="text-center">Status</TableHead>
-              <TableHead className="text-right">Save</TableHead>
+              <TableHead className="w-[22%]">Security</TableHead>
+              <TableHead className="w-[13%] text-right">Current</TableHead>
+              <TableHead className="w-[34%] text-center">Shocks</TableHead>
+              <TableHead className="w-[13%] text-right">New Price</TableHead>
+              <TableHead className="w-[8%] text-center">Status</TableHead>
+              <TableHead className="w-[10%] text-right">Save</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -122,15 +129,27 @@ export const PriceEditorSection: React.FC = () => {
                     </TableCell>
 
                     <TableCell className="text-center">
-                      <div className="flex items-center justify-center gap-1">
+                      <div className="flex flex-wrap items-center justify-center gap-1">
                         <Button variant="sell" size="xs" onClick={() => applyPresetShift(stock.id, -10)}>
                           -10%
+                        </Button>
+                        <Button variant="sell" size="xs" onClick={() => applyPresetShift(stock.id, -8)}>
+                          -8%
                         </Button>
                         <Button variant="sell" size="xs" onClick={() => applyPresetShift(stock.id, -5)}>
                           -5%
                         </Button>
+                        <Button variant="sell" size="xs" onClick={() => applyPresetShift(stock.id, -2)}>
+                          -2%
+                        </Button>
+                        <Button variant="buy" size="xs" onClick={() => applyPresetShift(stock.id, 2)}>
+                          +2%
+                        </Button>
                         <Button variant="buy" size="xs" onClick={() => applyPresetShift(stock.id, 5)}>
                           +5%
+                        </Button>
+                        <Button variant="buy" size="xs" onClick={() => applyPresetShift(stock.id, 8)}>
+                          +8%
                         </Button>
                         <Button variant="buy" size="xs" onClick={() => applyPresetShift(stock.id, 10)}>
                           +10%
