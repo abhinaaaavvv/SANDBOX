@@ -1,0 +1,18 @@
+- generic [active] [ref=f23e1]:
+  - generic [ref=f23e4]:
+    - generic: ₹
+    - banner [ref=f23e5]:
+      - generic [ref=f23e6]: SANDBOX
+      - generic [ref=f23e7]: Live Market Simulation
+    - main [ref=f23e8]:
+      - generic [ref=f23e9]:
+        - paragraph [ref=f23e10]: Business Club Competition
+        - heading "SANDBOX" [level=1] [ref=f23e11]
+        - paragraph [ref=f23e13]: A live market simulation across three timed rounds — build your portfolio, read the paper, call the moves.
+        - generic [ref=f23e14]:
+          - link "Participant Login" [ref=f23e15] [cursor=pointer]:
+            - /url: /participant/login
+          - link "Admin Sign In" [ref=f23e16] [cursor=pointer]:
+            - /url: /admin/login
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f23e22] [cursor=pointer]

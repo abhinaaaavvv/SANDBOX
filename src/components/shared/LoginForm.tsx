@@ -53,15 +53,15 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-hidden">
-      {/* Ghosted rupee — quieter sibling of the landing masthead mark */}
+      {/* Ghosted rupee — quiet printer's mark, identical to the landing page */}
       <span
         aria-hidden
-        className="ghost-glyph -right-10 bottom-0 hidden text-[22rem] md:block"
+        className="ghost-glyph -bottom-16 -right-8 hidden text-[24rem] md:block"
       >
         ₹
       </span>
 
-      <header className="flex items-center justify-between border-b border-border px-6 py-4 lg:px-10">
+      <header className="animate-page-enter flex items-center justify-between border-b border-border px-6 py-4 lg:px-10">
         <Link
           href="/"
           className="rise-in font-bodoni text-xl font-semibold tracking-tight text-foreground select-none"
@@ -77,7 +77,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ mode }) => {
         </Link>
       </header>
 
-      <main className="flex flex-1 items-center justify-center px-6">
+      <main className="animate-page-enter flex flex-1 items-center justify-center px-6">
         <div className="rise-in w-full max-w-sm" style={{ "--rise-delay": "0.08s" } as React.CSSProperties}>
           <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
             {mode === "admin" ? "Administrator Access" : "Team Access"}

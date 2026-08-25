@@ -187,8 +187,24 @@ export async function signIn(
   return { ok: true, role };
 }
 
+/**
+ * Set while a user-initiated sign-out is in flight, so the route guards
+ * skip their "session ended → go to login" redirect (the shell takes the
+ * user to the landing page instead).
+ */
+let intentionalSignOut = false;
+
+export function isIntentionalSignOut(): boolean {
+  return intentionalSignOut;
+}
+
+export function clearIntentionalSignOut(): void {
+  intentionalSignOut = false;
+}
+
 export async function signOut(): Promise<void> {
   ensureInitialized();
+  intentionalSignOut = true;
 
   const supabase = createClient();
   await supabase.auth.signOut();

@@ -2,7 +2,12 @@
 
 import React, { useEffect, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
-import { getSession, subscribeToSession, type AuthRole } from "@/lib/auth";
+import {
+  getSession,
+  subscribeToSession,
+  isIntentionalSignOut,
+  type AuthRole,
+} from "@/lib/auth";
 import { useSandboxStore } from "@/context/SandboxContext";
 
 interface AuthGuardProps {
@@ -38,7 +43,9 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ role, children }) => {
   );
 
   useEffect(() => {
-    if (!authed) {
+    // A user-initiated sign-out routes to the landing page via the shell;
+    // only an *unexpected* session loss bounces to the role's login page.
+    if (!authed && !isIntentionalSignOut()) {
       router.replace(LOGIN_PATHS[role]);
     }
   }, [authed, role, router]);

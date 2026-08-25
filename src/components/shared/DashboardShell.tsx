@@ -1,10 +1,14 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { LogOut, type LucideIcon } from "lucide-react";
 import { useSandboxStore } from "@/context/SandboxContext";
 import { formatTime, cn } from "@/lib/utils";
-import { signOut } from "@/lib/auth";
+import {
+  signOut,
+  clearIntentionalSignOut,
+} from "@/lib/auth";
 import { MarketStatusBadge } from "@/components/ui/status-badge";
 import { Badge } from "@/components/ui/badge";
 import { Clock3 } from "lucide-react";
@@ -54,17 +58,23 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
     pendingPriceChanges,
   } = useSandboxStore();
 
+  const router = useRouter();
   const isAdmin = role === "admin";
   const hasLiveTimer = serverEndTimestamp != null && roundStatus === "active";
   const isTimerCritical = timerSeconds <= 60 && timerSeconds > 0;
   const roundLabel = `Round ${String(currentRound).padStart(2, "0")}`;
 
   const handleSignOut = () => {
-    void signOut();
+    // Sign out, then take the user to the landing page. The auth guard
+    // skips its login redirect while an intentional sign-out is in flight.
+    void signOut().then(() => {
+      router.replace("/");
+      clearIntentionalSignOut();
+    });
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background text-foreground">
+    <div className="animate-page-enter flex h-screen overflow-hidden bg-background text-foreground">
       {/* ── Sidebar ─────────────────────────────────────────────── */}
       <aside className="flex w-[68px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar transition-[width] duration-200 lg:w-[248px]">
         {/* Wordmark */}
@@ -203,7 +213,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
         {/* Scrollable content region with ghost editorial glyph behind */}
         <main className="relative min-h-0 flex-1">
           <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-            <span className="ghost-glyph -top-14 right-0 text-[24rem] lg:-right-8">
+            <span className="ghost-glyph -bottom-16 right-0 text-[24rem] lg:-right-8">
               {activeLabel.charAt(0)}
             </span>
           </div>

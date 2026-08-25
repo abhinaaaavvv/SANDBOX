@@ -176,3 +176,15 @@ Import traces:
 [ 1397181ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
 [ 1398214ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
 [ 1398315ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[ 2641736ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2642364ms] [LOG] [Fast Refresh] done in 726ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2642447ms] [LOG] [Fast Refresh] done in 726ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2642581ms] [LOG] [Fast Refresh] done in 726ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2644394ms] [LOG] [Fast Refresh] done in 726ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2648914ms] [LOG] [Fast Refresh] done in 726ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2650826ms] [LOG] [Fast Refresh] done in 726ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2660580ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2660849ms] [LOG] [Fast Refresh] done in 271ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2661396ms] [LOG] [Fast Refresh] done in 271ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2661481ms] [LOG] [Fast Refresh] done in 271ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2663454ms] [LOG] [Fast Refresh] done in 271ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

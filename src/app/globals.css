@@ -157,7 +157,7 @@
   font-style: italic;
   font-weight: 500;
   line-height: 1;
-  color: color-mix(in srgb, var(--foreground) 8%, transparent);
+  color: color-mix(in srgb, var(--foreground) 11%, transparent);
   pointer-events: none;
   user-select: none;
   -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 72%);
