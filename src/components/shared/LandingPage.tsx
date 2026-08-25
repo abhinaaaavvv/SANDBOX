@@ -7,20 +7,26 @@ import { Separator } from "@/components/ui/separator";
 
 export const LandingPage: React.FC = () => {
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen flex-col overflow-hidden">
       {/* Ghosted rupee mark — a printer's ornament behind the masthead */}
       <span
         aria-hidden
-        className="font-bodoni pointer-events-none absolute -right-16 top-1/2 hidden select-none text-[26rem] font-medium italic leading-none text-foreground/4 md:block"
+        className="ghost-glyph -right-20 top-1/2 hidden -translate-y-1/2 text-[30rem] md:block"
       >
         ₹
       </span>
 
       <header className="flex items-center justify-between border-b border-border px-6 py-4 lg:px-10">
-        <span className="font-bodoni text-xl font-semibold tracking-tight text-foreground select-none">
+        <span
+          className="rise-in font-bodoni text-xl font-semibold tracking-tight text-foreground select-none"
+          style={{ "--rise-delay": "0.5s" } as React.CSSProperties}
+        >
           SANDBOX
         </span>
-        <span className="font-bodoni text-sm italic text-muted-foreground">
+        <span
+          className="rise-in font-bodoni text-sm italic text-muted-foreground"
+          style={{ "--rise-delay": "0.56s" } as React.CSSProperties}
+        >
           Live Market Simulation
         </span>
       </header>
@@ -34,21 +40,41 @@ export const LandingPage: React.FC = () => {
       */}
       <main className="flex flex-1 items-center justify-center px-6">
         <div className="w-fit text-left">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          <p
+            className="rise-in mb-4 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground"
+            style={{ "--rise-delay": "0.05s" } as React.CSSProperties}
+          >
             Business Club Competition
           </p>
-          <h1 className="font-bodoni mb-5 text-7xl font-medium tracking-tight text-foreground md:text-8xl lg:text-9xl">
+          <h1
+            className="rise-in font-bodoni mb-5 text-7xl font-medium tracking-tight text-foreground md:text-8xl lg:text-9xl"
+            style={{ "--rise-delay": "0.12s" } as React.CSSProperties}
+          >
             SANDBOX
           </h1>
-          <Separator className="mb-5 max-w-[15rem] md:max-w-[20rem] lg:max-w-md" />
-          {/*<p className="font-bodoni mb-2 max-w-[17rem] text-xl font-medium italic leading-snug text-foreground/90 md:max-w-[22rem] lg:max-w-lg lg:text-2xl">
+          <div
+            className="rise-in"
+            style={{ "--rise-delay": "0.2s" } as React.CSSProperties}
+          >
+            <Separator className="mb-5 max-w-60 md:max-w-[20rem] lg:max-w-md" />
+          </div>
+          <p
+            className="rise-in font-bodoni mb-2 max-w-68 text-xl font-medium italic leading-snug text-foreground/90 md:max-w-88 lg:max-w-lg lg:text-2xl"
+            style={{ "--rise-delay": "0.27s" } as React.CSSProperties}
+          >
             Where teams trade, react, and compete.
-          </p>*/}
-          <p className="mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground">
+          </p>
+          <p
+            className="rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+            style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+          >
             A live market simulation across three timed rounds — build your
             portfolio, read the paper, call the moves.
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <div
+            className="rise-in flex flex-col gap-3 sm:flex-row"
+            style={{ "--rise-delay": "0.42s" } as React.CSSProperties}
+          >
             <Button size="lg" asChild>
               <Link href="/participant/login">Participant Login</Link>
             </Button>
@@ -59,7 +85,10 @@ export const LandingPage: React.FC = () => {
         </div>
       </main>
 
-      <footer className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tracking-[0.14em] text-muted-foreground lg:px-10">
+      <footer
+        className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tracking-[0.14em] text-muted-foreground lg:px-10"
+        style={{ "--rise-delay": "0.55s" } as React.CSSProperties}
+      >
         <span>
           Round <span className="font-bodoni text-xs normal-case italic">01</span> — Portfolio Building
         </span>

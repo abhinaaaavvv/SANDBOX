@@ -73,6 +73,50 @@
   }
 }
 
+/* Route / section entrance */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered element reveal */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Indeterminate loader */
+@keyframes loader-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
 @layer utilities {
   .price-flash-up {
     animation: sandbox-flash-up 0.7s ease-out;
@@ -82,6 +126,53 @@
   }
   .rank-move {
     animation: sandbox-rank-move 0.9s ease-out;
+  }
+  .animate-page-enter {
+    animation: page-enter 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .rise-in {
+    opacity: 0;
+    animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--rise-delay, 0s);
+  }
+  .skeleton-shimmer {
+    background: linear-gradient(
+      110deg,
+      var(--muted) 8%,
+      color-mix(in srgb, var(--foreground) 7%, var(--muted)) 18%,
+      var(--muted) 33%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+  .loader-bar {
+    animation: loader-slide 1.2s ease-in-out infinite;
+  }
+}
+
+/* Ghost editorial glyph — the printer's mark that floats behind each page */
+@utility ghost-glyph {
+  position: absolute;
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1;
+  color: color-mix(in srgb, var(--foreground) 8%, transparent);
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 72%);
+  mask-image: radial-gradient(ellipse at center, black 25%, transparent 72%);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

@@ -267,3 +267,929 @@
 [ 3405015ms] [LOG] [Fast Refresh] done in 159ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
 [ 3405124ms] [LOG] [Fast Refresh] done in 159ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
 [ 3405462ms] [LOG] [Fast Refresh] done in 159ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4360871ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4361003ms] [LOG] [Fast Refresh] done in 198ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4398542ms] [LOG] [Fast Refresh] done in 198ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4400578ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4404531ms] [LOG] [Fast Refresh] done in 4044ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4404664ms] [LOG] [Fast Refresh] done in 4044ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4413688ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4413707ms] [LOG] [Fast Refresh] done in 118ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4768321ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4768912ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4771395ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4784465ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4786444ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4787747ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4792278ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4854186ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4863209ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4864906ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4868043ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4869496ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4869679ms] [LOG] [Fast Refresh] done in 136ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4869988ms] [LOG] [Fast Refresh] done in 136ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4871932ms] [LOG] [Fast Refresh] done in 136ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4873721ms] [LOG] [Fast Refresh] done in 136ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4876151ms] [LOG] [Fast Refresh] done in 136ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4876710ms] [LOG] [Fast Refresh] done in 136ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4877130ms] [LOG] [Fast Refresh] done in 136ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4879761ms] [LOG] [Fast Refresh] done in 136ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4883121ms] [LOG] [Fast Refresh] done in 136ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4884000ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4884196ms] [LOG] [Fast Refresh] done in 13ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4897251ms] [LOG] [Fast Refresh] done in 13ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4899652ms] [LOG] [Fast Refresh] done in 13ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4900819ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4900970ms] [LOG] [Fast Refresh] done in 179ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4901047ms] [LOG] [Fast Refresh] done in 179ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4910353ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4910662ms] [LOG] [Fast Refresh] done in 301ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4912382ms] [LOG] [Fast Refresh] done in 301ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4914944ms] [LOG] [Fast Refresh] done in 301ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4918061ms] [LOG] [Fast Refresh] done in 301ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4937912ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4938263ms] [LOG] [Fast Refresh] done in 367ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4940272ms] [LOG] [Fast Refresh] done in 367ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4956967ms] [LOG] [Fast Refresh] done in 367ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4960685ms] [LOG] [Fast Refresh] done in 367ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4966177ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4966819ms] [LOG] [Fast Refresh] done in 591ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4969487ms] [LOG] [Fast Refresh] done in 591ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4973887ms] [LOG] [Fast Refresh] done in 591ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4975544ms] [LOG] [Fast Refresh] done in 591ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4976512ms] [LOG] [Fast Refresh] done in 591ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4979255ms] [LOG] [Fast Refresh] done in 591ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5047167ms] [LOG] [Fast Refresh] done in 591ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5050937ms] [LOG] [Fast Refresh] done in 591ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5052108ms] [LOG] [Fast Refresh] done in 591ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5055582ms] [LOG] [Fast Refresh] done in 591ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5060132ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5060239ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5060286ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5060679ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5074854ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5076576ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5081070ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5084466ms] [LOG] [Fast Refresh] done in 147ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5106772ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5107083ms] [LOG] [Fast Refresh] done in 317ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5107223ms] [LOG] [Fast Refresh] done in 317ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5107398ms] [LOG] [Fast Refresh] done in 317ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5108876ms] [LOG] [Fast Refresh] done in 317ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5145345ms] [LOG] [Fast Refresh] done in 317ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5146396ms] [LOG] [Fast Refresh] done in 317ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5151432ms] [LOG] [Fast Refresh] done in 317ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5154655ms] [LOG] [Fast Refresh] done in 317ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5198785ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5199197ms] [LOG] [Fast Refresh] done in 372ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5200885ms] [LOG] [Fast Refresh] done in 372ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5220440ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5220468ms] [LOG] [Fast Refresh] done in 94ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5280699ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5281086ms] [LOG] [Fast Refresh] done in 330ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5282728ms] [LOG] [Fast Refresh] done in 330ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5298082ms] [LOG] [Fast Refresh] done in 330ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5300797ms] [LOG] [Fast Refresh] done in 330ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5304628ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5305075ms] [LOG] [Fast Refresh] done in 400ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5305201ms] [LOG] [Fast Refresh] done in 400ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5307207ms] [LOG] [Fast Refresh] done in 400ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5310977ms] [LOG] [Fast Refresh] done in 400ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5328660ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5329099ms] [LOG] [Fast Refresh] done in 384ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5329181ms] [LOG] [Fast Refresh] done in 384ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5331450ms] [LOG] [Fast Refresh] done in 384ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5409794ms] [LOG] [Fast Refresh] done in 384ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5411879ms] [LOG] [Fast Refresh] done in 384ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5500191ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5501637ms] [LOG] [Fast Refresh] done in 1525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5501839ms] [LOG] [Fast Refresh] done in 1525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5503691ms] [LOG] [Fast Refresh] done in 1525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5504788ms] [LOG] [Fast Refresh] done in 1525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5506145ms] [LOG] [Fast Refresh] done in 1525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5517174ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5518532ms] [ERROR] ./src/components/shared/LandingPage.tsx:66:13
+Error: Expected '</', got 'jsx text'
+  64 |           
+  65 |           Where teams trade, react, and compete.
+> 66 |         </p>
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 67 |            <p
+     | ^^^^^^^^^^^
+  68 |           className="rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+  69 |           style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+  70 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:66:13
+  64 |           
+  65 |           Where teams trade, react, and compete.
+> 66 |         </p>
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 67 |            <p
+     | ^^^^^^^^^^^
+  68 |           className="rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+  69 |           style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+  70 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5518932ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5519491ms] [ERROR] ./src/components/shared/LandingPage.tsx:66:13
+Error: Expected '</', got 'jsx text'
+  64 |           
+  65 |           Where teams trade, react, and compete.
+> 66 |         </p>
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 67 |            <p
+     | ^^^^^^^^^^^
+  68 |           className="rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+  69 |           style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+  70 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:66:13
+  64 |           
+  65 |           Where teams trade, react, and compete.
+> 66 |         </p>
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 67 |            <p
+     | ^^^^^^^^^^^
+  68 |           className="rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+  69 |           style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+  70 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5519610ms] [ERROR] ./src/components/shared/LandingPage.tsx:66:13
+Error: Expected '</', got 'jsx text'
+  64 |           
+  65 |           Where teams trade, react, and compete.
+> 66 |         </p>
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 67 |            <p
+     | ^^^^^^^^^^^
+  68 |           className="rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+  69 |           style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+  70 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:66:13
+  64 |           
+  65 |           Where teams trade, react, and compete.
+> 66 |         </p>
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 67 |            <p
+     | ^^^^^^^^^^^
+  68 |           className="rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+  69 |           style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+  70 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5528615ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5528645ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5539810ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5542161ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5550267ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5550378ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5550467ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5550629ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5551099ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5551300ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5551347ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5551463ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5551552ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5557831ms] [ERROR] ./src/components/shared/LandingPage.tsx:68:1
+Error: Expected '</', got 'string literal'
+  66 |           </p>
+  67 |           <p
+> 68 | "rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  69 |           style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+  70 |           >
+  71 |           A live market simulation across three timed rounds — build your
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:68:1
+  66 |           </p>
+  67 |           <p
+> 68 | "rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  69 |           style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+  70 |           >
+  71 |           A live market simulation across three timed rounds — build your
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5557877ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5567044ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+  84 |           </div>
+  85 |         </div>
+> 86 |        ain>
+     |           ^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |        ain>
+     |           ^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5567045ms] [ERROR] ./src/components/shared/LandingPage.tsx:104:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  102 |     </div>
+  103 |   );
+> 104 | };
+      | ^
+  105 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:104:1
+  102 |     </div>
+  103 |   );
+> 104 | };
+      | ^
+  105 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5567103ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5569987ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5570029ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5574832ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5613122ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5613270ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5613346ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5613362ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5613601ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5613667ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5617443ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 5650699ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=y3mKP8j1dJNJgeeJdp9A6' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5651702ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=y3mKP8j1dJNJgeeJdp9A6' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5652704ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=y3mKP8j1dJNJgeeJdp9A6' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5653707ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=y3mKP8j1dJNJgeeJdp9A6' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5654710ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=y3mKP8j1dJNJgeeJdp9A6' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5660416ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5665100ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/admin/login:0
+[ 5665609ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 5665932ms] [ERROR] Refused to execute script from 'http://localhost:3000/_next/static/development/_clientMiddlewareManifest.js' because its MIME type ('application/json') is not executable, and strict MIME type checking is enabled. @ http://localhost:3000/admin/login:0
+[ 5665989ms] Error: ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx
+
+
+    at <unknown> (Error: ./src/components/shared/LandingPage.tsx:86:11)
+    at <unknown> (./src/components/shared/LandingPage.tsx:86:11)
+    at Object.getCompilationErrors (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1410:59)
+    at DevBundlerService.getCompilationError (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/lib/dev-bundler-service.js:59:55)
+    at DevServer.getCompilationError (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/next-dev-server.js:754:42)
+    at DevServer.findPageComponents (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/next-dev-server.js:724:43)
+    at async DevServer.renderErrorToResponseImpl (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/base-server.js:1828:26)
+[ 5665972ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 5665989ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 5666154ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 5666516ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 5666648ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 5666688ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 5744036ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 5745212ms] [LOG] [Fast Refresh] done in 1275ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 5745765ms] [LOG] [Fast Refresh] done in 1275ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 5746153ms] [LOG] [Fast Refresh] done in 1275ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 5746598ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5746842ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5747152ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5747387ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19307
+[ 5747395ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19569
+[ 5747400ms] [LOG] [Vercel Web Analytics] Failed to load script from https://va.vercel-scripts.com/v1/script.debug.js. Please check if any ad blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5747409ms] [LOG] [Vercel Speed Insights] Failed to load script from https://va.vercel-scripts.com/v1/speed-insights/script.debug.js. Please check if any content blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5747496ms] [LOG] [Fast Refresh] done in 477ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5805774ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5806776ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5807778ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5808780ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5809784ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5814790ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5819796ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5825631ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5830678ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5835684ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5840691ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=kug-V1Wz-rztmGEsG-8uT' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5845706ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5849256ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5849448ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5849978ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19307
+[ 5849982ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19569
+[ 5849985ms] [LOG] [Vercel Web Analytics] Failed to load script from https://va.vercel-scripts.com/v1/script.debug.js. Please check if any ad blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5849985ms] [LOG] [Vercel Speed Insights] Failed to load script from https://va.vercel-scripts.com/v1/speed-insights/script.debug.js. Please check if any content blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5850348ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5851699ms] [LOG] [Fast Refresh] done in 1451ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5878646ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=-5RgQE1noLaJtHAkP6BxC' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js:16256
+[ 5880380ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5881789ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5881847ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5882024ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19307
+[ 5882028ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19569
+[ 5882034ms] [LOG] [Vercel Web Analytics] Failed to load script from https://va.vercel-scripts.com/v1/script.debug.js. Please check if any ad blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 5882035ms] [LOG] [Vercel Speed Insights] Failed to load script from https://va.vercel-scripts.com/v1/speed-insights/script.debug.js. Please check if any content blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6085470ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6086485ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6086575ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6086578ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6089199ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6118739ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6122009ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6124091ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6128357ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6402180ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6404542ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6406127ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6407866ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6415943ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6419026ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6420932ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6425149ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6427698ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 6546130ms] [LOG] [Fast Refresh] done in 1103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

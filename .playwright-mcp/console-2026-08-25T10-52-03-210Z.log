@@ -1,0 +1,410 @@
+[     103ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[     204ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[     246ms] [ERROR] Refused to execute script from 'http://localhost:3000/_next/static/development/_clientMiddlewareManifest.js' because its MIME type ('application/json') is not executable, and strict MIME type checking is enabled. @ http://localhost:3000/:0
+[     256ms] Error: ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx
+
+
+    at <unknown> (Error: ./src/components/shared/LandingPage.tsx:86:11)
+    at <unknown> (./src/components/shared/LandingPage.tsx:86:11)
+    at Object.getCompilationErrors (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1410:59)
+    at DevBundlerService.getCompilationError (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/lib/dev-bundler-service.js:59:55)
+    at DevServer.getCompilationError (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/next-dev-server.js:754:42)
+    at DevServer.findPageComponents (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/next-dev-server.js:724:43)
+    at async DevServer.renderErrorToResponseImpl (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/base-server.js:1828:26)
+[     258ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[     268ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[     352ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[     568ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[     631ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[    4410ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   37660ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[   38662ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[   39664ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[   40668ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[   41671ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[   47373ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[   52027ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[   52280ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[   52346ms] Error: ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx
+
+
+    at <unknown> (Error: ./src/components/shared/LandingPage.tsx:86:11)
+    at <unknown> (./src/components/shared/LandingPage.tsx:86:11)
+    at Object.getCompilationErrors (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1410:59)
+    at DevBundlerService.getCompilationError (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/lib/dev-bundler-service.js:59:55)
+    at DevServer.getCompilationError (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/next-dev-server.js:754:42)
+    at DevServer.findPageComponents (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/next-dev-server.js:724:43)
+    at async DevServer.renderErrorToResponseImpl (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/base-server.js:1828:26)
+[   52365ms] [ERROR] Refused to execute script from 'http://localhost:3000/_next/static/development/_clientMiddlewareManifest.js' because its MIME type ('application/json') is not executable, and strict MIME type checking is enabled. @ http://localhost:3000/:0
+[   52406ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[   52526ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   52563ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   52699ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   52715ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   52794ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[   53014ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   53480ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   53615ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   53657ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-cente...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[  131000ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[  132179ms] [LOG] [Fast Refresh] done in 1277ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[  132732ms] [LOG] [Fast Refresh] done in 1277ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[  133120ms] [LOG] [Fast Refresh] done in 1277ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[  133565ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  133741ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  134092ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  134297ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19307
+[  134306ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19569
+[  134318ms] [LOG] [Vercel Web Analytics] Failed to load script from https://va.vercel-scripts.com/v1/script.debug.js. Please check if any ad blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  134319ms] [LOG] [Vercel Speed Insights] Failed to load script from https://va.vercel-scripts.com/v1/speed-insights/script.debug.js. Please check if any content blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  134465ms] [LOG] [Fast Refresh] done in 490ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

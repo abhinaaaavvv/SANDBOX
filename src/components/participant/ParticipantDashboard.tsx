@@ -120,17 +120,20 @@ export const ParticipantDashboard: React.FC = () => {
           <div className="grid grid-cols-1 divide-y divide-border rounded-lg border border-border bg-card md:grid-cols-3 md:divide-x md:divide-y-0">
             <Stat
               label="Cash Available"
-              value={formatINR(cash)}
+              countTo={cash}
+              format={formatINR}
               sub="Liquid capital for order execution"
             />
             <Stat
               label="Portfolio Value"
-              value={formatINR(totalPortfolioValue)}
+              countTo={totalPortfolioValue}
+              format={formatINR}
               sub="Cash + active market positions"
             />
             <Stat
               label="Total Profit / Loss"
-              value={`${isPositivePL ? "+" : ""}${formatINR(totalProfitLoss)}`}
+              countTo={totalProfitLoss}
+              format={(n) => `${n >= 0 ? "+" : "-"}${formatINR(Math.abs(n))}`}
               positive={isPositivePL}
               sub={`${formatPercent(totalProfitLossPercent)} vs ₹1,00,000 base`}
             />

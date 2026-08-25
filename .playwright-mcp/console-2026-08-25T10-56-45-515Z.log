@@ -1,0 +1,28 @@
+[     227ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     295ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     609ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19307
+[     615ms] [ERROR] Loading the script 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://qmzsnlviwmbdecyomgbh.supabase.co". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked. @ http://localhost:3000/_next/static/chunks/node_modules_122xzik._.js:19569
+[     625ms] [LOG] [Vercel Web Analytics] Failed to load script from https://va.vercel-scripts.com/v1/script.debug.js. Please check if any ad blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     627ms] [LOG] [Vercel Speed Insights] Failed to load script from https://va.vercel-scripts.com/v1/speed-insights/script.debug.js. Please check if any content blockers are enabled and try again. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   24377ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[   25149ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[   25205ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://qmzsnlviwmbdecyomgbh.supabase.co/rest/v1/rounds?select=id%2Ccompetition_run_id%2Cround_number%2Cround_type%2Cstatus%2Cstarted_at%2Cends_at%2Cmarket_status%2Ctrading_status%2Cpaused_at%2Caccumulated_pause_duration%2Ccreated_at%2Cupdated_at&competition_run_id=eq.d1d8bcaf-d8e3-4b75-902b-e9ee981d9796&status=eq.active:0
+[  190133ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  191136ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  191240ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  191242ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  193861ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  223401ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  226671ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  228753ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  233019ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  506841ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  509206ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  510789ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  512528ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  520608ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  523688ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  525594ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  529811ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  532360ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  650792ms] [LOG] [Fast Refresh] done in 1076ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

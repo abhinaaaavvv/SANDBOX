@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useCompetitionContext } from "@/lib/competition-context";
-import { Loader2, AlertTriangle, Users, Trophy, Clock } from "lucide-react";
+import { AlertTriangle, Users, Trophy, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface CompetitionContextGuardProps {
@@ -33,13 +33,16 @@ export const CompetitionContextGuard: React.FC<CompetitionContextGuardProps> = (
   // Loading state
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="size-8 animate-spin text-muted-foreground" />
-          <p className="text-sm text-muted-foreground">
-            Loading competition context...
-          </p>
+      <div className="flex min-h-screen flex-col items-center justify-center gap-7 px-6">
+        <span className="font-bodoni animate-page-enter text-4xl font-semibold tracking-tight text-foreground select-none">
+          SANDBOX
+        </span>
+        <div className="h-px w-44 overflow-hidden rounded-full bg-border">
+          <div className="loader-bar h-full w-1/4 rounded-full bg-foreground/70" />
         </div>
+        <p className="font-bodoni text-sm italic text-muted-foreground">
+          Opening the floor…
+        </p>
       </div>
     );
   }

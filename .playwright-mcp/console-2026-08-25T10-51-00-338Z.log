@@ -1,0 +1,353 @@
+[     105ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[     217ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[     306ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     468ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[     510ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[     722ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[     823ms] [ERROR] Refused to execute script from 'http://localhost:3000/_next/static/development/_clientMiddlewareManifest.js' because its MIME type ('application/json') is not executable, and strict MIME type checking is enabled. @ http://localhost:3000/:0
+[     898ms] Error: ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx
+
+
+    at <unknown> (Error: ./src/components/shared/LandingPage.tsx:84:15)
+    at <unknown> (./src/components/shared/LandingPage.tsx:84:15)
+    at Object.getCompilationErrors (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1410:59)
+    at DevBundlerService.getCompilationError (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/lib/dev-bundler-service.js:59:55)
+    at DevServer.getCompilationError (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/next-dev-server.js:754:42)
+    at DevServer.findPageComponents (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/dev/next-dev-server.js:724:43)
+    at async DevServer.renderErrorToResponseImpl (file:///home/abhinav/dev/SANDBOX/node_modules/next/dist/server/base-server.js:1828:26)
+[     857ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[     869ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[    1054ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[    1265ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[    1272ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[    1309ms] [ERROR] ./src/components/shared/LandingPage.tsx:84:15
+Error: Expected '</', got 'ident'
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:84:15
+  82 |           <Link href="/admin/login">Admin Sign In</Link>
+  83 |       </Button>
+> 84 |           </d iv>
+     |               ^^
+  85 |         </di v>
+  86 |       </main>
+  87 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[    1406ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[    7673ms] [ERROR] ./src/components/shared/LandingPage.tsx:68:1
+Error: Expected '</', got 'string literal'
+  66 |           </p>
+  67 |           <p
+> 68 | "rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  69 |           style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+  70 |           >
+  71 |           A live market simulation across three timed rounds — build your
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:68:1
+  66 |           </p>
+  67 |           <p
+> 68 | "rise-in mb-10 max-w-[16rem] md:max-w-[20rem] lg:max-w-md text-sm leading-relaxed text-muted-foreground"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  69 |           style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+  70 |           >
+  71 |           A live market simulation across three timed rounds — build your
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[    7716ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[   16883ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+  84 |           </div>
+  85 |         </div>
+> 86 |        ain>
+     |           ^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |        ain>
+     |           ^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   16883ms] [ERROR] ./src/components/shared/LandingPage.tsx:104:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  102 |     </div>
+  103 |   );
+> 104 | };
+      | ^
+  105 |
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:104:1
+  102 |     </div>
+  103 |   );
+> 104 | };
+      | ^
+  105 |
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   16943ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[   19826ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[   19868ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[   24671ms] [ERROR] ./src/components/shared/LandingPage.tsx:86:11
+Error: Expected '</', got 'ident'
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Parsing ecmascript source code failed
+
+Generated code of loaders [next/dist/build/babel/loader] transform of file content of src/components/shared/LandingPage.tsx:
+./src/components/shared/LandingPage.tsx:86:11
+  84 |           </div>
+  85 |         </div>
+> 86 |       </m ain>
+     |           ^^^
+  87 |   
+  88 |       <footer
+  89 |         className="rise-in flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border px-6 py-4 text-[11px] uppercase tra...
+
+Import trace:
+  Server Component:
+    ./src/components/shared/LandingPage.tsx
+    ./src/app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817

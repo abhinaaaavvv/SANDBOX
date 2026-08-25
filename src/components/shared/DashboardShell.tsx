@@ -99,7 +99,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
                 aria-current={isActive ? "page" : undefined}
                 title={item.label}
                 className={cn(
-                  "group relative flex h-9 items-center gap-2.5 rounded-md px-2.5 text-sm transition-colors lg:px-3",
+                  "group relative flex h-9 items-center gap-2.5 rounded-md px-2.5 text-sm transition-all duration-200 active:scale-[0.98] lg:px-3",
                   isActive
                     ? "bg-sidebar-accent font-medium text-foreground"
                     : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
@@ -108,8 +108,8 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
                 {/* Active rail */}
                 <span
                   className={cn(
-                    "absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-foreground transition-opacity",
-                    isActive ? "opacity-100" : "opacity-0"
+                    "absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-foreground transition-all duration-300",
+                    isActive ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
                   )}
                 />
                 <Icon className="size-4 shrink-0" />
@@ -200,9 +200,20 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
           </div>
         </header>
 
-        {/* Scrollable content region */}
-        <main className="min-h-0 flex-1 overflow-y-auto">
-          <div className="mx-auto max-w-[1700px] p-4 md:p-6 lg:p-8">{children}</div>
+        {/* Scrollable content region with ghost editorial glyph behind */}
+        <main className="relative min-h-0 flex-1">
+          <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+            <span className="ghost-glyph -top-14 right-0 text-[24rem] lg:-right-8">
+              {activeLabel.charAt(0)}
+            </span>
+          </div>
+          <div className="relative h-full overflow-y-auto scroll-smooth">
+            <div className="mx-auto max-w-[1700px] p-4 md:p-6 lg:p-8">
+              <div key={activeId} className="animate-page-enter">
+                {children}
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     </div>
