@@ -133,9 +133,6 @@ export const PriceEditorSection: React.FC = () => {
                         <Button variant="sell" size="xs" onClick={() => applyPresetShift(stock.id, -10)}>
                           -10%
                         </Button>
-                        <Button variant="sell" size="xs" onClick={() => applyPresetShift(stock.id, -8)}>
-                          -8%
-                        </Button>
                         <Button variant="sell" size="xs" onClick={() => applyPresetShift(stock.id, -5)}>
                           -5%
                         </Button>
@@ -147,9 +144,6 @@ export const PriceEditorSection: React.FC = () => {
                         </Button>
                         <Button variant="buy" size="xs" onClick={() => applyPresetShift(stock.id, 5)}>
                           +5%
-                        </Button>
-                        <Button variant="buy" size="xs" onClick={() => applyPresetShift(stock.id, 8)}>
-                          +8%
                         </Button>
                         <Button variant="buy" size="xs" onClick={() => applyPresetShift(stock.id, 10)}>
                           +10%
