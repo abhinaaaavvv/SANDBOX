@@ -74,7 +74,7 @@ export const ParticipantDashboard: React.FC = () => {
         {marketStatus === "NOT_STARTED" && (
           <StateBanner
             icon={<Hourglass className="size-4 shrink-0 text-muted-foreground" />}
-            title="Competition Not Started"
+            title="Round Not Started"
             description={`Awaiting the administrator to begin Round ${currentRound}. Prepare your strategy.`}
           />
         )}
@@ -143,35 +143,35 @@ export const ParticipantDashboard: React.FC = () => {
         {/* Active section — only this region transitions on switch */}
         <div key={section} className="animate-page-enter">
           {section === "market" && (
-          <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
-            <div className="min-w-0 xl:col-span-8">
-              <MarketTable onTrade={openTrade} />
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
+              <div className="min-w-0 xl:col-span-8">
+                <MarketTable onTrade={openTrade} />
+              </div>
+              <div className="xl:col-span-4">
+                <LeaderboardTable />
+              </div>
             </div>
-            <div className="xl:col-span-4">
-              <LeaderboardTable />
-            </div>
-          </div>
-        )}
+          )}
 
-        {section === "portfolio" && (
-          <div className="space-y-5">
-            <PortfolioSection onTrade={openTrade} />
-            <TransactionHistory />
-          </div>
-        )}
-
-        {section === "leaderboard" && (
-          <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
-            <div className="xl:col-span-7">
-              <LeaderboardTable />
-            </div>
-            <div className="xl:col-span-5">
+          {section === "portfolio" && (
+            <div className="space-y-5">
               <PortfolioSection onTrade={openTrade} />
+              <TransactionHistory />
             </div>
-          </div>
-        )}
+          )}
 
-        {section === "transactions" && <TransactionHistory />}
+          {section === "leaderboard" && (
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
+              <div className="xl:col-span-7">
+                <LeaderboardTable />
+              </div>
+              <div className="xl:col-span-5">
+                <PortfolioSection onTrade={openTrade} />
+              </div>
+            </div>
+          )}
+
+          {section === "transactions" && <TransactionHistory />}
         </div>
       </div>
 
