@@ -52,8 +52,8 @@ const HoldingPrice: React.FC<{ price: number }> = ({ price }) => {
 };
 
 export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) => {
-  const { holdings, stocks, marketStatus } = useSandboxStore();
-  const isTradingDisabled = marketStatus !== "MARKET_OPEN";
+  const { holdings, stocks, marketStatus, isTeamBlocked } = useSandboxStore();
+  const isTradingDisabled = marketStatus !== "MARKET_OPEN" || isTeamBlocked;
 
   const chartData = holdings.map((h) => ({
     name: h.symbol,

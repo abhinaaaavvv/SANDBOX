@@ -25,7 +25,7 @@ interface TradeModalProps {
 }
 
 export const TradeModal: React.FC<TradeModalProps> = ({ stock, mode, onClose }) => {
-  const { cash, holdings, stocks, marketStatus, executeBuy, executeSell } = useSandboxStore();
+  const { cash, holdings, stocks, marketStatus, isTeamBlocked, executeBuy, executeSell } = useSandboxStore();
   const [quantity, setQuantity] = useState<number>(10);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -69,7 +69,7 @@ export const TradeModal: React.FC<TradeModalProps> = ({ stock, mode, onClose }) 
   };
 
   const setMaxQuantity = () => setQuantity(Math.max(1, maxQty));
-  const isMarketDisabled = marketStatus !== "MARKET_OPEN";
+  const isMarketDisabled = marketStatus !== "MARKET_OPEN" || isTeamBlocked;
   const hasMaxQty = maxQty > 0;
 
   return (
@@ -222,7 +222,9 @@ export const TradeModal: React.FC<TradeModalProps> = ({ stock, mode, onClose }) 
           )}
           {isMarketDisabled && (
             <div className="rounded-md border border-warn/25 bg-warn/10 px-3 py-2.5 text-center text-sm text-warn">
-              Trading is currently paused or closed.
+              {isTeamBlocked
+                ? "Your team has been banned by the administrator — orders cannot be placed."
+                : "Trading is currently paused or closed."}
             </div>
           )}
 

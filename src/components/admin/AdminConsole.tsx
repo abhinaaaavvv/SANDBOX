@@ -37,12 +37,14 @@ export const AdminConsole: React.FC = () => {
   const { pendingPriceChanges } = useSandboxStore();
   const [section, setSection] = useState<SectionId>("competition");
 
+  // Grouped by purpose: "Operations" runs the live competition,
+  // "Configuration" manages the teams and stocks being traded.
   const nav: (ShellNavItem & { id: SectionId })[] = [
-    { id: "competition", label: "Competition", icon: LayoutDashboard },
-    { id: "prices", label: "Price Editor", icon: TrendingUp, badge: pendingPriceChanges.length },
-    { id: "stocks", label: "Stocks", icon: Landmark },
-    { id: "ledger", label: "Cash & Dividends", icon: ScrollText },
-    { id: "teams", label: "Teams", icon: Users },
+    { id: "competition", label: "Competition", icon: LayoutDashboard, group: "Operations" },
+    { id: "prices", label: "Price Editor", icon: TrendingUp, badge: pendingPriceChanges.length, group: "Operations" },
+    { id: "ledger", label: "Cash & Dividends", icon: ScrollText, group: "Operations" },
+    { id: "stocks", label: "Stocks", icon: Landmark, group: "Configuration" },
+    { id: "teams", label: "Teams", icon: Users, group: "Configuration" },
   ];
 
   return (

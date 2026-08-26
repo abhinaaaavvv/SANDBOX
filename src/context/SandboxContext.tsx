@@ -79,6 +79,8 @@ interface SandboxContextType {
   serverEndTimestamp: string | null;
   timerSeconds: number;
   teamName: string;
+  /** True when an administrator has banned (blocked) the current participant team */
+  isTeamBlocked: boolean;
 
   // Trading State (Participant)
   cash: number;
@@ -224,6 +226,34 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   // Auto-end round removed — admin must manually end rounds via the RPC.
   // Timer expiry does NOT end the round automatically.
+
+  // Current participant team's blocked flag. Admins ban teams mid-run via
+  // set_team_blocked; DB triggers then reject every financial write. The flag
+  // refreshes on the PORTFOLIO_CHANGED realtime event that RPC emits.
+  const [isTeamBlocked, setIsTeamBlocked] = useState(false);
+  const refetchTeamBlockStatus = useCallback(async () => {
+    if (!teamId) return;
+    const supabase = createClient();
+    const { data } = await supabase
+      .from("teams")
+      .select("blocked")
+      .eq("id", teamId)
+      .maybeSingle();
+    if (data) setIsTeamBlocked(data.blocked ?? false);
+  }, [teamId]);
+  useEffect(() => {
+    // Initial + team-change sync (mirrors the rounds fetch below); kept live
+    // afterwards by refetchTeamBlockStatus on PORTFOLIO_CHANGED events.
+    if (!teamId) return;
+    createClient()
+      .from("teams")
+      .select("blocked")
+      .eq("id", teamId)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (data) setIsTeamBlocked(data.blocked ?? false);
+      });
+  }, [teamId]);
 
   // Simulates the initial authoritative-state sync so skeletons render once.
   const [isInitializing, setIsInitializing] = useState(true);
@@ -413,11 +443,13 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
           await refetchMarketData();
           break;
         case "PORTFOLIO_CHANGED":
-          // Portfolio changed - refetch holdings, cash, transactions + admin team overviews
+          // Portfolio changed - refetch holdings, cash, transactions,
+          // team block flag + admin team overviews
           await Promise.all([
             refetchHoldings(),
             refetchCash(),
             refetchTransactions(),
+            refetchTeamBlockStatus(),
             refreshTeams(),
           ]);
           break;
@@ -440,10 +472,11 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
             refetchLeaderboard(),
             refreshTeams(),
             competitionCtx.refresh(),
+            refetchTeamBlockStatus(),
           ]);
-      }
-    },
-    [refetchMarketData, refetchHoldings, refetchCash, refetchTransactions, refetchLeaderboard, competitionCtx, refetchDbRounds, refreshTeams]
+        }
+      },
+      [refetchMarketData, refetchHoldings, refetchCash, refetchTransactions, refetchLeaderboard, competitionCtx, refetchDbRounds, refreshTeams, refetchTeamBlockStatus]
   );
 
   // Realtime event subscriptions via Supabase (Phase 9.8).
@@ -934,6 +967,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       serverEndTimestamp: roundEndsAt,
       timerSeconds,
       teamName,
+      isTeamBlocked,
 
       // Trading state — real data from Supabase
       cash: realCash,
@@ -1009,6 +1043,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       roundEndsAt,
       timerSeconds,
       teamName,
+      isTeamBlocked,
       realCash,
       marketStocks,
       realHoldings,

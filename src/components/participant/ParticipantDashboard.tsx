@@ -8,6 +8,7 @@ import {
   ReceiptText,
   Pause,
   AlertTriangle,
+  Ban,
   Clock,
   Hourglass,
   type LucideIcon,
@@ -49,6 +50,7 @@ export const ParticipantDashboard: React.FC = () => {
     marketStatus,
     currentRound,
     isInitializing,
+    isTeamBlocked,
   } = useSandboxStore();
 
   const [section, setSection] = useState<SectionId>("market");
@@ -71,6 +73,15 @@ export const ParticipantDashboard: React.FC = () => {
     >
       <div className="space-y-5">
         {/* Competition state banners */}
+        {isTeamBlocked && (
+          <StateBanner
+            tone="down"
+            icon={<Ban className="size-4 shrink-0 text-down" />}
+            title="Your Team Has Been Banned"
+            description="An administrator has banned this team. All order submissions are disabled."
+          />
+        )}
+
         {marketStatus === "NOT_STARTED" && (
           <StateBanner
             icon={<Hourglass className="size-4 shrink-0 text-muted-foreground" />}

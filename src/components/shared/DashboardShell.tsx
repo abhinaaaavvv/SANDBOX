@@ -17,6 +17,12 @@ export interface ShellNavItem {
   id: string;
   label: string;
   icon: LucideIcon;
+  /**
+   * Optional sidebar group name. When consecutive items change group,
+   * a divider renders — an uppercase label on the expanded sidebar,
+   * a hairline rule on the collapsed icon rail.
+   */
+  group?: string;
   /** Small count rendered on the trailing edge (e.g. pending changes). */
   badge?: number;
 }
@@ -95,41 +101,57 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
 
         {/* Section nav */}
         <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-2.5 pt-4">
-          <span className="mb-1 hidden px-2.5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground/70 lg:block">
-            {isAdmin ? "Console" : "Workspace"}
-          </span>
-          {nav.map((item) => {
+          {!nav.some((item) => item.group) && (
+            <span className="mb-1 hidden px-2.5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground/70 lg:block">
+              {isAdmin ? "Console" : "Workspace"}
+            </span>
+          )}
+          {nav.map((item, idx) => {
             const Icon = item.icon;
             const isActive = item.id === activeId;
+            const isNewGroup = !!item.group && nav[idx - 1]?.group !== item.group;
             return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => onNavigate(item.id)}
-                aria-current={isActive ? "page" : undefined}
-                title={item.label}
-                className={cn(
-                  "group relative flex h-9 items-center gap-2.5 rounded-md px-2.5 text-sm transition-all duration-200 active:scale-[0.98] lg:px-3",
-                  isActive
-                    ? "bg-sidebar-accent font-medium text-foreground"
-                    : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
+              <React.Fragment key={item.id}>
+                {isNewGroup && (
+                  <>
+                    {/* Group heading — expanded sidebar */}
+                    <div className="mb-1 mt-3 hidden px-2.5 lg:block">
+                      <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground/70">
+                        {item.group}
+                      </span>
+                    </div>
+                    {/* Group divider — collapsed icon rail */}
+                    <div className="mx-1.5 my-2 h-px bg-sidebar-border lg:hidden" />
+                  </>
                 )}
-              >
-                {/* Active rail */}
-                <span
+                <button
+                  type="button"
+                  onClick={() => onNavigate(item.id)}
+                  aria-current={isActive ? "page" : undefined}
+                  title={item.label}
                   className={cn(
-                    "absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-foreground transition-all duration-300",
-                    isActive ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
+                    "group relative flex h-9 items-center gap-2.5 rounded-md px-2.5 text-sm transition-all duration-200 active:scale-[0.98] lg:px-3",
+                    isActive
+                      ? "bg-sidebar-accent font-medium text-foreground"
+                      : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
                   )}
-                />
-                <Icon className="size-4 shrink-0" />
-                <span className="hidden truncate lg:block">{item.label}</span>
-                {typeof item.badge === "number" && item.badge > 0 && (
-                  <span className="ml-auto hidden items-center rounded-full bg-warn/15 px-1.5 py-px text-[10px] font-semibold tabular-nums text-warn lg:flex">
-                    {item.badge}
-                  </span>
-                )}
-              </button>
+                >
+                  {/* Active rail */}
+                  <span
+                    className={cn(
+                      "absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-foreground transition-all duration-300",
+                      isActive ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
+                    )}
+                  />
+                  <Icon className="size-4 shrink-0" />
+                  <span className="hidden truncate lg:block">{item.label}</span>
+                  {typeof item.badge === "number" && item.badge > 0 && (
+                    <span className="ml-auto hidden items-center rounded-full bg-warn/15 px-1.5 py-px text-[10px] font-semibold tabular-nums text-warn lg:flex">
+                      {item.badge}
+                    </span>
+                  )}
+                </button>
+              </React.Fragment>
             );
           })}
         </nav>

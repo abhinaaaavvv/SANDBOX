@@ -47,7 +47,7 @@ const PriceCell: React.FC<{ stock: Stock }> = ({ stock }) => {
 };
 
 export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
-  const { stocks, holdings, marketStatus } = useSandboxStore();
+  const { stocks, holdings, marketStatus, isTeamBlocked } = useSandboxStore();
   const [searchTerm, setSearchTerm] = useState("");
   const [sortField, setSortField] = useState<"symbol" | "currentPricePaise" | "changePercent">(
     "symbol"
@@ -95,7 +95,7 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
       }
     };
 
-  const isTradingDisabled = marketStatus !== "MARKET_OPEN";
+  const isTradingDisabled = marketStatus !== "MARKET_OPEN" || isTeamBlocked;
 
   return (
     <Panel>
