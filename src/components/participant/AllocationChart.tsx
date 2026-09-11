@@ -8,15 +8,25 @@ interface AllocationChartProps {
   chartData: { name: string; value: number }[];
 }
 
-// Neutral palette for the allocation pie.
-export const CHARCOAL_COLORS = [
-  "#a1a1aa",
-  "#71717a",
-  "#52525b",
-  "#3f3f46",
-  "#d4d4d8",
-  "#27272a",
+// Vibrant categorical palette for the allocation pie — distinct hues
+// so each holding is instantly distinguishable.
+export const ALLOCATION_COLORS = [
+  "#6366f1", // indigo
+  "#0ea5e9", // sky
+  "#10b981", // emerald
+  "#f59e0b", // amber
+  "#ef4444", // red
+  "#ec4899", // pink
+  "#8b5cf6", // violet
+  "#06b6d4", // cyan
+  "#f97316", // orange
+  "#84cc16", // lime
+  "#14b8a6", // teal
+  "#eab308", // yellow
 ];
+
+// Kept for backwards compatibility with existing imports.
+export const CHARCOAL_COLORS = ALLOCATION_COLORS;
 
 /**
  * Recharts-backed allocation donut. Loaded via next/dynamic from
@@ -40,7 +50,7 @@ const AllocationChart: React.FC<AllocationChartProps> = ({ chartData }) => (
         {chartData.map((entry, index) => (
           <Cell
             key={`cell-${entry.name}`}
-            fill={CHARCOAL_COLORS[index % CHARCOAL_COLORS.length]}
+            fill={ALLOCATION_COLORS[index % ALLOCATION_COLORS.length]}
           />
         ))}
       </Pie>

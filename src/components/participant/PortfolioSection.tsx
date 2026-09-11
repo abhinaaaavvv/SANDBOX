@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Panel, PanelHeader, PanelMeta, PanelTitle } from "@/components/ui/panel";
-import { CHARCOAL_COLORS } from "@/components/participant/AllocationChart";
+import { ALLOCATION_COLORS } from "@/components/participant/AllocationChart";
 
 interface PortfolioSectionProps {
   onTrade: (stock: Stock, mode: "BUY" | "SELL") => void;
@@ -186,7 +186,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) =
             <div key={item.name} className="flex items-center gap-1.5 text-xs">
               <span
                 className="size-2 shrink-0 rounded-sm"
-                style={{ backgroundColor: CHARCOAL_COLORS[idx % CHARCOAL_COLORS.length] }}
+                style={{ backgroundColor: ALLOCATION_COLORS[idx % ALLOCATION_COLORS.length] }}
               />
               <span className="truncate font-medium text-muted-foreground">{item.name}</span>
             </div>
