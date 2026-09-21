@@ -177,34 +177,17 @@
 }
 
 /* ---- Scrollbar ----
-   The page itself has no visible scrollbar (kiosk presentation mode).
-   Overflow containers (tables, select dropdowns, scrollable lists) keep
-   the thin styled scrollbar, which only appears when content overflows. */
+   All scrollbars are hidden site-wide (kiosk presentation mode). */
 html,
-body {
+body,
+* {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
   width: 0;
   height: 0;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--ring);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-foreground);
 }
 
 ::selection {
