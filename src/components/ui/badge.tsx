@@ -14,9 +14,9 @@ const badgeVariants = cva(
         destructive: "border-destructive/25 bg-destructive/10 text-destructive",
         outline: "border-border bg-transparent text-muted-foreground",
         ghost: "border-transparent bg-transparent text-muted-foreground",
-        buy: "border-up/25 bg-up/10 text-up",
-        sell: "border-down/25 bg-down/10 text-down",
-        warn: "border-warn/25 bg-warn/10 text-warn",
+        buy: "border-up/40 bg-transparent text-up",
+        sell: "border-down/40 bg-transparent text-down",
+        warn: "border-warn/40 bg-transparent text-warn",
       },
     },
     defaultVariants: {

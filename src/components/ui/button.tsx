@@ -16,9 +16,9 @@ const buttonVariants = cva(
           "border border-border bg-transparent text-foreground hover:bg-muted hover:text-foreground hover:border-foreground/25 hover:-translate-y-px active:translate-y-0",
         ghost: "bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        buy: "border border-up/25 bg-up/10 text-up hover:bg-up/15 hover:border-up/40 hover:-translate-y-px active:translate-y-0",
-        sell: "border border-down/25 bg-down/10 text-down hover:bg-down/15 hover:border-down/40 hover:-translate-y-px active:translate-y-0",
-        warn: "border border-warn/25 bg-warn/10 text-warn hover:bg-warn/15 hover:border-warn/40 hover:-translate-y-px active:translate-y-0",
+        buy: "border border-up/40 bg-transparent text-up hover:border-up/60 hover:text-up/90 hover:-translate-y-px active:translate-y-0",
+        sell: "border border-down/40 bg-transparent text-down hover:border-down/60 hover:text-down/90 hover:-translate-y-px active:translate-y-0",
+        warn: "border border-warn/40 bg-transparent text-warn hover:border-warn/60 hover:text-warn/90 hover:-translate-y-px active:translate-y-0",
         link: "bg-transparent text-foreground underline-offset-4 hover:underline",
       },
       size: {

@@ -139,7 +139,7 @@ export const TeamManager: React.FC = () => {
                   {team.blocked ? (
                     <Badge variant="warn">Blocked</Badge>
                   ) : (
-                    <Badge variant="secondary">Active</Badge>
+                    <Badge variant="buy">Active</Badge>
                   )}
                 </TableCell>
                 <TableCell className="text-right">
