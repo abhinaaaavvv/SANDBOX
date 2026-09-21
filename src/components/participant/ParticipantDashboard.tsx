@@ -11,6 +11,7 @@ import {
   Ban,
   Clock,
   Hourglass,
+  ArrowRight,
   type LucideIcon,
 } from "lucide-react";
 import { useSandboxStore } from "@/context/SandboxContext";
@@ -51,6 +52,7 @@ export const ParticipantDashboard: React.FC = () => {
     currentRound,
     isInitializing,
     isTeamBlocked,
+    transactions,
   } = useSandboxStore();
 
   const [section, setSection] = useState<SectionId>("market");
@@ -167,20 +169,23 @@ export const ParticipantDashboard: React.FC = () => {
           {section === "portfolio" && (
             <div className="space-y-5">
               <PortfolioSection onTrade={openTrade} />
-              <TransactionHistory />
+              <div className="space-y-5">
+                <TransactionHistory limit={5} />
+                {transactions.length > 5 && (
+                  <button
+                    type="button"
+                    onClick={() => setSection("transactions")}
+                    className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-border bg-card py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    View all transactions
+                    <ArrowRight className="size-3.5" />
+                  </button>
+                )}
+              </div>
             </div>
           )}
 
-          {section === "leaderboard" && (
-            <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
-              <div className="xl:col-span-7">
-                <LeaderboardTable />
-              </div>
-              <div className="xl:col-span-5">
-                <PortfolioSection onTrade={openTrade} hideAllocation />
-              </div>
-            </div>
-          )}
+          {section === "leaderboard" && <LeaderboardTable variant="full" />}
 
           {section === "transactions" && <TransactionHistory />}
         </div>

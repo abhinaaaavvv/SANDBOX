@@ -14,14 +14,25 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Panel, PanelHeader, PanelMeta, PanelTitle } from "@/components/ui/panel";
 
-export const TransactionHistory: React.FC = () => {
+interface TransactionHistoryProps {
+  limit?: number;
+}
+
+export const TransactionHistory: React.FC<TransactionHistoryProps> = ({ limit }) => {
   const { transactions } = useSandboxStore();
+
+  const visible = limit ? transactions.slice(0, limit) : transactions;
+  const isTruncated = limit != null && transactions.length > limit;
 
   return (
     <Panel>
       <PanelHeader>
         <PanelTitle>Transaction History</PanelTitle>
-        <PanelMeta>{transactions.length} entries</PanelMeta>
+        <PanelMeta>
+          {isTruncated
+            ? `Showing ${limit} of ${transactions.length}`
+            : `${transactions.length} entries`}
+        </PanelMeta>
       </PanelHeader>
 
       <Table>
@@ -36,7 +47,7 @@ export const TransactionHistory: React.FC = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {transactions.map((tx) => (
+          {visible.map((tx) => (
             <TableRow key={tx.id}>
               <TableCell className="text-xs tabular-nums text-muted-foreground">
                 {tx.timestamp}

@@ -13,11 +13,21 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Panel, PanelHeader, PanelMeta, PanelTitle } from "@/components/ui/panel";
+import { Trophy } from "lucide-react";
 
-export const LeaderboardTable: React.FC = () => {
+const RANK_MEDAL: Record<number, { label: string; cls: string }> = {
+  1: { label: "1st", cls: "text-amber-400" },
+  2: { label: "2nd", cls: "text-zinc-300" },
+  3: { label: "3rd", cls: "text-amber-600" },
+};
+
+interface LeaderboardTableProps {
+  variant?: "compact" | "full";
+}
+
+export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ variant = "compact" }) => {
   const { leaderboard } = useSandboxStore();
 
-  // Subtle flash when an entry's rank changes.
   const [moved, setMoved] = useState<Record<string, true>>({});
   const prevRanksRef = useRef<Record<string, number>>({});
 
@@ -41,12 +51,59 @@ export const LeaderboardTable: React.FC = () => {
     }
   }, [leaderboard]);
 
+  const isFull = variant === "full";
+  const myEntry = isFull ? leaderboard.find((e) => e.isCurrentTeam) : null;
+  const leader = isFull ? leaderboard[0] : null;
+
   return (
     <Panel>
       <PanelHeader>
         <PanelTitle>Live Leaderboard</PanelTitle>
         <PanelMeta>By portfolio value</PanelMeta>
       </PanelHeader>
+
+      {/* Your-standing strip — full variant only */}
+      {isFull && myEntry && (
+        <div className="mx-4 mb-4 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-lg border border-border bg-muted/40 px-4 py-3 text-sm">
+          <span className="font-medium text-muted-foreground">Your standing</span>
+          <span className="font-bodoni text-lg font-semibold text-foreground">
+            #{myEntry.rank}
+            <span className="text-xs font-normal text-muted-foreground"> / {leaderboard.length}</span>
+          </span>
+          <span className="text-muted-foreground">|</span>
+          <span>
+            Portfolio{" "}
+            <span className="font-semibold tabular-nums text-foreground">
+              {formatINR(myEntry.portfolioValue)}
+            </span>
+          </span>
+          {leader && leader.teamId !== myEntry.teamId && (
+            <>
+              <span className="text-muted-foreground">|</span>
+              <span>
+                Gap to #1{" "}
+                <span className="font-semibold tabular-nums text-foreground">
+                  {formatINR(myEntry.portfolioValue - leader.portfolioValue)}
+                </span>
+              </span>
+            </>
+          )}
+          {myEntry.rank > 1 && (
+            <>
+              <span className="text-muted-foreground">|</span>
+              <span>
+                Gap to #{myEntry.rank - 1}{" "}
+                <span className="font-semibold tabular-nums text-foreground">
+                  {(() => {
+                    const above = leaderboard.find((e) => e.rank === myEntry.rank - 1);
+                    return above ? formatINR(myEntry.portfolioValue - above.portfolioValue) : "—";
+                  })()}
+                </span>
+              </span>
+            </>
+          )}
+        </div>
+      )}
 
       <Table>
         <TableHeader>
@@ -55,12 +112,14 @@ export const LeaderboardTable: React.FC = () => {
             <TableHead>Team</TableHead>
             <TableHead className="text-right">Portfolio Value</TableHead>
             <TableHead className="text-right">Total P/L</TableHead>
+            {isFull && <TableHead className="text-right">Return %</TableHead>}
           </TableRow>
         </TableHeader>
         <TableBody>
           {leaderboard.map((entry) => {
             const isPositive = entry.profitLoss >= 0;
             const isUser = entry.isCurrentTeam;
+            const medal = isFull ? RANK_MEDAL[entry.rank] : undefined;
 
             return (
               <TableRow
@@ -69,11 +128,19 @@ export const LeaderboardTable: React.FC = () => {
               >
                 <TableCell
                   className={cn(
-                    "font-bodoni text-center text-base font-semibold",
-                    isUser ? "text-foreground" : "text-muted-foreground"
+                    "text-center text-base font-semibold",
+                    medal ? medal.cls : "text-muted-foreground",
+                    isUser && "text-foreground",
                   )}
                 >
-                  {entry.rank}
+                  {medal ? (
+                    <span className="font-bodoni inline-flex items-center gap-1">
+                      <Trophy className="size-3.5" />
+                      {medal.label}
+                    </span>
+                  ) : (
+                    <span className="font-bodoni">{entry.rank}</span>
+                  )}
                 </TableCell>
 
                 <TableCell>
@@ -96,9 +163,19 @@ export const LeaderboardTable: React.FC = () => {
                 <TableCell className="text-right font-medium tabular-nums">
                   <span className={cn(isPositive ? "text-up" : "text-down")}>
                     {isPositive ? "+" : ""}
-                    {formatINR(entry.profitLoss)} ({formatPercent(entry.profitLossPercent)})
+                    {formatINR(entry.profitLoss)}
+                    {!isFull && ` (${formatPercent(entry.profitLossPercent)})`}
                   </span>
                 </TableCell>
+
+                {isFull && (
+                  <TableCell className="text-right font-medium tabular-nums">
+                    <span className={cn(isPositive ? "text-up" : "text-down")}>
+                      {isPositive ? "+" : ""}
+                      {formatPercent(entry.profitLossPercent)}
+                    </span>
+                  </TableCell>
+                )}
               </TableRow>
             );
           })}

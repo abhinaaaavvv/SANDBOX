@@ -22,7 +22,6 @@ import { ALLOCATION_COLORS } from "@/components/participant/AllocationChart";
 
 interface PortfolioSectionProps {
 	onTrade: (stock: Stock, mode: "BUY" | "SELL") => void;
-	hideAllocation?: boolean;
 }
 
 // Chart library is heavy (~100 KB gz) — fetch it only when this panel renders.
@@ -52,7 +51,7 @@ const HoldingPrice: React.FC<{ price: number }> = ({ price }) => {
 	);
 };
 
-export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade, hideAllocation }) => {
+export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) => {
 	const { holdings, stocks, marketStatus, isTeamBlocked } = useSandboxStore();
 	const isTradingDisabled = marketStatus !== "MARKET_OPEN" || isTeamBlocked;
 
@@ -62,9 +61,9 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade, hid
 	}));
 
 	return (
-		<div className={hideAllocation ? "grid grid-cols-1 gap-4" : "grid grid-cols-1 gap-4 lg:grid-cols-3"}>
+		<div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
 			{/* Holdings table */}
-			<Panel className={hideAllocation ? "" : "lg:col-span-2"}>
+			<Panel className="lg:col-span-2">
 				<PanelHeader>
 					<PanelTitle>Active Positions</PanelTitle>
 					<PanelMeta>{holdings.length} positions</PanelMeta>
@@ -166,8 +165,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade, hid
 			</Panel>
 
 			{/* Allocation visualizer */}
-			{!hideAllocation && (
-				<Panel className="flex flex-col p-4">
+			<Panel className="flex flex-col p-4">
 					<PanelHeader className="px-0 pb-3">
 						<PanelTitle>Asset Allocation</PanelTitle>
 					</PanelHeader>
@@ -195,7 +193,6 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade, hid
 						))}
 					</div>
 				</Panel>
-			)}
 		</div>
 	);
 };

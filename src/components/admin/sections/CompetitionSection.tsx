@@ -165,7 +165,7 @@ export const CompetitionSection: React.FC = () => {
         </div>
       </Panel>
 
-      <LeaderboardTable />
+      <LeaderboardTable variant="full" />
 
       {/* Reset confirmation */}
       <AlertDialog open={showResetConfirmation} onOpenChange={setShowResetConfirmation}>
