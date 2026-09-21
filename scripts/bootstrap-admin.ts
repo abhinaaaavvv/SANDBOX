@@ -15,6 +15,10 @@
  *   bun run bootstrap:admin
  *
  * Idempotent: safe to run multiple times. Reuses existing accounts.
+ *
+ * The `teams` table is the user entity (teams.id = auth.uid()).
+ * The handle_new_user trigger reads `role` from raw_user_meta_data,
+ * so passing role: 'admin' in user_metadata creates an admin directly.
  */
 
 import { createClient } from "@supabase/supabase-js";
@@ -51,16 +55,16 @@ const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY, {
 async function findAuthUserByEmail(
   email: string,
 ): Promise<{ id: string; email: string } | null> {
-  // listUsers paginates; scan up to 1000 users (sufficient for bootstrap)
   const { data, error } = await supabase.auth.admin.listUsers({
     page: 1,
     perPage: 1000,
   });
 
   if (error) {
-    // listUsers can return 500 on some Supabase projects — treat as "not found"
-    // so the script falls through to createUser.
-    console.warn("   Warning: listUsers failed, will attempt to create user:", error.message);
+    console.warn(
+      "   Warning: listUsers failed, will attempt to create user:",
+      error.message,
+    );
     return null;
   }
   const match = data?.users?.find(
@@ -76,10 +80,10 @@ async function bootstrap(): Promise<void> {
   console.log("SANDBOX Admin Bootstrap");
   console.log("=======================\n");
 
-  // Step 1: Check if an admin profile already exists
+  // Step 1: Check if an admin already exists in the teams table
   console.log("1. Checking for existing admin...");
   const { data: existingAdmin, error: lookupError } = await supabase
-    .from("profiles")
+    .from("teams")
     .select("id, role")
     .eq("role", "admin")
     .limit(1)
@@ -92,19 +96,17 @@ async function bootstrap(): Promise<void> {
 
   if (existingAdmin) {
     console.log(
-      `   Admin profile exists (id: ${existingAdmin.id.slice(0, 8)}…). Updating password...`,
+      `   Admin exists (id: ${existingAdmin.id.slice(0, 8)}…). Updating password...`,
     );
 
-    // Find auth user by email — profile id may not match auth user id
     const authUser = await findAuthUserByEmail(ADMIN_EMAIL);
     if (!authUser) {
       console.error(`   No auth user found for ${ADMIN_EMAIL}. Recreating...`);
-      // Fall through to Step 3 to create the auth user
     } else {
-      const { error: updateError } = await supabase.auth.admin.updateUserById(
-        authUser.id,
-        { password: ADMIN_PASSWORD }
-      );
+      const { error: updateError } =
+        await supabase.auth.admin.updateUserById(authUser.id, {
+          password: ADMIN_PASSWORD,
+        });
 
       if (updateError) {
         console.error("   Failed to update password:", updateError.message);
@@ -123,13 +125,12 @@ async function bootstrap(): Promise<void> {
 
   if (existingUser) {
     console.log(
-      `   Auth user exists (id: ${existingUser.id.slice(0, 8)}…). Updating password and ensuring profile...`,
+      `   Auth user exists (id: ${existingUser.id.slice(0, 8)}…). Updating password and ensuring team row...`,
     );
 
-    // Update password to match current SANDBOX_ADMIN_PASSWORD
     const { error: updateError } = await supabase.auth.admin.updateUserById(
       existingUser.id,
-      { password: ADMIN_PASSWORD }
+      { password: ADMIN_PASSWORD },
     );
 
     if (updateError) {
@@ -139,10 +140,11 @@ async function bootstrap(): Promise<void> {
 
     console.log("   Password updated.");
 
-    // Upsert profile as admin
-    const { error: upsertError } = await supabase.from("profiles").upsert(
+    // Upsert team row as admin (teams is the user entity)
+    const { error: upsertError } = await supabase.from("teams").upsert(
       {
         id: existingUser.id,
+        name: "Administrator",
         display_name: "Administrator",
         role: "admin",
       },
@@ -150,25 +152,31 @@ async function bootstrap(): Promise<void> {
     );
 
     if (upsertError) {
-      console.error("   Failed to create/update profile:", upsertError.message);
+      console.error(
+        "   Failed to create/update team row:",
+        upsertError.message,
+      );
       process.exit(1);
     }
 
-    console.log("   Profile ensured with admin role.");
+    console.log("   Team row ensured with admin role.");
     console.log("\nBootstrap complete. Admin account is ready.");
     return;
   }
 
   // Step 3: Create the auth user
+  // Pass role: 'admin' in user_metadata so the handle_new_user trigger
+  // creates the team row with admin role directly.
   console.log("3. Creating Supabase Auth user...");
 
   const { data: newUser, error: createError } =
     await supabase.auth.admin.createUser({
       email: ADMIN_EMAIL,
       password: ADMIN_PASSWORD,
-      email_confirm: true, // Skip email verification for bootstrap
+      email_confirm: true,
       user_metadata: {
         display_name: "Administrator",
+        role: "admin",
       },
     });
 
@@ -184,23 +192,24 @@ async function bootstrap(): Promise<void> {
 
   console.log(`   Auth user created (id: ${newUser.user.id.slice(0, 8)}…).`);
 
-  // Step 4: The handle_new_user trigger should have created the profile.
+  // Step 4: The handle_new_user trigger should have created the team row.
   // Wait briefly and then verify.
-  console.log("4. Waiting for profile trigger...");
+  console.log("4. Waiting for team trigger...");
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const { data: profile, error: profileError } = await supabase
-    .from("profiles")
+  const { data: team, error: teamError } = await supabase
+    .from("teams")
     .select("id, role")
     .eq("id", newUser.user.id)
     .single();
 
-  if (profileError || !profile) {
-    // Trigger may not have fired — create profile manually
-    console.log("   Profile not found via trigger. Creating manually...");
-    const { error: insertError } = await supabase.from("profiles").upsert(
+  if (teamError || !team) {
+    // Trigger may not have fired — create team row manually
+    console.log("   Team row not found via trigger. Creating manually...");
+    const { error: insertError } = await supabase.from("teams").upsert(
       {
         id: newUser.user.id,
+        name: "Administrator",
         display_name: "Administrator",
         role: "admin",
       },
@@ -208,25 +217,25 @@ async function bootstrap(): Promise<void> {
     );
 
     if (insertError) {
-      console.error("   Failed to create profile:", insertError.message);
+      console.error("   Failed to create team row:", insertError.message);
       process.exit(1);
     }
-    console.log("   Profile created manually.");
-  } else if (profile.role !== "admin") {
-    // Step 5: Promote to admin (default trigger creates as participant)
-    console.log("5. Promoting profile to admin...");
+    console.log("   Team row created manually.");
+  } else if (team.role !== "admin") {
+    // Step 5: Promote to admin (in case trigger used default 'participant')
+    console.log("5. Promoting team row to admin...");
     const { error: updateError } = await supabase
-      .from("profiles")
+      .from("teams")
       .update({ role: "admin" })
       .eq("id", newUser.user.id);
 
     if (updateError) {
-      console.error("   Failed to promote profile:", updateError.message);
+      console.error("   Failed to promote team row:", updateError.message);
       process.exit(1);
     }
-    console.log("   Profile promoted to admin.");
+    console.log("   Team row promoted to admin.");
   } else {
-    console.log("   Profile already has admin role.");
+    console.log("   Team row already has admin role.");
   }
 
   console.log("\n=======================");

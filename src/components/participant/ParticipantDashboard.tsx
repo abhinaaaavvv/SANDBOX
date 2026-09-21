@@ -177,7 +177,7 @@ export const ParticipantDashboard: React.FC = () => {
                 <LeaderboardTable />
               </div>
               <div className="xl:col-span-5">
-                <PortfolioSection onTrade={openTrade} />
+                <PortfolioSection onTrade={openTrade} hideAllocation />
               </div>
             </div>
           )}
