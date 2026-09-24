@@ -109,7 +109,7 @@ interface SandboxContextType {
   isInitializing: boolean;
 
   // Admin Actions (Supabase RPCs — authoritative database mutations)
-  startRound: (round: RoundNumber) => Promise<void>;
+  startRound: (round: RoundNumber, durationMinutes?: number) => Promise<void>;
   endRound: (round: RoundNumber) => Promise<void>;
   setMarketStatus: (status: MarketStatus) => Promise<void>;
   resumeTrading: () => Promise<void>;
@@ -515,7 +515,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
       rounds.find((r) => r.status === "active");
 
     return {
-      startRound: async (round: RoundNumber) => {
+      startRound: async (round: RoundNumber, durationMinutes?: number) => {
         const roundRecord = findRoundByNumber(round);
         if (!roundRecord) {
           toast.error("Round not found", { description: `Round ${round} does not exist` });
@@ -523,6 +523,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
         }
         const { error } = await supabase.rpc("start_round", {
           p_round_id: roundRecord.id,
+          p_duration_minutes: durationMinutes ?? 15,
         });
         if (error) {
           toast.error("Failed to start round", { description: error.message });

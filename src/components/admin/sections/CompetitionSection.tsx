@@ -5,6 +5,8 @@ import { useSandboxStore } from "@/context/SandboxContext";
 import { cn } from "@/lib/utils";
 import type { RoundNumber } from "@/types/sandbox";
 import { Button } from "@/components/ui/button";
+import { NumberInput } from "@/components/ui/number-input";
+import { Label } from "@/components/ui/label";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -43,8 +45,17 @@ export const CompetitionSection: React.FC = () => {
   } = useSandboxStore();
 
   const [showResetConfirmation, setShowResetConfirmation] = useState(false);
+  const [roundDurationMins, setRoundDurationMins] = useState("15");
 
   const isRoundActive = roundStatus === "active";
+
+  // Shared round duration, applied to whichever round is started next.
+  // Clamped to the server-accepted range (1–180 mins); falls back to 15.
+  const parsedDuration = (() => {
+    const n = parseInt(roundDurationMins, 10);
+    if (!Number.isFinite(n)) return 15;
+    return Math.min(180, Math.max(1, n));
+  })();
 
   return (
     <div className="space-y-5">
@@ -111,6 +122,22 @@ export const CompetitionSection: React.FC = () => {
           </span>
         </PanelHeader>
         <div className="flex flex-col gap-2 p-4">
+          <div className="flex flex-wrap items-center gap-3 rounded-md border border-border bg-card px-3 py-2.5">
+            <div className="flex flex-col gap-1">
+              <Label htmlFor="round-duration">Round duration (mins)</Label>
+              <NumberInput
+                id="round-duration"
+                min={1}
+                max={180}
+                value={roundDurationMins}
+                onChange={(e) => setRoundDurationMins(e.target.value)}
+                className="w-24 tabular-nums"
+              />
+            </div>
+            <span className="text-xs text-muted-foreground">
+              Applied when a round is started. Default 15 mins.
+            </span>
+          </div>
           {[1, 2, 3].map((rNum) => {
             const roundVal = rNum as RoundNumber;
             const dbRound = rounds.find((r) => r.round_number === rNum);
@@ -146,7 +173,7 @@ export const CompetitionSection: React.FC = () => {
                     variant="buy"
                     size="sm"
                     disabled={isActive || isRoundActive}
-                    onClick={() => startRound(roundVal)}
+                    onClick={() => startRound(roundVal, parsedDuration)}
                   >
                     {isCompleted ? "Restart" : "Start"}
                   </Button>
