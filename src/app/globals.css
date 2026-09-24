@@ -190,6 +190,29 @@ body,
   height: 0;
 }
 
+/* Opt-in thin scrollbar for dense table containers.
+   Overrides the kiosk-mode global hide above (class beats `*` specificity). */
+@utility table-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+
+  &::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--ring);
+  }
+}
+
 ::selection {
   background: var(--border);
   color: var(--foreground);

@@ -117,7 +117,8 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ variant = "c
         </TableHeader>
         <TableBody>
           {leaderboard.map((entry) => {
-            const isPositive = entry.profitLoss >= 0;
+            const isZeroPL = entry.profitLoss === 0;
+            const isPositive = entry.profitLoss > 0;
             const isUser = entry.isCurrentTeam;
             const medal = isFull ? RANK_MEDAL[entry.rank] : undefined;
 
@@ -161,7 +162,11 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ variant = "c
                 </TableCell>
 
                 <TableCell className="text-right font-medium tabular-nums">
-                  <span className={cn(isPositive ? "text-up" : "text-down")}>
+                  <span
+                    className={cn(
+                      isZeroPL ? "text-foreground" : isPositive ? "text-up" : "text-down"
+                    )}
+                  >
                     {isPositive ? "+" : ""}
                     {formatINR(entry.profitLoss)}
                     {!isFull && ` (${formatPercent(entry.profitLossPercent)})`}
@@ -170,7 +175,15 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ variant = "c
 
                 {isFull && (
                   <TableCell className="text-right font-medium tabular-nums">
-                    <span className={cn(isPositive ? "text-up" : "text-down")}>
+                    <span
+                      className={cn(
+                        entry.profitLossPercent === 0
+                          ? "text-foreground"
+                          : isPositive
+                            ? "text-up"
+                            : "text-down"
+                      )}
+                    >
                       {isPositive ? "+" : ""}
                       {formatPercent(entry.profitLossPercent)}
                     </span>

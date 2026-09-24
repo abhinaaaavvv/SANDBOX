@@ -8,8 +8,11 @@
  * - currentPrice is derived (currentPricePaise / 100) for display only.
  * - Stocks WITHOUT a market quote are included with quoteAvailable: false.
  * - NULL price is distinct from 0 price.
- * - Legacy fields (change, changePercent, high, low, volume, sector) are
- *   undefined when not available in the database — never fabricated.
+ * - Change fields (previousPrice, change, changePercent) are derived from
+ *   the authoritative listing price (stocks.initial_price_paise) vs the
+ *   current quote — display-only, never used for calculations.
+ * - Other legacy fields (high, low, volume, sector) are undefined when
+ *   not available in the database — never fabricated.
  */
 
 import { Stock } from "@/types/sandbox";
@@ -25,6 +28,7 @@ interface DbStock {
   name: string;
   description: string;
   is_active: boolean;
+  initial_price_paise: number | null;
 }
 
 /** Database market_quote row from Supabase. */
@@ -88,8 +92,23 @@ export function dbStockToStock(dbStock: DbStockWithQuote): Stock {
     // Never use this for authoritative calculations.
     currentPrice: currentPricePaise / 100,
     quoteAvailable,
-    // Legacy fields: undefined (not fabricated) when not in database.
-    // Components must handle undefined by showing "N/A" or hiding the element.
+    // Change vs the authoritative listing price (stocks.initial_price_paise).
+    // Undefined when the quote is missing or no listing price exists —
+    // components must handle undefined by showing "N/A" or hiding the element.
+    ...(quoteAvailable &&
+    dbStock.initial_price_paise != null &&
+    dbStock.initial_price_paise > 0
+      ? (() => {
+          const previousPrice = dbStock.initial_price_paise! / 100;
+          const currentPrice = currentPricePaise / 100;
+          const change = currentPrice - previousPrice;
+          return {
+            previousPrice,
+            change,
+            changePercent: (change / previousPrice) * 100,
+          };
+        })()
+      : {}),
   };
 }
 

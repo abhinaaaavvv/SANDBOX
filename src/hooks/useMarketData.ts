@@ -46,6 +46,7 @@ async function fetchMarketStocks(
       name,
       description,
       is_active,
+      initial_price_paise,
       market_quotes(
         price_paise,
         updated_at,
@@ -81,6 +82,7 @@ async function fetchAllStocks(
       name,
       description,
       is_active,
+      initial_price_paise,
       market_quotes(
         price_paise,
         updated_at,

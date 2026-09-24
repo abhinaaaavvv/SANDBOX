@@ -69,6 +69,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) =
 					<PanelMeta>{holdings.length} positions</PanelMeta>
 				</PanelHeader>
 
+				<div className="table-scroll overflow-x-auto">
 				<Table>
 					<TableHeader>
 						<TableRow className="hover:bg-transparent">
@@ -84,7 +85,8 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) =
 					<TableBody>
 						{holdings.map((h) => {
 							const stock = stocks.find((s) => s.id === h.stockId);
-							const isPositive = h.unrealizedPL >= 0;
+							const isZeroPL = h.unrealizedPL === 0;
+							const isPositive = h.unrealizedPL > 0;
 
 							return (
 								<TableRow key={h.stockId}>
@@ -115,7 +117,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) =
 										<span
 											className={cn(
 												"inline-flex items-center gap-0.5",
-												isPositive ? "text-up" : "text-down"
+												isZeroPL ? "text-foreground" : isPositive ? "text-up" : "text-down"
 											)}
 										>
 											{isPositive ? (
@@ -160,9 +162,10 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onTrade }) =
 								</TableCell>
 							</TableRow>
 						)}
-					</TableBody>
+				</TableBody>
 				</Table>
-			</Panel>
+			</div>
+		</Panel>
 
 			{/* Allocation visualizer */}
 			<Panel className="flex flex-col p-4">

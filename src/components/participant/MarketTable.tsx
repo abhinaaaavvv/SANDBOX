@@ -5,7 +5,7 @@ import { Stock } from "@/types/sandbox";
 import { useSandboxStore } from "@/context/SandboxContext";
 import { formatPaise, cn } from "@/lib/utils";
 import { usePriceFlash } from "@/hooks/usePriceFlash";
-import { Search, ArrowUpDown } from "lucide-react";
+import { Search, ArrowUpDown, TrendingUp, TrendingDown } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -177,7 +177,8 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
             const holding = holdings.find((h) => h.stockId === stock.id);
             const ownedQty = holding ? holding.quantity : 0;
             const changeAvailable = stock.change != null && stock.changePercent != null;
-            const isPositive = changeAvailable && stock.change! >= 0;
+            const isZeroChange = changeAvailable && stock.change === 0;
+            const isPositive = changeAvailable && stock.change! > 0;
 
             return (
               <TableRow key={stock.id}>
@@ -199,7 +200,18 @@ export const MarketTable: React.FC<MarketTableProps> = ({ onTrade }) => {
 
                 <TableCell className="text-right font-medium tabular-nums">
                   {changeAvailable ? (
-                    <span className={cn(isPositive ? "text-up" : "text-down")}>
+                    <span
+                      className={cn(
+                        "inline-flex items-center gap-0.5",
+                        isZeroChange ? "text-foreground" : isPositive ? "text-up" : "text-down"
+                      )}
+                    >
+                      {!isZeroChange &&
+                        (isPositive ? (
+                          <TrendingUp className="size-3.5" />
+                        ) : (
+                          <TrendingDown className="size-3.5" />
+                        ))}
                       {isPositive ? "+" : ""}
                       {stock.change!.toFixed(0)} ({stock.changePercent!.toFixed(2)}%)
                     </span>
