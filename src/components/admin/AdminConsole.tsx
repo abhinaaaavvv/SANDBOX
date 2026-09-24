@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { LayoutDashboard, TrendingUp, Landmark, Users, ScrollText, HandCoins, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, TrendingUp, Landmark, Users, ScrollText, HandCoins, Briefcase, type LucideIcon } from "lucide-react";
 import { useSandboxStore } from "@/context/SandboxContext";
 import {
   DashboardShell,
@@ -11,6 +11,7 @@ import { CompetitionSection } from "./sections/CompetitionSection";
 import { PriceEditorSection } from "./sections/PriceEditorSection";
 import { StocksSection } from "./sections/StocksSection";
 import { DividendsSection } from "./sections/DividendsSection";
+import { HoldingsSection } from "./sections/HoldingsSection";
 import { LedgerSection } from "./sections/LedgerSection";
 import { TeamManager } from "./TeamManager";
 
@@ -20,6 +21,7 @@ type SectionId =
   | "stocks"
   | "ledger"
   | "dividends"
+  | "holdings"
   | "teams";
 
 const SECTION_LABELS: Record<SectionId, string> = {
@@ -28,6 +30,7 @@ const SECTION_LABELS: Record<SectionId, string> = {
   stocks: "Stock Management",
   ledger: "Cash Ledger",
   dividends: "Dividend Dispatcher",
+  holdings: "Participant Holdings",
   teams: "Team Manager",
 };
 
@@ -38,6 +41,7 @@ const SECTION_LABELS: Record<SectionId, string> = {
 export const AdminConsole: React.FC = () => {
   const { pendingPriceChanges } = useSandboxStore();
   const [section, setSection] = useState<SectionId>("competition");
+  const [holdingsTeamId, setHoldingsTeamId] = useState<string | null>(null);
 
   // Grouped by purpose: "Operations" runs the live competition,
   // "Configuration" manages the teams and stocks being traded.
@@ -46,6 +50,7 @@ export const AdminConsole: React.FC = () => {
     { id: "prices", label: "Price Editor", icon: TrendingUp, badge: pendingPriceChanges.length, group: "Operations" },
     { id: "ledger", label: "Cash Ledger", icon: ScrollText, group: "Operations" },
     { id: "dividends", label: "Dividends", icon: HandCoins, group: "Operations" },
+    { id: "holdings", label: "Holdings", icon: Briefcase, group: "Operations" },
     { id: "stocks", label: "Stocks", icon: Landmark, group: "Configuration" },
     { id: "teams", label: "Teams", icon: Users, group: "Configuration" },
   ];
@@ -65,7 +70,17 @@ export const AdminConsole: React.FC = () => {
         {section === "stocks" && <StocksSection />}
         {section === "ledger" && <LedgerSection />}
         {section === "dividends" && <DividendsSection />}
-        {section === "teams" && <TeamManager />}
+        {section === "holdings" && (
+          <HoldingsSection teamId={holdingsTeamId} onTeamChange={setHoldingsTeamId} />
+        )}
+        {section === "teams" && (
+          <TeamManager
+            onViewHoldings={(id) => {
+              setHoldingsTeamId(id);
+              setSection("holdings");
+            }}
+          />
+        )}
       </div>
     </DashboardShell>
   );

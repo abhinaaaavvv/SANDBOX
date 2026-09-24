@@ -11,7 +11,7 @@ import { useCompetitionContext } from "@/lib/competition-context";
 import { Holding } from "@/types/sandbox";
 import { mapRpcError } from "@/lib/errors";
 
-interface HoldingsRpcRow {
+export interface HoldingsRpcRow {
   stock_id: string;
   stock_symbol: string;
   stock_name: string;
@@ -21,7 +21,7 @@ interface HoldingsRpcRow {
   average_buy_price_paise: number;
 }
 
-interface HoldingsRpcResponse {
+export interface HoldingsRpcResponse {
   ok: boolean;
   team_id: string;
   competition_run_id: string;
@@ -29,7 +29,7 @@ interface HoldingsRpcResponse {
   error?: string;
 }
 
-function transformHolding(row: HoldingsRpcRow): Holding {
+export function transformHolding(row: HoldingsRpcRow): Holding {
   const currentPrice = row.current_price_paise / 100;
   const averageBuyPrice = row.average_buy_price_paise / 100;
   const totalValue = row.market_value_paise / 100;

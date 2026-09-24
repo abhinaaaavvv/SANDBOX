@@ -23,7 +23,7 @@ import {
 import { TradeResponseDto } from "@/types/realtime";
 import { useAuthoritativeTimer } from "@/hooks/useAuthoritativeTimer";
 import { useMarketData } from "@/hooks/useMarketData";
-import { useHoldings } from "@/hooks/useHoldings";
+import { useHoldings, transformHolding, type HoldingsRpcResponse } from "@/hooks/useHoldings";
 import { useTradeHistory } from "@/hooks/useTradeHistory";
 import { useCashBalance } from "@/hooks/useCashBalance";
 import { useTradeExecution } from "@/hooks/useTradeExecution";
@@ -116,6 +116,8 @@ interface SandboxContextType {
   applyPriceChanges: () => Promise<void>;
   payDividends: (stockId: string, amountPerShare: number) => Promise<void>;
   payDividendsBatch: (items: { stockId: string; amountPerShare: number }[]) => Promise<void>;
+  /** Admin: fetch any team's holdings via get_team_holdings(p_team_id). */
+  fetchTeamHoldings: (teamId: string) => Promise<Holding[]>;
   // Team Manager (admin)
   createTeam: (
     params: { name: string; email: string; password: string; startingCashRupees: number }
@@ -747,6 +749,28 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
             description: `${succeeded} dividend${succeeded === 1 ? "" : "s"} applied`,
           });
         }
+      },
+
+      fetchTeamHoldings: async (teamId: string) => {
+        if (!competitionRunId) {
+          toast.error("No active competition run", { description: "Cannot load holdings without an active run" });
+          return [];
+        }
+        const supabaseAdmin = createClient();
+        const { data, error: rpcError } = await supabaseAdmin.rpc("get_team_holdings", {
+          p_competition_run_id: competitionRunId,
+          p_team_id: teamId,
+        });
+        if (rpcError) {
+          toast.error("Failed to load holdings", { description: rpcError.message });
+          return [];
+        }
+        const response = data as HoldingsRpcResponse;
+        if (!response.ok) {
+          toast.error("Failed to load holdings", { description: response.error ?? "Unknown error" });
+          return [];
+        }
+        return response.holdings.map(transformHolding);
       },
 
       creditCash: (teamId: string, amount: number, reason?: string) => {

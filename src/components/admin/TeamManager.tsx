@@ -39,7 +39,11 @@ import { Panel, PanelHeader, PanelTitle } from "@/components/ui/panel";
 
 const DEFAULT_STARTING_CASH = "100000";
 
-export const TeamManager: React.FC = () => {
+interface TeamManagerProps {
+  onViewHoldings?: (teamId: string) => void;
+}
+
+export const TeamManager: React.FC<TeamManagerProps> = ({ onViewHoldings }) => {
   const {
     teams,
     createTeam,
@@ -144,6 +148,9 @@ export const TeamManager: React.FC = () => {
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="flex items-center justify-end gap-1">
+                    <Button variant="ghost" size="xs" onClick={() => onViewHoldings?.(team.id)}>
+                      View
+                    </Button>
                     <Button variant="secondary" size="xs" onClick={() => {
                       setRenameTarget(team);
                       setRenameValue(team.name);

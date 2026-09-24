@@ -233,19 +233,14 @@ export const DividendsSection: React.FC = () => {
             <AlertDialogAction
               variant="warn"
               onClick={async () => {
-                const dispatchedStockIds = queuedDividends.map((d) => d.stockId);
                 await payDividendsBatch(
                   queuedDividends.map((d) => ({
                     stockId: d.stockId,
                     amountPerShare: d.amountPerShare,
                   }))
                 );
-                // Drop drafts so rows fall back to unqueued.
-                setEditedDividends((prev) => {
-                  const next = { ...prev };
-                  dispatchedStockIds.forEach((id) => delete next[id]);
-                  return next;
-                });
+                // Drafts are intentionally kept so the same payouts can be
+                // dispatched again without retyping. Use per-row ✕ to clear.
                 setShowDispatchConfirmation(false);
               }}
             >
