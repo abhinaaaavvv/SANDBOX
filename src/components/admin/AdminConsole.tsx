@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { LayoutDashboard, TrendingUp, Landmark, Users, ScrollText, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, TrendingUp, Landmark, Users, ScrollText, HandCoins, type LucideIcon } from "lucide-react";
 import { useSandboxStore } from "@/context/SandboxContext";
 import {
   DashboardShell,
@@ -19,13 +19,15 @@ type SectionId =
   | "prices"
   | "stocks"
   | "ledger"
+  | "dividends"
   | "teams";
 
 const SECTION_LABELS: Record<SectionId, string> = {
   competition: "Competition Control",
   prices: "Private Price Editor",
   stocks: "Stock Management",
-  ledger: "Cash & Dividends",
+  ledger: "Cash Ledger",
+  dividends: "Dividend Dispatcher",
   teams: "Team Manager",
 };
 
@@ -42,7 +44,8 @@ export const AdminConsole: React.FC = () => {
   const nav: (ShellNavItem & { id: SectionId })[] = [
     { id: "competition", label: "Competition", icon: LayoutDashboard, group: "Operations" },
     { id: "prices", label: "Price Editor", icon: TrendingUp, badge: pendingPriceChanges.length, group: "Operations" },
-    { id: "ledger", label: "Cash & Dividends", icon: ScrollText, group: "Operations" },
+    { id: "ledger", label: "Cash Ledger", icon: ScrollText, group: "Operations" },
+    { id: "dividends", label: "Dividends", icon: HandCoins, group: "Operations" },
     { id: "stocks", label: "Stocks", icon: Landmark, group: "Configuration" },
     { id: "teams", label: "Teams", icon: Users, group: "Configuration" },
   ];
@@ -60,12 +63,8 @@ export const AdminConsole: React.FC = () => {
         {section === "competition" && <CompetitionSection />}
         {section === "prices" && <PriceEditorSection />}
         {section === "stocks" && <StocksSection />}
-        {section === "ledger" && (
-          <div className="space-y-5">
-            <LedgerSection />
-            <DividendsSection />
-          </div>
-        )}
+        {section === "ledger" && <LedgerSection />}
+        {section === "dividends" && <DividendsSection />}
         {section === "teams" && <TeamManager />}
       </div>
     </DashboardShell>

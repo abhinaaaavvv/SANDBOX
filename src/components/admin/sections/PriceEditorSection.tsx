@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { useSandboxStore } from "@/context/SandboxContext";
 import { formatINR, formatPaise, formatPercent } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { NumberInput } from "@/components/ui/number-input";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -44,6 +45,17 @@ export const PriceEditorSection: React.FC = () => {
   // Drafts are stored as raw strings so admins can freely clear and retype prices.
   const [editedPrices, setEditedPrices] = useState<Record<string, string>>({});
   const [showApplyConfirmation, setShowApplyConfirmation] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const visibleStocks = stocks
+    .filter((stock) => stock.isActive)
+    .filter((stock) => {
+      const q = searchTerm.trim().toLowerCase();
+      if (!q) return true;
+      return (
+        stock.symbol.toLowerCase().includes(q) || stock.name.toLowerCase().includes(q)
+      );
+    });
 
   const handlePriceInput = (stockId: string, val: string) => {
     setEditedPrices((prev) => {
@@ -94,9 +106,22 @@ export const PriceEditorSection: React.FC = () => {
               Pending changes remain strictly private until broadcast.
             </span>
           </div>
-          {pendingPriceChanges.length > 0 && (
-            <Badge variant="warn">{pendingPriceChanges.length} pending</Badge>
-          )}
+          <div className="flex items-center gap-2">
+            {pendingPriceChanges.length > 0 && (
+              <Badge variant="warn">{pendingPriceChanges.length} pending</Badge>
+            )}
+            <div className="relative w-full sm:w-64">
+              <Search className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search ticker or name…"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-9"
+                aria-label="Search securities"
+              />
+            </div>
+          </div>
         </PanelHeader>
 
         <Table className="table-fixed">
@@ -111,9 +136,14 @@ export const PriceEditorSection: React.FC = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {stocks
-              .filter((stock) => stock.isActive)
-              .map((stock) => {
+            {visibleStocks.length === 0 ? (
+              <TableRow className="hover:bg-transparent">
+                <TableCell colSpan={6} className="py-8 text-center text-sm text-muted-foreground">
+                  No securities match your search.
+                </TableCell>
+              </TableRow>
+            ) : (
+              visibleStocks.map((stock) => {
                 const pending = pendingPriceChanges.find((p) => p.stockId === stock.id);
                 const currentEditVal =
                   editedPrices[stock.id] ?? String(pending ? pending.newPrice : stock.currentPrice);
@@ -188,7 +218,8 @@ export const PriceEditorSection: React.FC = () => {
                     </TableCell>
                   </TableRow>
                 );
-              })}
+              })
+            )}
           </TableBody>
         </Table>
 

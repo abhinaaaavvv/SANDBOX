@@ -115,6 +115,7 @@ interface SandboxContextType {
   resumeTrading: () => Promise<void>;
   applyPriceChanges: () => Promise<void>;
   payDividends: (stockId: string, amountPerShare: number) => Promise<void>;
+  payDividendsBatch: (items: { stockId: string; amountPerShare: number }[]) => Promise<void>;
   // Team Manager (admin)
   createTeam: (
     params: { name: string; email: string; password: string; startingCashRupees: number }
@@ -698,6 +699,56 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
         refetchLeaderboard();
       },
 
+      payDividendsBatch: async (items: { stockId: string; amountPerShare: number }[]) => {
+        if (items.length === 0) return;
+        if (!competitionRunId) {
+          toast.error("No active competition run", { description: "Cannot pay dividends without an active run" });
+          return;
+        }
+        const supabaseAdmin = createClient();
+        let succeeded = 0;
+
+        for (const { stockId, amountPerShare } of items) {
+          if (!Number.isFinite(amountPerShare) || amountPerShare <= 0) continue;
+
+          const { data: dividendResult, error: createError } = await supabaseAdmin.rpc(
+            "create_dividend",
+            {
+              p_competition_run_id: competitionRunId,
+              p_stock_id: stockId,
+              p_amount_per_share_paise: Math.round(amountPerShare * 100),
+            }
+          );
+
+          if (createError) {
+            const sym = marketStocks.find((s) => s.id === stockId)?.symbol ?? "stock";
+            toast.error(`Failed to create dividend for ${sym}`, { description: createError.message });
+            continue;
+          }
+
+          const dividendId = (dividendResult as { dividend_id: string }).dividend_id;
+          const { error: applyError } = await supabaseAdmin.rpc("apply_dividend", {
+            p_dividend_id: dividendId,
+          });
+
+          if (applyError) {
+            const sym = marketStocks.find((s) => s.id === stockId)?.symbol ?? "stock";
+            toast.error(`Failed to apply dividend for ${sym}`, { description: applyError.message });
+            continue;
+          }
+          succeeded += 1;
+        }
+
+        refetchCash();
+        refetchHoldings();
+        refetchLeaderboard();
+        if (succeeded > 0) {
+          toast.success("Dividends paid", {
+            description: `${succeeded} dividend${succeeded === 1 ? "" : "s"} applied`,
+          });
+        }
+      },
+
       creditCash: (teamId: string, amount: number, reason?: string) => {
         if (!competitionRunId) {
           return { ok: false, message: "No active competition run" };
@@ -875,7 +926,7 @@ export const SandboxProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return true;
       },
     };
-  }, [rounds, competitionRunId, refetchMarketData, refetchDbRounds, competitionCtx, refetchCash, refetchHoldings, refetchTransactions, refetchLeaderboard, refreshTeams]);
+  }, [rounds, competitionRunId, refetchMarketData, refetchDbRounds, competitionCtx, refetchCash, refetchHoldings, refetchTransactions, refetchLeaderboard, refreshTeams, marketStocks]);
 
   // Pending price changes — local state (admin-private, never persisted to DB)
 

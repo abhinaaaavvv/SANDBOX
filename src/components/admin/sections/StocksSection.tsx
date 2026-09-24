@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Search } from "lucide-react";
 import { useSandboxStore } from "@/context/SandboxContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -63,6 +64,15 @@ export const StocksSection: React.FC = () => {
   const [editStockSymbol, setEditStockSymbol] = useState("");
   const [editStockName, setEditStockName] = useState("");
   const [editStockDescription, setEditStockDescription] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const visibleStocks = stocks.filter((stock) => {
+    const q = searchTerm.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      stock.symbol.toLowerCase().includes(q) || stock.name.toLowerCase().includes(q)
+    );
+  });
 
   const handleAddStock = async () => {
     const price = parseFloat(newStockPrice);
@@ -145,10 +155,21 @@ export const StocksSection: React.FC = () => {
         </PanelHeader>
         <div className="p-4 space-y-4">
           {/* Add Stock */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Button variant="buy" onClick={() => setShowAddStockDialog(true)}>
               Add Stock
             </Button>
+            <div className="relative w-full sm:w-64 sm:ml-auto">
+              <Search className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search ticker or name…"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-9"
+                aria-label="Search stocks"
+              />
+            </div>
           </div>
 
           {/* Stocks Table */}
@@ -162,7 +183,14 @@ export const StocksSection: React.FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {stocks.map((stock) => (
+              {visibleStocks.length === 0 ? (
+                <TableRow className="hover:bg-transparent">
+                  <TableCell colSpan={4} className="py-8 text-center text-sm text-muted-foreground">
+                    No stocks match your search.
+                  </TableCell>
+                </TableRow>
+              ) : (
+                visibleStocks.map((stock) => (
                 <TableRow key={stock.id}>
                   <TableCell>
                     <span className="text-sm font-semibold text-foreground">{stock.symbol}</span>
@@ -215,7 +243,8 @@ export const StocksSection: React.FC = () => {
                     </div>
                   </TableCell>
                 </TableRow>
-              ))}
+              ))
+              )}
             </TableBody>
           </Table>
         </div>
